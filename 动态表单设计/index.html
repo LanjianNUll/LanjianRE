@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>动态表单设计</title>
+		<script type="text/javascript" src="js/DefinedMap.js" ></script>
+		<script type="text/javascript" src="js/jquery-2.1.1.js" ></script>
+		<script type="text/javascript" src="js/common.js" ></script>
+		<script type="text/javascript" src="js/jquery-ui.js" ></script>
+		<script type="text/javascript" src="js/jquery-ui.min.js" ></script>
+		
+		<link rel="stylesheet" href="css/common.css" />
+	</head>
+	<body>
+		<div id="selectTag">
+			<button id="divContainer" class="selectTagSpan">容器</button></br>
+			<button id="comboBox" class="selectTagSpan">下拉框</button></br>
+			<button id="inputFrame" class="selectTagSpan">输入框</button></br>
+			<button id="radioButton" class="selectTagSpan">单选框</button></br>
+			<button id="TextFrame" class="selectTagSpan">文本框</button></br>
+			<button id="iamge" class="selectTagSpan">图片</button></br>
+			<button id="checkBox" class="selectTagSpan">复选框</button></br>
+			<button id="submitButton" class="selectTagSpan">提交按钮</button></br>
+		</div>
+		<div id="topAndSpace"> 
+			<div id="top">top</div>
+			<div id="workSpace" onmousedown="CreateChirdren(event)"
+			 onmousemove="getcurrentXandY(event)">workSpace
+				
+				<div id="workspaceCurrntXandY" style="float: right;">
+					工作区域的当前坐标点：(0,0)
+				</div>
+				
+			</div>
+		</div>
+		<div id="historyAndProperty">
+			<div id="property">property</div>
+			<div id="history">history</div>
+		</div>
+		<div id="afterbody">afterbody</div>
+	</body>
+</html>
