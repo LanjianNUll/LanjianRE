@@ -1,36 +1,54 @@
 var currentButton = null;
 var currentSelectedTag;
+var ww;
+var hh;
 $(document).ready(function(){
-  $("button.selectTagSpan").click(function(){
+  $("button.button").click(function(){
    //alert("你点击按钮"+$(this).text());
    //alert($(this).attr("id"));
    	$("button").removeClass("clickedButton");//移除所有点击了按钮的效果
    	$(this).addClass("clickedButton");//添加当前按钮被点击了的效果
    	$("#workSpace").addClass("cursorClass")//设置进入workSpace的鼠标图标效果
-   switch ($(this).attr("id")){
+   switch ($(this).attr("id")){//这里匹配可能乱序了  因为不影响所以就不改了 
    	case "divContainer":
-   		createTag('<span>',null,null);
+   		ww = 180;
+   		hh = 80;
+   		createTag(createRadio());
    		break;
    	case "comboBox":
-   		createTag('<input>',null,null);
+   		ww = 182;
+   		hh = 62;
+   		createTag(createSelect());
    		break;
 	case "inputFrame":
-			createTag('<span>',null,null);
+			ww = 230;
+   		hh = 30;
+			createTag(createInputOne());
    		break;
 	case "radioButton":
-   		createTag('<span>',null,null);
+			ww = 200;
+   		hh = 84;
+   		createTag(createInputTwo());
    		break;
 	case "TextFrame":
-			createTag('<div>',null,null);
+			ww = 55;
+   		hh = 30;
+			createTag(createSubmit());
    		break;
 	case "iamge":
-   		createTag('<span>',null,null);
+			ww = 270;
+   		hh = 120;
+   		createTag(createTextArea());
    		break;
 	case "checkBox":
-   		createTag('<span>',null,null);
+			ww = 210;
+   		hh = 80;
+   		createTag(createCheckBox());
    		break;
-   	case "submitButton":
-   		createTag('<span>',null,null);
+   case "submitButton":
+   		ww = 155;
+   		hh = 45;
+   		createTag(createP());
    		break;
    	default:
    		break;
@@ -39,19 +57,24 @@ $(document).ready(function(){
 });
 var divCount = 0;
 //创建div标签
-function createTag(TagName,typename,value){
+function createTag(obj){
 	//alert("开始创建工作区的Tag了");
 	//alert(pointX+"::"+pointY)
 	flag = true;
 	divCount = divCount+1;
 	//创建标签
-	currentSelectedTag = $(TagName,{'id':'NewDiv'+divCount,
-									'name':'createdDiv',
-									'class':'newDivClass'
-									}
-									);//创建一个div
-	currentSelectedTag.text("这是新创建的div");
-	currentSelectedTag.addClass("newDivClass").prop('disabled', true);//禁止输入
+//	currentSelectedTag = $('<div>',{'id':'NewDiv'+divCount,
+//									'name':'createdDiv',
+//									'disabled':"disabled",
+//									'class':'newDivClass'
+//									}
+//									);//创建一个div
+//	currentSelectedTag.text("这是新创建的div");
+//	currentSelectedTag.addClass("newDivClass");
+
+
+		currentSelectedTag = obj;
+	//createRadio().appendTo(currentSelectedTag);
 };
 
 var flag;//设置一个标志确保一次只创建一div
@@ -59,6 +82,9 @@ function CreateChirdren(e){//鼠标按下时的事件
 	$("button").removeClass("clickedButton");//移除所有点击了按钮的效果	
 	if(flag){
 		creatBoder();//创建边框
+		//根据选择的控件设置框的大小
+		currentDragDiv.style.width = ww + "px";
+		currentDragDiv.style.height = hh + "px";
 		currentSelectedTag.css({"background-color":"yellow",
 					  		"position":"absolute",
 					  		"left":"0px",

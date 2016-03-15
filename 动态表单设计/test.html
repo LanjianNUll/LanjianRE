@@ -4,6 +4,7 @@
   <title></title>
   <script type="text/javascript" src="js/jquery-2.1.1.js" ></script>
   <script type="text/javascript" src="js/jquery-ui.js" ></script>
+  <script type="text/javascript" src="js/definedFromControls.js"></script>
   <head></head>
   <body>
 <style type="text/css">
@@ -42,13 +43,72 @@ $(function(){
 	
 	
 </script>
+
+ <script>
+  	$(function(){
+  	//createRadio().appendTo($("#he"));
+  	//createSelect().appendTo($("#he"));
+  	//createInputOne().appendTo($('#he'));
+  	document.write($("#radiotpro").offsetHeight+":"+$("#radiotpro").offsetWidth);
+  	});
+  </script>
 <body>
-	<div id="dragDiv">
-	<div id="canDrag" >creatdiv</div>
-	<div id="123">123</div>
-	</div>
-	
-	<div id="456">456</div>
+	<!--
+    	作者：765797511@qq.com
+    	时间：2016-03-15
+    	描述
+    -->
+	<span id="radiotpro">
+			<p>你对你的生活满意吗</p>
+      <input type="radio" name="radio"> 生不如死</input>
+      <input type="radio" name="radio"> 还行</input>
+      <input type="radio" name="radio"> 壮士</input>
+  </span>
+ </br></br>
+ 
+  <span id="selcetpro">
+  	<label> 来吧 选个你想要的</label>
+  	<select>
+	    <option value="选择品牌">我的选择与众不同</option>
+			<option value="选择品牌1">选择品牌1</option>
+			<option value="选择品牌2">选择品牌2</option>
+    </select>
+  </span>
+  
+  
+  <br/> </br>
+  <span id="inputOnepro">
+ 				<label>First name:</label><input type="text" name="fname" />
+  </span>
+  	<br/> </br>
+  <span id="inputTwopro">
+ 				<p>First name:</p><input type="text" name="fname" />
+  </span>
+  
+  <br/> </br>
+  <span id="submitBtnpro">
+  	<input type="submit" value="提交表单" />
+  </span>
+  
+  
+  <br/> </br>
+  
+  <span id="textAreapro">
+  	<p>您的意见对我很重要:</p>
+				<textarea>这里输入你想说的话</textarea>
+  </span>
+  
+  <br/><br/>
+  <span id="checkBoxpro">
+				<p>您喜欢的水果？</p>
+		    <label><input type="checkbox" value="" />苹果 </label> 
+		    <label><input type="checkbox" value="" />桃子 </label> 
+		    <label><input type="checkbox" value="" />香蕉 </label> 
+		    <label><input type="checkbox" value="" />梨 </label> 
+  </span>
+  <div id="he"></div>
+  
+ 
 </body>
 </html>
 
