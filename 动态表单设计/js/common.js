@@ -78,6 +78,7 @@ function createTag(obj){
 };
 
 var flag;//设置一个标志确保一次只创建一div
+var keyCanMoveDiv = false;
 function CreateChirdren(e){//鼠标按下时的事件
 	$("button").removeClass("clickedButton");//移除所有点击了按钮的效果	
 	if(flag){
@@ -85,17 +86,18 @@ function CreateChirdren(e){//鼠标按下时的事件
 		//根据选择的控件设置框的大小
 		currentDragDiv.style.width = ww + "px";
 		currentDragDiv.style.height = hh + "px";
-		currentSelectedTag.css({"background-color":"yellow",
+		//主边框的css
+		currentSelectedTag.css({"background-color":"white",
 					  		"position":"absolute",
 					  		"left":"0px",
 					  		"top":"0px",
 					  		"width":"100%",
 					  		"height":"100%"
 								})
+		.bind("mouseover",function(){keyCanMoveDiv = true;})
+		.bind("mouseout",function(){keyCanMoveDiv = false;})
 					  .appendTo($(currentDragDiv));
-		$(currentDragDiv).bind("mouseover",function(){
-				move(event);
-				});
+		$(currentDragDiv).bind("mouseover",function(){move(event);})//绑定移动事件
 		$(currentDragDiv).css({
 				"left":piontX+"px",
 				"top":piontY+"px"
@@ -112,8 +114,6 @@ function getcurrentXandY(e){//鼠标在工作区域时 更新位置信息
 				if(isContain(e.clientX,e.clientY,currentDragDivMap.values()[i]))
 					currentDragDiv = currentDragDivMap.values()[i];
 			}
-		
-
 	piontX = e.clientX;//记录当前的坐标点
 	piontY = e.clientY;
 	$("#workspaceCurrntXandY").html("工作区域的当前坐标点：("+
@@ -121,6 +121,7 @@ function getcurrentXandY(e){//鼠标在工作区域时 更新位置信息
 }
 //当前Tag移动
 function move(e){
+	console.log(keyCanMoveDiv);
 		$("#dragDiv"+currentSerialNum).draggable({containment:"#workSpace"}).css({"cursor":"move"});//设置dragDiv可以拖拽并限定器拖拽的范围，
 }
 var currentSerialNum = 0;
@@ -129,28 +130,28 @@ function creatBoder(){
 		currentSerialNum = currentSerialNum + 1;
 		$('<div>',{'id':'dragDiv'+currentSerialNum,'class':'publicdragDiv'}).appendTo("#workSpace");
 		$('<div>',{'id':'rRightDown'+currentSerialNum,'class':'rRightDown',
-		'mouseover':function(){keyControlAction = 'rRightDown';},
+		'mouseover':function(){keyControlAction = 'rRightDown';keyCanMoveDiv = false;},
 		'mousedown':function(){resizeAction(event,"rRightDown")}}).appendTo($("#dragDiv"+currentSerialNum));
 		$('<div>',{'id':'rLeftDown'+currentSerialNum,'class':'rLeftDown',
-		'mouseover':function(){keyControlAction = 'rLeftDown';},
+		'mouseover':function(){keyControlAction = 'rLeftDown';keyCanMoveDiv = false;},
 		'mousedown':function(){resizeAction(event,"rLeftDown")}}).appendTo($("#dragDiv"+currentSerialNum));
 		$('<div>',{'id':'rRightUp'+currentSerialNum,'class':'rRightUp',
-		'mouseover':function(){keyControlAction = 'rRightUp';},
+		'mouseover':function(){keyControlAction = 'rRightUp';keyCanMoveDiv = false;},
 		'mousedown':function(){resizeAction(event,"rRightUp")}}).appendTo($("#dragDiv"+currentSerialNum));
 		$('<div>',{'id':'rLeftUp'+currentSerialNum,'class':'rLeftUp',
-		'mouseover':function(){keyControlAction = 'rLeftUp';},
+		'mouseover':function(){keyControlAction = 'rLeftUp';keyCanMoveDiv = false;},
 		'mousedown':function(){resizeAction(event,"rLeftUp")}}).appendTo($("#dragDiv"+currentSerialNum));
 		$('<div>',{'id':'rRight'+currentSerialNum,'class':'rRight',
-		'mouseover':function(){keyControlAction = 'rRight';},
+		'mouseover':function(){keyControlAction = 'rRight';keyCanMoveDiv = false;},
 		'mousedown':function(){resizeAction(event,"rRight")}}).appendTo($("#dragDiv"+currentSerialNum));
 		$('<div>',{'id':'rLeft'+currentSerialNum,'class':'rLeft',
-		'mouseover':function(){keyControlAction = 'rLeft';},
+		'mouseover':function(){keyControlAction = 'rLeft';keyCanMoveDiv = false;},
 		'mousedown':function(){resizeAction(event,"rLeft")}}).appendTo($("#dragDiv"+currentSerialNum));
 		$('<div>',{'id':'rUp'+currentSerialNum,'class':'rUp',
-		'mouseover':function(){keyControlAction = 'rUp';},
+		'mouseover':function(){keyControlAction = 'rUp';keyCanMoveDiv = false;},
 		'mousedown':function(){resizeAction(event,"rUp")}}).appendTo($("#dragDiv"+currentSerialNum));
 		$('<div>',{'id':'rDown'+currentSerialNum,'class':'rDown',
-		'mouseover':function(){keyControlAction = 'rDown';},
+		'mouseover':function(){keyControlAction = 'rDown';keyCanMoveDiv = false;},
 		'mousedown':function(){resizeAction(event,"rDown")}}).appendTo($("#dragDiv"+currentSerialNum));
 		currentDragDiv = document.getElementById("dragDiv"+currentSerialNum);
 		currentDragDivMap.put($(currentDragDiv).attr("id"),currentDragDiv);
@@ -272,72 +273,76 @@ function resizeAction(e,action){
 		//左37上38右39下40event.keyCode
 		console.log("要移动的边框"+keyControlAction);
 		console.log("按下的键值"+event.keyCode);
-		switch(keyControlAction){
-			case "rLeftDown":
-						if(event.keyCode == 37)
-							keyLeftMoveLeft();
-						if(event.keyCode == 38)
-							keyDownMoveUp();
-						if(event.keyCode == 39)
-							keyLeftMoveRight();
-						if(event.keyCode == 40)
-							keyDownMoveDown();
-				break;
-			case "rRightUp":
-						if(event.keyCode == 37)
-							keyRightMoveLeft();
-						if(event.keyCode == 38)
-							keyUpMoveUp();
-						if(event.keyCode == 39)
-							keyRightMoveRight();
-						if(event.keyCode == 40)
-							keyUpMoveDown();
-				break;
-			case "rLeftUp":
-						if(event.keyCode == 37)
-							keyLeftMoveLeft();
-						if(event.keyCode == 38)
-							keyUpMoveUp();
-						if(event.keyCode == 39)
-							keyLeftMoveRight();
-						if(event.keyCode == 40)
-							keyUpMoveDown();
-				break;
-			case "rRightDown":
-						if(event.keyCode == 37)
-							keyRightMoveLeft();
-						if(event.keyCode == 38)
-							keyDownMoveUp();
-						if(event.keyCode == 39)
-							keyRightMoveRight();
-						if(event.keyCode == 40)
-							keyDownMoveDown();
-				break;
-			case "rRight":
-						if(event.keyCode == 37)
-							 keyRightMoveLeft();
-						if(event.keyCode == 39)
+		if(keyCanMoveDiv)
+			doSomeKeyMoveOpra(event.keyCode);
+		else{
+			switch(keyControlAction){
+				case "rLeftDown":
+							if(event.keyCode == 37)
+								keyLeftMoveLeft();
+							if(event.keyCode == 38)
+								keyDownMoveUp();
+							if(event.keyCode == 39)
+								keyLeftMoveRight();
+							if(event.keyCode == 40)
+								keyDownMoveDown();
+					break;
+				case "rRightUp":
+							if(event.keyCode == 37)
+								keyRightMoveLeft();
+							if(event.keyCode == 38)
+								keyUpMoveUp();
+							if(event.keyCode == 39)
 								keyRightMoveRight();
-				break;
-			case "rLeft":
-						if(event.keyCode == 37)
-							keyLeftMoveLeft();
-						if(event.keyCode == 39)
-							keyLeftMoveRight();
-				break;
-			case "rUp":
-						if(event.keyCode == 38)
-							keyUpMoveUp();
-						if(event.keyCode == 40)
-							keyUpMoveDown();
-				break;
-			case "rDown":
-						if(event.keyCode == 38)
-							keyDownMoveUp();
-						if(event.keyCode == 40)
-							keyDownMoveDown();
-				break;
-			}
+							if(event.keyCode == 40)
+								keyUpMoveDown();
+					break;
+				case "rLeftUp":
+							if(event.keyCode == 37)
+								keyLeftMoveLeft();
+							if(event.keyCode == 38)
+								keyUpMoveUp();
+							if(event.keyCode == 39)
+								keyLeftMoveRight();
+							if(event.keyCode == 40)
+								keyUpMoveDown();
+					break;
+				case "rRightDown":
+							if(event.keyCode == 37)
+								keyRightMoveLeft();
+							if(event.keyCode == 38)
+								keyDownMoveUp();
+							if(event.keyCode == 39)
+								keyRightMoveRight();
+							if(event.keyCode == 40)
+								keyDownMoveDown();
+					break;
+				case "rRight":
+							if(event.keyCode == 37)
+								 keyRightMoveLeft();
+							if(event.keyCode == 39)
+									keyRightMoveRight();
+					break;
+				case "rLeft":
+							if(event.keyCode == 37)
+								keyLeftMoveLeft();
+							if(event.keyCode == 39)
+								keyLeftMoveRight();
+					break;
+				case "rUp":
+							if(event.keyCode == 38)
+								keyUpMoveUp();
+							if(event.keyCode == 40)
+								keyUpMoveDown();
+					break;
+				case "rDown":
+							if(event.keyCode == 38)
+								keyDownMoveUp();
+							if(event.keyCode == 40)
+								keyDownMoveDown();
+					break;
+				}
+		}
 	});
 	//左边框 向左移动
 	function keyLeftMoveLeft(){
@@ -385,20 +390,23 @@ function resizeAction(e,action){
 		currentDragDiv.style.height = currentDragDiv.offsetHeight - 2 + 1 +"px";
 		console.log(currentDragDiv.offsetHeight)
 	}
+	//键盘控制微调
+	function doSomeKeyMoveOpra(keyCode){
+		if(event.keyCode == 37)
+				currentDragDiv.style.left = currentDragDiv.offsetLeft - 1 +"px";
+		if(event.keyCode == 38)
+				currentDragDiv.style.top = currentDragDiv.offsetTop - 1 +"px";
+		if(event.keyCode == 39)
+				currentDragDiv.style.left= currentDragDiv.offsetLeft + 1 +"px";
+		if(event.keyCode == 40)
+				currentDragDiv.style.top = currentDragDiv.offsetTop + 1 +"px";
+	}
 	
 	
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	

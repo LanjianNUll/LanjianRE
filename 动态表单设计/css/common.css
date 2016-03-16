@@ -9,6 +9,7 @@ html, body {
 	height: 90%;
 	background: gray;
 	float: left;
+	text-align:center;
 }
 #topAndSpace{
 	width: 65%;
@@ -63,7 +64,8 @@ html, body {
 }
 .rRightDown,.rLeftDown,.rLeftUp,.rRightUp,.rRight,.rLeft,.rUp,.rDown{
 	position:absolute;
-	background:#C00;
+	background:#6F6F6F;
+	border: 1px snow;
 	width:7px;
 	height:7px;
 	z-index:5;
@@ -71,7 +73,7 @@ html, body {
 }
 .rLeftDown{left:-4px;bottom:-4px;cursor:ne-resize;}
 .rRightUp{right:-4px;top:-4px;cursor:ne-resize;}
-.rRightDown{right:-4px;bottom:-4px;background-color:#00F;cursor:nw-resize;}
+.rRightDown{right:-4px;bottom:-4px;cursor:nw-resize;}
 .rLeftUp{left:-4px;top:-4px;cursor:nw-resize;}
 .rRight{right:-4px;top:50%;margin-top:-4px;cursor:e-resize;}
 .rLeft{left:-4px;top:50%;margin-top:-4px;cursor:e-resize;}
