@@ -79,7 +79,6 @@ html, body {
 .rLeft{left:-4px;top:50%;margin-top:-4px;cursor:e-resize;}
 .rUp{top:-4px;left:50%;margin-left:-4px;cursor:n-resize;}
 .rDown{bottom:-4px;left:50%;margin-left:-4px;cursor:n-resize;}
-
 .publicdragDiv{border:1px solid #000000; width:100px; height:60px; background:#fff;	position:absolute;}
 
 
