@@ -1,6 +1,3 @@
-function creatFromControls(tagName){	
-};
-
 function createRadio(){//创建一个单项标签
 	var publicSpan = $("<span>",{});
 	var radioTag = null;

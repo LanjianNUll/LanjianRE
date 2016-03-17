@@ -71,8 +71,6 @@ function createTag(obj){
 //									);//创建一个div
 //	currentSelectedTag.text("这是新创建的div");
 //	currentSelectedTag.addClass("newDivClass");
-
-
 		currentSelectedTag = obj;
 	//createRadio().appendTo(currentSelectedTag);
 };
@@ -138,30 +136,32 @@ function creatBoder(){
 		$('<div>',{'id':'dragDiv'+currentSerialNum,'class':'publicdragDiv'}).appendTo("#workSpace");
 		$('<div>',{'id':'rRightDown'+currentSerialNum,'class':'rRightDown',
 		'mouseover':function(){keyControlAction = 'rRightDown';keyCanMoveDiv = false;},
-		'mousedown':function(){resizeAction(event,"rRightDown")}}).appendTo($("#dragDiv"+currentSerialNum));
+		'mousedown':function(){resizeAction(event,"rRightDown")}}).addClass("publicDiv").appendTo($("#dragDiv"+currentSerialNum));
 		$('<div>',{'id':'rLeftDown'+currentSerialNum,'class':'rLeftDown',
 		'mouseover':function(){keyControlAction = 'rLeftDown';keyCanMoveDiv = false;},
-		'mousedown':function(){resizeAction(event,"rLeftDown")}}).appendTo($("#dragDiv"+currentSerialNum));
+		'mousedown':function(){resizeAction(event,"rLeftDown")}}).addClass("publicDiv").appendTo($("#dragDiv"+currentSerialNum));
 		$('<div>',{'id':'rRightUp'+currentSerialNum,'class':'rRightUp',
 		'mouseover':function(){keyControlAction = 'rRightUp';keyCanMoveDiv = false;},
-		'mousedown':function(){resizeAction(event,"rRightUp")}}).appendTo($("#dragDiv"+currentSerialNum));
+		'mousedown':function(){resizeAction(event,"rRightUp")}}).addClass("publicDiv").appendTo($("#dragDiv"+currentSerialNum));
 		$('<div>',{'id':'rLeftUp'+currentSerialNum,'class':'rLeftUp',
 		'mouseover':function(){keyControlAction = 'rLeftUp';keyCanMoveDiv = false;},
-		'mousedown':function(){resizeAction(event,"rLeftUp")}}).appendTo($("#dragDiv"+currentSerialNum));
+		'mousedown':function(){resizeAction(event,"rLeftUp")}}).addClass("publicDiv").appendTo($("#dragDiv"+currentSerialNum));
 		$('<div>',{'id':'rRight'+currentSerialNum,'class':'rRight',
 		'mouseover':function(){keyControlAction = 'rRight';keyCanMoveDiv = false;},
-		'mousedown':function(){resizeAction(event,"rRight")}}).appendTo($("#dragDiv"+currentSerialNum));
+		'mousedown':function(){resizeAction(event,"rRight")}}).addClass("publicDiv").appendTo($("#dragDiv"+currentSerialNum));
 		$('<div>',{'id':'rLeft'+currentSerialNum,'class':'rLeft',
 		'mouseover':function(){keyControlAction = 'rLeft';keyCanMoveDiv = false;},
-		'mousedown':function(){resizeAction(event,"rLeft")}}).appendTo($("#dragDiv"+currentSerialNum));
+		'mousedown':function(){resizeAction(event,"rLeft")}}).addClass("publicDiv").appendTo($("#dragDiv"+currentSerialNum));
 		$('<div>',{'id':'rUp'+currentSerialNum,'class':'rUp',
 		'mouseover':function(){keyControlAction = 'rUp';keyCanMoveDiv = false;},
-		'mousedown':function(){resizeAction(event,"rUp")}}).appendTo($("#dragDiv"+currentSerialNum));
+		'mousedown':function(){resizeAction(event,"rUp")}}).addClass("publicDiv").appendTo($("#dragDiv"+currentSerialNum));
 		$('<div>',{'id':'rDown'+currentSerialNum,'class':'rDown',
 		'mouseover':function(){keyControlAction = 'rDown';keyCanMoveDiv = false;},
-		'mousedown':function(){resizeAction(event,"rDown")}}).appendTo($("#dragDiv"+currentSerialNum));
+		'mousedown':function(){resizeAction(event,"rDown")}}).addClass("publicDiv").appendTo($("#dragDiv"+currentSerialNum));
 		currentDragDiv = document.getElementById("dragDiv"+currentSerialNum);
 		currentDragDivMap.put($(currentDragDiv).attr("id"),currentDragDiv);
+		
+		
 	}
 var keyControlAction = null;
 var isMouseLeftKeyDown = false;
@@ -249,15 +249,16 @@ function removeBoder(oobb){
 //		$(currentDragDiv).empty();//移除所有的子元素
 //		$(currentSelectedTag).appendTo(currentDragDiv);//将选择的标签添加进来
 	$(oobb).css({'border':'0px'});//因擦实线边
-	var boder = $(oobb.childNodes).detach('div');//移除所有的div
-	$(currentSelectedTag).appendTo($(oobb));//将选择的标签添加进来
+	//var boder = $(oobb.childNodes).detach('div');//移除所有的div
+	//$(currentSelectedTag).appendTo($(oobb));//将选择的标签添加进来
+	var boder = $(oobb).children("div.publicDiv").remove();
 	//console.log($(oobb).attr("id"));
 	saveCurrntBoder.put($(oobb).attr("id")+"boder",boder);//将这个存放到map,以便等下显示出来(这里加一个boder是为了不和前面div的ID重复了)
 }
 //显示边框
 function displayBoder(oob){
 	$(oob).css({'border':'1px solid #000000'});//显示实线边
-		$(currentSelectedTag).appendTo($(oob));//将选择的标签添加进来
+	//$(currentSelectedTag).appendTo($(oob));//将选择的标签添加进来
 	//console.log("显示边框");
 	if(!saveCurrntBoder.isEmpty())
 			saveCurrntBoder.get($(oob).attr("id")+"boder").appendTo($(oob));//取到map中的边框值(这里加一个boder是为了不和前面div的ID重复了)
@@ -273,7 +274,10 @@ function isContain(x,y,opreaObj){
 		return true;
 	}
 	else
-		removeBoder(opreaObj);
+	{
+			removeBoder(opreaObj);
+	}
+		
 }
 //键盘上下左右控制大小 
 $(document).keydown(function(event){
@@ -410,16 +414,16 @@ function doSomeKeyMoveOpra(keyCode){
 }
 var isKeyCtrlDown = false;//是否按下了ctrl键
 var currentDivArrayList = new Array();
-//$(document).keydown(function(event){
-//	if(event.keyCode == 17){
-//		if(!isContainCurrentDivArrayList(currentDragDiv))
-//			currentDivArrayList.push(currentDragDiv);
-//		}
-//	displaySelectDivBoder();
-//	//console.log("数组的长度："+currentDivArrayList.length);
-//	//console.log("id:"+$(currentDragDiv).attr("id"));
-//	}
-//);
+$(document).keydown(function(event){
+	if(event.keyCode == 17){
+		if(!isContainCurrentDivArrayList(currentDragDiv))
+			currentDivArrayList.push(currentDragDiv);
+		}
+	displaySelectDivBoder();
+	console.log("数组的长度："+currentDivArrayList.length);
+	//console.log("id:"+$(currentDragDiv).attr("id"));
+	}
+);
 //$(document).keyup(function(event){
 //	if(event.keyCode == 17){
 //		removeAllDivBoder();
@@ -444,8 +448,7 @@ function displaySelectDivBoder(){
 function removeAllDivBoder(){
 		for(var x = 0; x<currentDivArrayList.length;x++)
 				removeBoder(currentDivArrayList[x]);
-		//把数组清空
-		//currentDivArrayList.length = 0;
+		currentDivArrayList.length = 0;
 		//currentDragDiv = null;
 }
 	

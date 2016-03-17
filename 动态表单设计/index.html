@@ -9,6 +9,7 @@
 		<script type="text/javascript" src="js/jquery-ui.js" ></script>
 		<script type="text/javascript" src="js/jquery-ui.min.js" ></script>
 		<script type="text/javascript" src="js/definedFromControls.js"></script>
+		<script type="text/javascript" src="js/alignAction.js" ></script>
 		<link rel="stylesheet" href="css/prettyBtn.css" />
 		<link rel="stylesheet" href="css/common.css" />
 	</head>
@@ -26,13 +27,16 @@
 			
 		</div>
 		<div id="topAndSpace"> 
-			<div id="top">top</div>
+			<div id="top">top
+			
+			<button id="leftAlign" class="button black" onclick="leftAlign()">左对齐</button>
+			<button id="rightAlign" class="button black" onclick="rightAlign()">右对齐</button>
+			</div>
 			<div id="workSpace" onmousedown="CreateChirdren(event)"
 			 onmouseover="getXandY(event)">workSpace
 				<div id="workspaceCurrntXandY" style="float: right;">
 					工作区域的当前坐标点：(0,0)
 				</div>
-				
 			</div>
 		</div>
 		<div id="historyAndProperty">
