@@ -2,8 +2,10 @@ var currentButton = null;
 var currentSelectedTag;
 var ww;
 var hh;
+var isCanCreateChirdren = false;
 $(document).ready(function(){
   $("button.button").click(function(){
+  	isCanCreateChirdren = true;
    //alert("你点击按钮"+$(this).text());
    //alert($(this).attr("id"));
    	$("button").removeClass("clickedButton");//移除所有点击了按钮的效果
@@ -78,49 +80,57 @@ function createTag(obj){
 var flag;//设置一个标志确保一次只创建一div
 var keyCanMoveDiv = false;
 function CreateChirdren(e){//鼠标按下时的事件
-	
 	piontX = e.clientX;//记录当前的坐标点
 	piontY = e.clientY;
 	getcurrentXandY(e);
-	
-	$("button").removeClass("clickedButton");//移除所有点击了按钮的效果	
-	if(flag){
-		creatBoder();//创建边框
-		//根据选择的控件设置框的大小
-		currentDragDiv.style.width = ww + "px";
-		currentDragDiv.style.height = hh + "px";
-		//主边框的css
-		currentSelectedTag.css({"background-color":"white",
-					  		"position":"absolute",
-					  		"left":"0px",
-					  		"top":"0px",
-					  		"width":"100%",
-					  		"height":"100%"
-								})
-		.bind("mouseover",function(){keyCanMoveDiv = true;})
-		.bind("mouseout",function(){keyCanMoveDiv = false;})
-					  .appendTo($(currentDragDiv));
-		$(currentDragDiv).bind("mouseover",function(){move(event);})//绑定移动事件
-		$(currentDragDiv).css({
-				"left":piontX+"px",
-				"top":piontY+"px"
-		})
+	if(isCanCreateChirdren){
+		$("button").removeClass("clickedButton");//移除所有点击了按钮的效果	
+		if(flag){
+			creatBoder();//创建边框
+			openContextMeun();//开启右键菜单
+			//根据选择的控件设置框的大小
+			currentDragDiv.style.width = ww + "px";
+			currentDragDiv.style.height = hh + "px";
+			//主边框的css
+			currentSelectedTag.css({"background-color":"white",
+						  		"position":"absolute",
+						  		"left":"0px",
+						  		"top":"0px",
+						  		"width":"100%",
+						  		"height":"100%"
+									})
+			.bind("mouseover",function(){keyCanMoveDiv = true;})
+			.bind("mouseout",function(){keyCanMoveDiv = false;})
+						  .appendTo($(currentDragDiv));
+			$(currentDragDiv).bind("mouseover",function(){move(event);})//绑定移动事件
+			$(currentDragDiv).css({
+					"left":piontX+"px",
+					"top":piontY+"px"
+			})
+		}
+		flag = false;
+		isCanCreateChirdren = false;
 	}
-	flag = false;
 }
 var piontX,piontY;//记录坐标点
 function getXandY(e){
-	$("#workspaceCurrntXandY").html("工作区域的当前坐标点：("+
-		Math.floor(e.pageX-$("#workSpace").offset().left)+","+Math.floor(e.pageY-$("#workSpace").offset().top)+")");
+	$("#afterbody").html("工作区域的当前坐标点：("+
+		Math.floor(e.pageX-$("#workSpace").offset().left)+","+Math.floor(e.pageY-$("#workSpace").offset().top)+")"+"当前的控件ID:"+$(currentDragDiv).attr("id"));
+		isActiveSelectRec = true;//激活鼠标选框动作
+}
+function iceSelectRecAction(e){
+	isActiveSelectRec = false;//阻止鼠标选框动作
 }
 function getcurrentXandY(e){//鼠标在工作区域时 更新位置信息
 //	if(currentDragDiv!=null)
 //		isContain(e.clientX,e.clientY);//判读鼠标是否在当前的div
 	if(!currentDragDivMap.isEmpty())
 		for(var i = 0;i<currentDragDivMap.values().length;i++){
-			if(isContain(e.clientX,e.clientY,currentDragDivMap.values()[i]))
+			if(isContain(e.clientX,e.clientY,currentDragDivMap.values()[i])){
 				currentDragDiv = currentDragDivMap.values()[i];
+			}
 		}
+		console.log("当前的divId是  ———"+$(currentDragDiv).attr("id"));
 //	piontX = e.clientX;//记录当前的坐标点
 //	piontY = e.clientY;
 }
@@ -251,8 +261,9 @@ function removeBoder(oobb){
 	$(oobb).css({'border':'0px'});//因擦实线边
 	//var boder = $(oobb.childNodes).detach('div');//移除所有的div
 	//$(currentSelectedTag).appendTo($(oobb));//将选择的标签添加进来
-	var boder = $(oobb).children("div.publicDiv").remove();
+	var boder = $(oobb).children("div.publicDiv").detach();
 	//console.log($(oobb).attr("id"));
+	console.log("隐藏边框"+$(oobb).attr("id")+"_boder");
 	saveCurrntBoder.put($(oobb).attr("id")+"boder",boder);//将这个存放到map,以便等下显示出来(这里加一个boder是为了不和前面div的ID重复了)
 }
 //显示边框
@@ -261,7 +272,8 @@ function displayBoder(oob){
 	//$(currentSelectedTag).appendTo($(oob));//将选择的标签添加进来
 	//console.log("显示边框");
 	if(!saveCurrntBoder.isEmpty())
-			saveCurrntBoder.get($(oob).attr("id")+"boder").appendTo($(oob));//取到map中的边框值(这里加一个boder是为了不和前面div的ID重复了)
+			saveCurrntBoder.get($(oob).attr("id")+"boder").appendTo(oob);//取到map中的边框值(这里加一个boder是为了不和前面div的ID重复了)
+	console.log("显示边框"+$(oob).attr("id")+"_boder");
 }
 //判读鼠标是否在当前div中
 function isContain(x,y,opreaObj){
@@ -275,7 +287,7 @@ function isContain(x,y,opreaObj){
 	}
 	else
 	{
-			removeBoder(opreaObj);
+		removeBoder(opreaObj);
 	}
 		
 }
@@ -415,7 +427,7 @@ function doSomeKeyMoveOpra(keyCode){
 var isKeyCtrlDown = false;//是否按下了ctrl键
 var currentDivArrayList = new Array();
 $(document).keydown(function(event){
-	if(event.keyCode == 17){
+	if(event.shiftKey){
 		if(!isContainCurrentDivArrayList(currentDragDiv))
 			currentDivArrayList.push(currentDragDiv);
 		}
@@ -451,10 +463,104 @@ function removeAllDivBoder(){
 		currentDivArrayList.length = 0;
 		//currentDragDiv = null;
 }
-	
-	
-	
-	
-	
-	
+///**
+// * 实现鼠标拖动选取控件
+// * **/
+var isActiveSelectRec = false;//判断鼠标是否在工作区，判断的在getXandY()函数
+var startX = 0, startY = 0;
+var flag = false;
+var retcLeft = "0px", retcTop = "0px", retcHeight = "0px", retcWidth = "0px";
+var sDiv;
+//鼠标按下
+document.onmousedown = function(e){
+	//if判断是否按下的鼠标的左键
+	if(event.which ==1 && isActiveSelectRec){
+		currentDivArrayList.length = 0;//清空选择框里
+		console.log("onmousedown");
+		 flag = true;
+		  try{
+		   startX = e.clientX;
+		   startY = e.clientY;
+		   sDiv = document.createElement("div");
+		   sDiv.className = "selectRec";
+		   sDiv.style.marginLeft = startX + "px";
+		   sDiv.style.marginTop = startY + "px";
+		  }catch(e){
+		  //alert(e);
+		  }
+	}
+}
+//鼠标移动
+document.onmousemove = function(e){
+	if(event.which == 1 && isActiveSelectRec){
+		console.log("onmousemove");
+		if(flag){
+			document.getElementById("workSpace").appendChild(sDiv);
+	   try{
+		   retcLeft = (startX - e.clientX > 0 ? e.clientX : startX);
+		   retcTop = (startY - e.clientY > 0 ? e.clientY : startY);
+		   retcHeight = Math.abs(startY - e.clientY);
+		   retcWidth = Math.abs(startX - e.clientX );
+		   sDiv.style.marginLeft = retcLeft + "px";
+		   sDiv.style.marginTop = retcTop + "px";
+		   sDiv.style.width = retcWidth + "px";
+		   sDiv.style.height = retcHeight + "px";
+		   isContainAnyDiv();
+	   }catch(e){
+	    //alert(e);
+	   } 
+	  }
+	}
+}
+//鼠标抬起
+document.onmouseup = function(e){
+	if(event.which == 1 && isActiveSelectRec){
+			console.log("onmouseup");
+			try{
+			  document.getElementById("workSpace").removeChild(sDiv);
+			  }catch(e){
+			   //alert(e);
+			  }
+			  flag = false;
+			}
+}
+//判断是否包含了 控件	
+function isContainAnyDiv(){
+	var leftUpx,leftUpy,rightUpx,rightUpy,leftDownx,leftDowny,rightDownx,rightDowny;
+	for(var i = 0;i<currentDragDivMap.values().length;i++)
+	{
+		leftUpx = currentDragDivMap.values()[i].offsetLeft;
+		leftUpy = currentDragDivMap.values()[i].offsetTop;
+		
+		rightUpx = currentDragDivMap.values()[i].offsetLeft + currentDragDivMap.values()[i].offsetWidth;
+		rightUpy = currentDragDivMap.values()[i].offsetTop;
+		
+		leftDownx = currentDragDivMap.values()[i].offsetLeft;
+		leftDowny =  currentDragDivMap.values()[i].offsetTop + currentDragDivMap.values()[i].offsetHeight;
+		
+		rightDownx = currentDragDivMap.values()[i].offsetLeft + currentDragDivMap.values()[i].offsetWidth;
+		rightDowny = currentDragDivMap.values()[i].offsetTop + currentDragDivMap.values()[i].offsetHeight;
+//		console.log("左上角:"+leftUpx+"——"+leftUpy);
+//		console.log("右上角:"+rightUpx+"——"+rightUpy);
+//		console.log("左下角:"+leftDownx+"——"+leftDowny);
+//		console.log("右下角:"+rightDownx+"——"+rightDowny);
+		if(isInSelectDiv(leftUpx,leftUpy,rightUpx,rightUpy,leftDownx,leftDowny,rightDownx,rightDowny)){
+			displayBoder(currentDragDivMap.values()[i]);
+			if(!isContainCurrentDivArrayList(currentDragDivMap.values()[i]))
+				currentDivArrayList.push(currentDragDivMap.values()[i]);
+		}
+	}
+}
+//判断是否在选框里的核心算法
+function isInSelectDiv(lux,luy,rux,ruy,ldx,ldy,rdx,rdy){
+	if(lux > retcLeft &&  luy > retcTop && lux < retcLeft+retcWidth && luy < retcTop+retcHeight)
+		return true;
+	if(rux > retcLeft &&  ruy > retcTop && rux < retcLeft+retcWidth && ruy < retcTop+retcHeight)
+		return true;
+	if(ldx > retcLeft &&  ldy > retcTop && ldx < retcLeft+retcWidth && ldy < retcTop+retcHeight)
+		return true;
+	if(rdx > retcLeft &&  rdy > retcTop && rdx < retcLeft+retcWidth && rdy < retcTop+retcHeight)
+		return true;
+	return false;
+}
 	

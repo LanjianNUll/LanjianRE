@@ -5,13 +5,16 @@
 		<title>动态表单设计</title>
 		<script type="text/javascript" src="js/definedMap.js" ></script>
 		<script type="text/javascript" src="js/jquery-2.1.1.js" ></script>
-		<script type="text/javascript" src="js/common.js" ></script>
 		<script type="text/javascript" src="js/jquery-ui.js" ></script>
 		<script type="text/javascript" src="js/jquery-ui.min.js" ></script>
-		<script type="text/javascript" src="js/definedFromControls.js"></script>
-		<script type="text/javascript" src="js/alignAction.js" ></script>
-		<link rel="stylesheet" href="css/prettyBtn.css" />
-		<link rel="stylesheet" href="css/common.css" />
+		<script type="text/javascript" src="js/jquery.contextmenu.js" ></script>
+		<script type="text/javascript" src="myWriteJs/alignAction.js" ></script>
+		<script type="text/javascript" src="myWriteJs/common.js" ></script>
+		<script type="text/javascript" src="myWriteJs/contextMenu.js" ></script>
+		<script type="text/javascript" src="myWriteJs/definedFromControls.js" ></script>
+		<link rel="stylesheet" href="myWriteCss/common.css" />
+		<link rel="stylesheet" href="myWriteCss/prettyBtn.css" />
+		<link rel="stylesheet" href="css/jquery.contextmenu.css" />
 	</head>
 	<body>
 		<div id="selectTag">
@@ -28,14 +31,23 @@
 		</div>
 		<div id="topAndSpace"> 
 			<div id="top">top
-			
-			<button id="leftAlign" class="button black" onclick="leftAlign()">左对齐</button>
-			<button id="rightAlign" class="button black" onclick="rightAlign()">右对齐</button>
+			<button id="leftAlign"  onclick="leftAlign()">左对齐</button>
+			<button id="rightAlign" class="" onclick="rightAlign()">右对齐</button>
+			<button id="centerAlign" class="" onclick="centerAlign()">居中</button>
+			<button id="equalHeight" class="" onclick="equalHeight()">等高</button>
+			<button id="equalWidth" class="" onclick="equalWidth()">等宽</button>
+			<button id="resetSerize" class="" onclick="resetSerize()">重排</button>
+			<button id="aboutProperty" class="" onclick="aboutProperty()">属性</button>
+			<button id="pageAboutProperty" class="" onclick="pageAboutProperty()">页面属性</button>
+			<button id="copyCurrentDiv" class="" onclick="copyCurrentDiv()">复制</button>
+			<button id="pasteCurrentDiv" class="" onclick="pasteCurrentDiv()">粘贴</button>
+			<button id="clearAll" class="" onclick="clearAll()">清空</button>
+			<button id="save">保存</button>
+			<button id="exitpage">退出</button>
 			</div>
-			<div id="workSpace" onmousedown="CreateChirdren(event)"
-			 onmouseover="getXandY(event)">workSpace
+			<div id="workSpace" onmousedown="CreateChirdren(event)" 
+			 onmousemove="getXandY(event)" onmouseout ="iceSelectRecAction(event)">workSpace
 				<div id="workspaceCurrntXandY" style="float: right;">
-					工作区域的当前坐标点：(0,0)
 				</div>
 			</div>
 		</div>
