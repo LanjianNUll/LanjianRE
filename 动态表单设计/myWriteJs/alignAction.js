@@ -28,7 +28,6 @@ function rightAlign(){
 }
 //清空工作区
 function clearAll(){
-	
 	$("#workSpace").children().remove();
 	currentDragDivMap.clear();
 	currentSerialNum = 0;

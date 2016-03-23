@@ -99,10 +99,11 @@ function CreateChirdren(e){//鼠标按下时的事件
 						  		"width":"100%",
 						  		"height":"100%"
 									})
-			.bind("mouseover",function(){keyCanMoveDiv = true;})
-			.bind("mouseout",function(){keyCanMoveDiv = false;})
+			.bind("mouseover",function(event){keyCanMoveDiv = true;})
+			.bind("mouseout",function(event){keyCanMoveDiv = false;})
 						  .appendTo($(currentDragDiv));
-			$(currentDragDiv).bind("mouseover",function(){move(event);})//绑定移动事件
+			//var event = event||window.event 为了兼容FF
+			$(currentDragDiv).bind("mousedown",function(event){ move(event);}),
 			$(currentDragDiv).css({
 					"left":piontX+"px",
 					"top":piontY+"px"
@@ -115,7 +116,9 @@ function CreateChirdren(e){//鼠标按下时的事件
 var piontX,piontY;//记录坐标点
 function getXandY(e){
 	$("#afterbody").html("工作区域的当前坐标点：("+
-		Math.floor(e.pageX-$("#workSpace").offset().left)+","+Math.floor(e.pageY-$("#workSpace").offset().top)+")"+"当前的控件ID:"+$(currentDragDiv).attr("id"));
+		Math.floor(e.pageX-$("#workSpace").offset().left)+","+Math.floor(e.pageY-$("#workSpace").offset().top)+")"
+				+"当前的控件ID:"+$(currentDragDiv).attr("id")
+				+"当前控件的name值为："+$(currentDragDiv).children("span").attr("name"));
 		isActiveSelectRec = true;//激活鼠标选框动作
 }
 function iceSelectRecAction(e){
@@ -130,14 +133,15 @@ function getcurrentXandY(e){//鼠标在工作区域时 更新位置信息
 				currentDragDiv = currentDragDivMap.values()[i];
 			}
 		}
-		console.log("当前的divId是  ———"+$(currentDragDiv).attr("id"));
+		//console.log("当前的divId是  ———"+$(currentDragDiv).attr("id"));
 //	piontX = e.clientX;//记录当前的坐标点
 //	piontY = e.clientY;
 }
 //当前Tag移动
 function move(e){
-	console.log(keyCanMoveDiv);
-		$("#dragDiv"+currentSerialNum).draggable({containment:"#workSpace"}).css({"cursor":"move"});//设置dragDiv可以拖拽并限定器拖拽的范围，
+	//console.log(keyCanMoveDiv);
+	isActiveSelectRec = false;//阻止鼠标选框动作
+	$("#dragDiv"+currentSerialNum).draggable({containment:"#workSpace"}).css({"cursor":"move"});//设置dragDiv可以拖拽并限定器拖拽的范围，
 }
 var currentSerialNum = 0;
 //创建边框
@@ -146,32 +150,30 @@ function creatBoder(){
 		$('<div>',{'id':'dragDiv'+currentSerialNum,'class':'publicdragDiv'}).appendTo("#workSpace");
 		$('<div>',{'id':'rRightDown'+currentSerialNum,'class':'rRightDown',
 		'mouseover':function(){keyControlAction = 'rRightDown';keyCanMoveDiv = false;},
-		'mousedown':function(){resizeAction(event,"rRightDown")}}).addClass("publicDiv").appendTo($("#dragDiv"+currentSerialNum));
+		'mousedown':function(event){ resizeAction(event,"rRightDown")}}).addClass("publicDiv").appendTo($("#dragDiv"+currentSerialNum));
 		$('<div>',{'id':'rLeftDown'+currentSerialNum,'class':'rLeftDown',
 		'mouseover':function(){keyControlAction = 'rLeftDown';keyCanMoveDiv = false;},
-		'mousedown':function(){resizeAction(event,"rLeftDown")}}).addClass("publicDiv").appendTo($("#dragDiv"+currentSerialNum));
+		'mousedown':function(event){ resizeAction(event,"rLeftDown")}}).addClass("publicDiv").appendTo($("#dragDiv"+currentSerialNum));
 		$('<div>',{'id':'rRightUp'+currentSerialNum,'class':'rRightUp',
 		'mouseover':function(){keyControlAction = 'rRightUp';keyCanMoveDiv = false;},
-		'mousedown':function(){resizeAction(event,"rRightUp")}}).addClass("publicDiv").appendTo($("#dragDiv"+currentSerialNum));
+		'mousedown':function(event){resizeAction(event,"rRightUp")}}).addClass("publicDiv").appendTo($("#dragDiv"+currentSerialNum));
 		$('<div>',{'id':'rLeftUp'+currentSerialNum,'class':'rLeftUp',
 		'mouseover':function(){keyControlAction = 'rLeftUp';keyCanMoveDiv = false;},
-		'mousedown':function(){resizeAction(event,"rLeftUp")}}).addClass("publicDiv").appendTo($("#dragDiv"+currentSerialNum));
+		'mousedown':function(event){resizeAction(event,"rLeftUp")}}).addClass("publicDiv").appendTo($("#dragDiv"+currentSerialNum));
 		$('<div>',{'id':'rRight'+currentSerialNum,'class':'rRight',
 		'mouseover':function(){keyControlAction = 'rRight';keyCanMoveDiv = false;},
-		'mousedown':function(){resizeAction(event,"rRight")}}).addClass("publicDiv").appendTo($("#dragDiv"+currentSerialNum));
+		'mousedown':function(event){ resizeAction(event,"rRight")}}).addClass("publicDiv").appendTo($("#dragDiv"+currentSerialNum));
 		$('<div>',{'id':'rLeft'+currentSerialNum,'class':'rLeft',
 		'mouseover':function(){keyControlAction = 'rLeft';keyCanMoveDiv = false;},
-		'mousedown':function(){resizeAction(event,"rLeft")}}).addClass("publicDiv").appendTo($("#dragDiv"+currentSerialNum));
+		'mousedown':function(event){ resizeAction(event,"rLeft")}}).addClass("publicDiv").appendTo($("#dragDiv"+currentSerialNum));
 		$('<div>',{'id':'rUp'+currentSerialNum,'class':'rUp',
 		'mouseover':function(){keyControlAction = 'rUp';keyCanMoveDiv = false;},
-		'mousedown':function(){resizeAction(event,"rUp")}}).addClass("publicDiv").appendTo($("#dragDiv"+currentSerialNum));
+		'mousedown':function(event){resizeAction(event,"rUp")}}).addClass("publicDiv").appendTo($("#dragDiv"+currentSerialNum));
 		$('<div>',{'id':'rDown'+currentSerialNum,'class':'rDown',
 		'mouseover':function(){keyControlAction = 'rDown';keyCanMoveDiv = false;},
-		'mousedown':function(){resizeAction(event,"rDown")}}).addClass("publicDiv").appendTo($("#dragDiv"+currentSerialNum));
+		'mousedown':function(event){ resizeAction(event,"rDown")}}).addClass("publicDiv").appendTo($("#dragDiv"+currentSerialNum));
 		currentDragDiv = document.getElementById("dragDiv"+currentSerialNum);
 		currentDragDivMap.put($(currentDragDiv).attr("id"),currentDragDiv);
-		
-		
 	}
 var keyControlAction = null;
 var isMouseLeftKeyDown = false;
@@ -193,7 +195,7 @@ window.onmouseup = function(){
 //鼠标移动事件
 window.onmousemove = function(e){
 	if(isMouseLeftKeyDown == true){
-			console.log("当前的动作"+currentDriection);
+			//console.log("当前的动作"+currentDriection);
 		switch(currentDriection){
 			case "rRightDown":rightMove(e);downMove(e);break;
 			case "rLeftDown":leftMove(e);downMove(e);break;
@@ -263,7 +265,7 @@ function removeBoder(oobb){
 	//$(currentSelectedTag).appendTo($(oobb));//将选择的标签添加进来
 	var boder = $(oobb).children("div.publicDiv").detach();
 	//console.log($(oobb).attr("id"));
-	console.log("隐藏边框"+$(oobb).attr("id")+"_boder");
+	//console.log("隐藏边框"+$(oobb).attr("id")+"_boder");
 	saveCurrntBoder.put($(oobb).attr("id")+"boder",boder);//将这个存放到map,以便等下显示出来(这里加一个boder是为了不和前面div的ID重复了)
 }
 //显示边框
@@ -273,7 +275,7 @@ function displayBoder(oob){
 	//console.log("显示边框");
 	if(!saveCurrntBoder.isEmpty())
 			saveCurrntBoder.get($(oob).attr("id")+"boder").appendTo(oob);//取到map中的边框值(这里加一个boder是为了不和前面div的ID重复了)
-	console.log("显示边框"+$(oob).attr("id")+"_boder");
+	//console.log("显示边框"+$(oob).attr("id")+"_boder");
 }
 //判读鼠标是否在当前div中
 function isContain(x,y,opreaObj){
@@ -382,12 +384,12 @@ function keyLeftMoveRight(){
 //右边框 向右移动
 function keyRightMoveLeft(){
 	currentDragDiv.style.width = currentDragDiv.offsetWidth - 2 - 1 +"px";
-	console.log(currentDragDiv.offsetWidth)
+	//console.log(currentDragDiv.offsetWidth)
 }
 //右边框 向左移动
 function keyRightMoveRight(){
 	currentDragDiv.style.width = currentDragDiv.offsetWidth - 2 + 1 +"px";
-	console.log(currentDragDiv.offsetWidth)
+	//console.log(currentDragDiv.offsetWidth)
 }
 //上边框 向上移动
 function keyUpMoveUp(){
@@ -401,17 +403,17 @@ function keyUpMoveDown(){
 	currentDragDiv.style.height = 	heightBefore - 1 + "px";
 	currentDragDiv.style.top = currentDragDiv.offsetTop + 1 + "px";
 	
-	console.log(currentDragDiv.offsetHeight)
+	//console.log(currentDragDiv.offsetHeight)
 }
 //下边框 向上移动
 function keyDownMoveUp(){
 	currentDragDiv.style.height = currentDragDiv.offsetHeight -2  - 1 +"px";
-	console.log(currentDragDiv.offsetHeight)
+	//console.log(currentDragDiv.offsetHeight)
 }
 //下边框 向下移动
 function keyDownMoveDown(){
 	currentDragDiv.style.height = currentDragDiv.offsetHeight - 2 + 1 +"px";
-	console.log(currentDragDiv.offsetHeight)
+	//console.log(currentDragDiv.offsetHeight)
 }
 //键盘控制微调
 function doSomeKeyMoveOpra(keyCode){
@@ -432,7 +434,7 @@ $(document).keydown(function(event){
 			currentDivArrayList.push(currentDragDiv);
 		}
 	displaySelectDivBoder();
-	console.log("数组的长度："+currentDivArrayList.length);
+	//console.log("数组的长度："+currentDivArrayList.length);
 	//console.log("id:"+$(currentDragDiv).attr("id"));
 	}
 );
@@ -472,52 +474,53 @@ var flag = false;
 var retcLeft = "0px", retcTop = "0px", retcHeight = "0px", retcWidth = "0px";
 var sDiv;
 //鼠标按下
-document.onmousedown = function(e){
+document.onmousedown = function(event){
 	//if判断是否按下的鼠标的左键
 	if(event.which ==1 && isActiveSelectRec){
 		currentDivArrayList.length = 0;//清空选择框里
-		console.log("onmousedown");
+		//console.log("onmousedown");
 		 flag = true;
 		  try{
-		   startX = e.clientX;
-		   startY = e.clientY;
+		   startX = event.clientX;
+		   startY = event.clientY;
 		   sDiv = document.createElement("div");
 		   sDiv.className = "selectRec";
 		   sDiv.style.marginLeft = startX + "px";
 		   sDiv.style.marginTop = startY + "px";
-		  }catch(e){
-		  //alert(e);
+		  }catch(event){
+		  //alert(event);
 		  }
 	}
 }
 //鼠标移动
-document.onmousemove = function(e){
+document.onmousemove = function(event){
 	if(event.which == 1 && isActiveSelectRec){
-		console.log("onmousemove");
+		//console.log("onmousemove");
 		if(flag){
 			document.getElementById("workSpace").appendChild(sDiv);
 	   try{
-		   retcLeft = (startX - e.clientX > 0 ? e.clientX : startX);
-		   retcTop = (startY - e.clientY > 0 ? e.clientY : startY);
-		   retcHeight = Math.abs(startY - e.clientY);
-		   retcWidth = Math.abs(startX - e.clientX );
+		   retcLeft = (startX - event.clientX > 0 ? event.clientX : startX);
+		   retcTop = (startY - event.clientY > 0 ? event.clientY : startY);
+		   retcHeight = Math.abs(startY - event.clientY);
+		   retcWidth = Math.abs(startX - event.clientX );
 		   sDiv.style.marginLeft = retcLeft + "px";
 		   sDiv.style.marginTop = retcTop + "px";
 		   sDiv.style.width = retcWidth + "px";
 		   sDiv.style.height = retcHeight + "px";
 		   isContainAnyDiv();
-	   }catch(e){
+	   }catch(event){
 	    //alert(e);
 	   } 
 	  }
 	}
 }
 //鼠标抬起
-document.onmouseup = function(e){
+document.onmouseup = function(event){
 	if(event.which == 1 && isActiveSelectRec){
-			console.log("onmouseup");
+			//console.log("onmouseup");
 			try{
-			  document.getElementById("workSpace").removeChild(sDiv);
+			  //document.getElementById("workSpace").removeChild(sDiv);
+			  $(".selectRec").remove();//草泥马  干掉onmouserdown创建出来的div
 			  }catch(e){
 			   //alert(e);
 			  }
@@ -548,6 +551,10 @@ function isContainAnyDiv(){
 			displayBoder(currentDragDivMap.values()[i]);
 			if(!isContainCurrentDivArrayList(currentDragDivMap.values()[i]))
 				currentDivArrayList.push(currentDragDivMap.values()[i]);
+		}else{
+			removeBoder(currentDragDivMap.values()[i]);
+			if(isContainCurrentDivArrayList(currentDragDivMap.values()[i]))
+				currentDivArrayList.pop(currentDragDivMap.values()[i]);
 		}
 	}
 }

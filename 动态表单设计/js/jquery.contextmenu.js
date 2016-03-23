@@ -89,7 +89,7 @@ jQuery.fn.contextPopup = function(menuData) {
       .appendTo(document.body)
       .bind('contextmenu click', function() {
         // If click or right click anywhere else on page: remove clean up.
-        console.log("右键菜单移除");
+       // console.log("右键菜单移除");
         bg.remove();
         menu.remove();
         return false;
@@ -97,7 +97,7 @@ jQuery.fn.contextPopup = function(menuData) {
 
     // When clicking on a link in menu: clean up (in addition to handlers on link already)
     menu.find('a').click(function() {
-      console.log("右键菜单移除");
+     // console.log("右键菜单移除");
       bg.remove();
       menu.remove();
     });

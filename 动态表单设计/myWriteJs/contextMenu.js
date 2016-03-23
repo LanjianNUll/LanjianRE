@@ -1,4 +1,4 @@
-var copyCurrentDivTemp = null;
+var copyCurrentDivTempName= null;
 function openContextMeun() {
     $(currentDragDiv).contextPopup({
       items: [
@@ -28,15 +28,76 @@ function deleteDivAction(){
   	if (confirm("确定删除当前控件？")) {  
            $(currentDragDiv).remove();
         }  
-       
 }
 //复制当前div
 function copyCurrentDiv(){
-	
+	if(currentDragDiv!=null){
+		copyCurrentDivTempName = $(currentDragDiv).children("span").attr("name");
+		//console.log("当前div的name值为："+copyCurrentDivTempName);
+	}
 }
+////克隆一个对象
+//function clone(myObj){  
+//if(typeof(myObj) != 'object') return myObj;  
+//if(myObj == null) return myObj;  
+//  
+//var myNewObj = new Object();  
+//  
+//for(var i in myObj)  
+//   myNewObj[i] = clone(myObj[i]);  
+//  
+//return myNewObj;  
+//}  
 //粘贴当前div
 function pasteCurrentDiv(){
-	
+	if(copyCurrentDivTempName!=null){
+		isCanCreateChirdren = true;
+		switch (copyCurrentDivTempName){//这里匹配可能乱序了  因为不影响所以就不改了 
+		   	case "Radio":
+		   		ww = 180;
+		   		hh = 80;
+		   		createTag(createRadio());
+		   		break;
+		   	case "Select":
+		   		ww = 182;
+		   		hh = 62;
+		   		createTag(createSelect());
+		   		break;
+			case "InputOne":
+					ww = 230;
+		   		hh = 30;
+					createTag(createInputOne());
+		   		break;
+			case "InputTwo":
+					ww = 200;
+		   		hh = 84;
+		   		createTag(createInputTwo());
+		   		break;
+			case "Submit":
+					ww = 55;
+		   		hh = 30;
+					createTag(createSubmit());
+		   		break;
+			case "TextArea":
+					ww = 270;
+		   		hh = 120;
+		   		createTag(createTextArea());
+		   		break;
+			case "CheckBox":
+					ww = 210;
+		   		hh = 80;
+		   		createTag(createCheckBox());
+		   		break;
+		   case "P":
+		   		ww = 155;
+		   		hh = 45;
+		   		createTag(createP());
+		   		break;
+		   	default:
+		   		break;
+		}
+		$('#workSpace').trigger(CreateChirdren(event));//模拟鼠标点击事件  触发创建新对象函数
+	}
 }
 //移动至最上层
 function moveToUpTop(){
