@@ -6,7 +6,6 @@
 		<script type="text/javascript" src="js/definedMap.js" ></script>
 		<script type="text/javascript" src="js/jquery-2.1.1.js" ></script>
 		<script type="text/javascript" src="js/jquery-ui.js" ></script>
-		<script type="text/javascript" src="js/jquery-ui.min.js" ></script>
 		<script type="text/javascript" src="js/jquery.contextmenu.js" ></script>
 		<script type="text/javascript" src="myWriteJs/alignAction.js" ></script>
 		<script type="text/javascript" src="myWriteJs/common.js" ></script>
@@ -15,37 +14,116 @@
 		<link rel="stylesheet" href="myWriteCss/common.css" />
 		<link rel="stylesheet" href="myWriteCss/prettyBtn.css" />
 		<link rel="stylesheet" href="css/jquery.contextmenu.css" />
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/bootstrap.css" />
+		<script type="text/javascript" src="js/bootstrap.js" ></script>
+		<script type="text/javascript" src="js/bootstrap.min.js" ></script>
 	</head>
 	<body>
 		<div id="selectTag">
 			
-			<button id="divContainer" class="button black">单选框</button></br>
-			<button id="comboBox" class="button black">下拉框</button></br>
-			<button id="inputFrame" class="button black">输入框一</button></br>
-			<button id="radioButton" class="button black">输入框二</button></br>
-			<button id="TextFrame" class="button black">提交按钮</button></br>
-			<button id="iamge" class="button black">文本域</button></br>
-			<button id="checkBox" class="button black">复选框</button></br>
-			<button id="submitButton" class="button black">文本框</button></br>
+			<button id="divContainer" class="btn btn-default btn-sm ">单选框</button></br>
+			<button id="comboBox" class="btn btn-default btn-sm">下拉框</button></br>
+			<button id="inputFrame" class="btn btn-default btn-sm">输入框一</button></br>
+			<button id="radioButton" class="btn btn-default btn-sm">输入框二</button></br>
+			<button id="TextFrame" class="btn btn-default btn-sm">提交按钮</button></br>
+			<button id="iamge" class="btn btn-default btn-sm">文本域</button></br>
+			<button id="checkBox" class="btn btn-default btn-sm">复选框</button></br>
+			<button id="submitButton" class="btn btn-default btn-sm">文本框</button></br>
 			
 		</div>
 		<div id="topAndSpace"> 
-			<div id="top">top
-			<button id="leftAlign"  onclick="leftAlign()">左对齐</button>
-			<button id="rightAlign" class="" onclick="rightAlign()">右对齐</button>
-			<button id="centerAlign" class="" onclick="centerAlign()">居中</button>
-			<button id="equalHeight" class="" onclick="equalHeight()">等高</button>
-			<button id="equalWidth" class="" onclick="equalWidth()">等宽</button>
-			<button id="resetSerize" class="" onclick="resetSerize()">重排</button>
-			<button id="aboutProperty" class="" onclick="aboutProperty()">属性</button>
-			<button id="pageAboutProperty" class="" onclick="pageAboutProperty()">页面属性</button>
-			<button id="copyCurrentDiv" class="" onclick="copyCurrentDiv()">复制</button>
-			<button id="pasteCurrentDiv" class="" onclick="pasteCurrentDiv()">粘贴</button>
-			<button id="otherSave" class="" onclick="otherSave()">另存为</button>
-			<button id="clearAll" class="" onclick="clearAll()">清空</button>
-			<button id="save">保存</button>
-			<button id="exitpage">退出</button>
+			<div id="top" align="center"> 
+				<div style="margin-top: 12px;">
+					<button id="leftAlign" type="button" class="btn btn-default btn-sm" 
+						style="font-size: 18px" data-toggle="tooltip" 
+		   				data-placement="bottom" title="左对齐"
+						onclick="leftAlign()">
+					  <span class="glyphicon glyphicon-align-left"></span>
+					</button>
+					<button id="centerAlign" class="btn btn-default btn-sm" 
+						style="font-size: 18px" data-toggle="tooltip" 
+		   				data-placement="bottom" title="居中"
+						 onclick="centerAlign()"> 
+						<span class="glyphicon glyphicon-align-center"></span>
+					</button>
+					<button id="rightAlign" type="button" class="btn btn-default btn-sm" 
+						style="font-size: 18px" data-toggle="tooltip" 
+		   				data-placement="bottom" title="右对齐"
+		   				onclick="rightAlign()">
+						 <span class="glyphicon glyphicon-align-right"></span>
+					</button>
+					<button id="equalHeight"  type="button" class="btn btn-default btn-sm" 
+						style="font-size: 18px" data-toggle="tooltip" 
+		   				data-placement="bottom" title="等高"
+						onclick="equalHeight()">
+						<span class="glyphicon glyphicon-resize-vertical"></span>
+					</button>
+					<button id="equalWidth" type="button" class="btn btn-default btn-sm" 
+						style="font-size: 18px" data-toggle="tooltip" 
+		   				data-placement="bottom" title="等宽"
+						onclick="equalWidth()">
+						<span class="glyphicon glyphicon-resize-horizontal"></span>
+					</button>
+					<button id="resetSerize" type="button" class="btn btn-default btn-sm" 
+						style="font-size: 18px" data-toggle="tooltip" 
+		   				data-placement="bottom" title="重排"
+		   				onclick="resetSerize()">
+						<span class="glyphicon glyphicon-sort-by-attributes"></span>
+					</button>
+					<button id="aboutProperty" type="button" class="btn btn-default btn-sm" 
+						style="font-size: 18px" data-toggle="tooltip" 
+		   				data-placement="bottom" title="属性" 
+		   				onclick="aboutProperty()">
+						<span class="glyphicon glyphicon-cog"></span>
+						</br>
+					</button>
+					<button id="pageAboutProperty" type="button" class="btn btn-default btn-sm" 
+						style="font-size: 18px" data-toggle="tooltip" 
+		   				data-placement="bottom" title="页面属性"
+		   				onclick="pageAboutProperty()">
+						<span class="glyphicon glyphicon-file"></span>
+					</button>
+					<button id="copyCurrentDiv" type="button" class="btn btn-default btn-sm" 
+						style="font-size: 18px" data-toggle="tooltip" 
+		   				data-placement="bottom" title="复制"
+		   				onclick="copyCurrentDiv()">
+						<span class="glyphicon glyphicon-copy"></span>
+					</button>
+					<button id="pasteCurrentDiv" type="button" class="btn btn-default btn-sm" 
+						style="font-size: 18px" data-toggle="tooltip" 
+		   				data-placement="bottom" title="粘贴"
+		   				onclick="pasteCurrentDiv()">
+						<span class="glyphicon glyphicon-paste"></span>
+					</button>
+					<button id="otherSave" type="button" class="btn btn-default btn-sm" 
+						style="font-size: 18px" data-toggle="tooltip" 
+		   				data-placement="bottom" title="另存为"
+		   				onclick="otherSave()">
+						<span class="glyphicon glyphicon-floppy-save"></span>
+					</button>
+					<button id="clearAll"  type="button" class="btn btn-default btn-sm" 
+						style="font-size: 18px" data-toggle="tooltip" 
+		   				data-placement="bottom" title="清空" 
+		   				onclick="clearAll()"> 
+						<span class="glyphicon glyphicon-trash"></span>
+					</button>
+					<button id="save" type="button" class="btn btn-default btn-sm" 
+						style="font-size: 18px" data-toggle="tooltip" 
+		   				data-placement="bottom" title="保存"  >
+						<span class="glyphicon glyphicon-save-file"></span>
+					</button>
+					<button id="exitpage" type="button" class="btn btn-default btn-sm" 
+						style="font-size: 18px" data-toggle="tooltip" 
+		   				data-placement="bottom" title="退出"  >
+						<span class="glyphicon glyphicon-off"></span>
+					</button>
+					<script>
+						   $(function () { $("[data-toggle='tooltip']").tooltip(); });
+					</script>
+				</div>
 			</div>
+			
 			<div id="workSpace" onmousedown="CreateChirdren(event)" 
 			 onmousemove="getXandY(event)" onmouseout ="iceSelectRecAction(event)">workSpace
 				<div id="workspaceCurrntXandY" style="float: right;">
@@ -53,7 +131,7 @@
 			</div>
 		</div>
 		<div id="historyAndProperty">
-			<div id="property">property</div>
+			<div id="property">propertyfds</div>
 			<div id="history">history</div>
 		</div>
 		<div id="afterbody">afterbody</div>

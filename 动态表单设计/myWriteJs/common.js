@@ -4,7 +4,7 @@ var ww;
 var hh;
 var isCanCreateChirdren = false;
 $(document).ready(function(){
-  $("button.button").click(function(){
+  $("button.btn").click(function(){
   	isCanCreateChirdren = true;
    //alert("你点击按钮"+$(this).text());
    //alert($(this).attr("id"));
@@ -103,7 +103,7 @@ function CreateChirdren(e){//鼠标按下时的事件
 			.bind("mouseout",function(event){keyCanMoveDiv = false;})
 						  .appendTo($(currentDragDiv));
 			//var event = event||window.event 为了兼容FF
-			$(currentDragDiv).bind("mousedown",function(event){ move(event);}),
+			$(currentDragDiv).bind("mousedown",function(event){var event = event || window.event; move(event);}),
 			$(currentDragDiv).css({
 					"left":piontX+"px",
 					"top":piontY+"px"
