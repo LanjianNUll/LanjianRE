@@ -2,26 +2,26 @@ var copyCurrentDivTempName= null;
 function openContextMeun() {
     $(currentDragDiv).contextPopup({
       items: [
-        {label:'属性',     icon:'img/contextMeunTest.png',  
+        {label:'属性',     icon:'img/contextMeunSetting.png',  
         	action:function() { aboutProperty(); } },
-        {label:'删除', icon:'img/contextMeunTest.png',  
+        {label:'删除', icon:'img/contextMeunDelete.png',  
         	action:function() { deleteDivAction(); } },
-        {label:'复制',         icon:'img/contextMeunTest.png',  
-        	action:function() { copyCurrentDiv(); } },
-        {label:'置于顶层',         icon:'img/contextMeunTest.png', 
-        	action:function() { moveToUpTop(); } },
-        {label:'上移一层',       icon:'img/contextMeunTest.png',   
-        	action:function() { moveToUp(); } },
-        {label:'置于底层',      icon:'img/contextMeunTest.png',     
-        	action:function() { moveToDownDown(); } },
-    	{label:'下移一层',      icon:'img/contextMeunTest.png',     
-    	action:function() { moveToDowm(); } }
+        {label:'复制',         icon:'img/contextMeunCopy.png',  
+        	action:function() { copyCurrentDiv(); } }
+//      {label:'置于顶层',         icon:'img/contextMeunTest.png', 
+//      	action:function() { moveToUpTop(); } },
+//      {label:'上移一层',       icon:'img/contextMeunTest.png',   
+//      	action:function() { moveToUp(); } },
+//      {label:'置于底层',      icon:'img/contextMeunTest.png',     
+//      	action:function() { moveToDownDown(); } },
+//  	{label:'下移一层',      icon:'img/contextMeunTest.png',     
+//  	action:function() { moveToDowm(); } }
       ]
     });
   };
 //相关属性窗口
 function aboutProperty(){
-  	
+  	$("#historyAndProperty").slideDown("slow");
 }
 //删除当前div
 function deleteDivAction(){
@@ -120,9 +120,9 @@ function pageAboutProperty(){
 	
 }
 var workspaceItems = [
-		{label:'页面属性',     icon:'img/contextMeunTest.png',
+		{label:'页面属性',     icon:'img/contextMeunProperties.png',
         	action:function() { pageAboutProperty(); } },
-        {label:'粘贴', icon:'img/contextMeunTest.png',  
+        {label:'粘贴', icon:'img/contextMeunPaste.png',  
         	action:function() { pasteCurrentDiv(); } },
      	 ]
 $(function(){

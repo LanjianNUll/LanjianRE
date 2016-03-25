@@ -6,60 +6,71 @@ html, body {
 }
 /*控件选择区*/
 #selectTag{
-	width: 10%;
-	height: 90%;
-	background: gray;
+	width: 8%;
+	height: 95%;
+	background: #8B8B8B;
 	float: left;
 	text-align:center;
 }
+/**工具栏和画板*/
 #topAndSpace{
-	width: 90%;
-	height: 90%;
+	width: 92%;
+	height: 95%;
 	float: left;
 }
+/**工具栏*/
 #top{
 	width: 100%;
 	height: 10%;
 	float: left;
 	background: #8B8B8B;
 }
+/**画板*/
 #workSpace{
 	width: 100%;
 	height: 90%;
 	float: left;
 }
+/**属性和历史记录区*/
 #historyAndProperty{
-	width: 200px;
-	height: 80%;
+	width: 300px;
+	height: 86%;
 	top:9%;
-	right: 0%;
+	right: 2%;
 	position: absolute;
+	border: solid  2px #A8A8A8;
+	border-radius: 10px;
 	
 }
+/**历史记录区*/
 #history{
 	width: 100%;
-	height: 50%;
-	background: greenyellow;
+	height: 30%;
 }
+/**属性区*/
 #property{
 	width: 100%;
-	height: 50%;
-	background: blueviolet;
+	height: 70%;
+	margin: 5px;
 }
+/**页面底部的画板动作状态区*/
 #afterbody{
 	width: 100%;
-	height: 10%;
+	height: 5%;
 	float: left;
 	background: palevioletred;
 }
+/**选择控件的Span*/
 .selectTagSpan{
 	font-weight: 700;
 	margin: 15px;
 }
+/**点击鼠标后的按钮*/
 .clickedButton{
 	background:gray ;
 	color: white;
 }
+/**鼠标样式*/
 .cursorClass{
 	cursor:crosshair;
 }
@@ -94,15 +105,14 @@ html, body {
     width:0px;
     height:0px;left:0px; top:0px; overflow:hidden;
 }
+/**选择控件栏的选择按钮*/
+.SelectBtn{
+	font-size: 15px;
+	width: 50px;
+	height: 60px;
+	margin: 4px;
+}
 
-
-
-
-
-
-
-
-
-
-
-
+.propertybody{
+	background: #E5E5E5;
+}
