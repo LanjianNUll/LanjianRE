@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 	<head>
 		<meta charset="utf-8" />
@@ -11,13 +11,18 @@
 		<script type="text/javascript" src="myWriteJs/common.js" ></script>
 		<script type="text/javascript" src="myWriteJs/contextMenu.js" ></script>
 		<script type="text/javascript" src="myWriteJs/definedFromControls.js" ></script>
+		<script type="text/javascript" src="js/bootstrap.js" ></script>
+		<script type="text/javascript" src="js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="js/spectrum.js" ></script>
+		<script type="text/javascript" src="myWriteJs/propertyControls.js" ></script>
+		
 		<link rel="stylesheet" href="myWriteCss/common.css" />
 		<link rel="stylesheet" href="myWriteCss/prettyBtn.css" />
 		<link rel="stylesheet" href="css/jquery.contextmenu.css" />
 		<link rel="stylesheet" href="css/bootstrap.min.css" />
 		<link rel="stylesheet" href="css/bootstrap.css" />
-		<script type="text/javascript" src="js/bootstrap.js" ></script>
-		<script type="text/javascript" src="js/bootstrap.min.js" ></script>
+		<link rel="stylesheet" href="css/spectrum.css" />
+		
 	</head>
 	<body>
 		<div id="selectTag" align="center">
@@ -239,7 +244,7 @@
             	描述：画板 工作区
             -->
 			<div id="workSpace" onmousedown="CreateChirdren(event)" 
-			 onmousemove="getXandY(event)" onmouseout ="iceSelectRecAction(event)">workSpace
+			 onmousemove="getXandY(event)" onmouseout ="iceSelectRecAction(event)">
 				<div id="workspaceCurrntXandY" style="float: right;">
 				</div>
 			</div>
@@ -249,7 +254,7 @@
         	时间：2016-03-24
         	描述：属性和历史记录面板
         -->
-		<div id="historyAndProperty" hidden="true">
+		<div id="historyAndProperty" >
 			<div id="property">
 				<div id="propertybody">
 					<!--
@@ -296,7 +301,16 @@
 						    </div>
 						    <div id="collapseOne" class="panel-collapse collapse">
 						      <div class="panel-body">
-						       	 这里是放置内容的
+									纯色<input type='text' id="full" style="width: 120px" onchange="changeBackgroundColor()"/>
+									<br/><br/>
+ 								 	<span>
+									图案<select id="picture" style="width:150px; height:30px;" value=""
+										 onchange="changeBackgroundPicture()">
+											<option></option>
+											<option value="lantian">天空</option>
+											<option value="flowers">鲜花</option>
+										</select>
+									</span>
 						      </div>
 						    </div>
 						  </div>
@@ -309,9 +323,13 @@
 						    </div>
 						    <div id="collapseTwo" class="panel-collapse collapse">
 						      <div class="panel-body">
-						        Nihil anim keffiyeh helvetica, craft beer labore wes anderson 
-						        cred nesciunt sapiente ea proident. Ad vegan excepteur butcher 
-						        vice lomo.
+						      	位置<br />
+						        X  轴：<input type="text" id="divX" style="width: 60px;" onchange="changeDivX()"/>px&nbsp;&nbsp;&nbsp;
+ 							 	Y  轴：<input type="text" id="divY" style="width: 60px;" onchange="changeDivY()"/>px
+ 							 	<br />
+							       大小<br />
+							       高度：<input type="text" id="divHeight" style="width: 60px;" onchange="changeDivHeight()"/>px&nbsp;&nbsp;&nbsp;
+	 							宽度：<input type="text" id="divWidth" style="width: 60px;" onchange="changeDivWidth()"/>px
 						      </div>
 						    </div>
 						  </div>
@@ -323,9 +341,30 @@
 						    </div>
 						    <div id="collapseThree" class="panel-collapse collapse">
 						      <div class="panel-body">
-						        Nihil anim keffiyeh helvetica, craft beer labore wes anderson 
-						        cred nesciunt sapiente ea proident. Ad vegan excepteur butcher 
-						        vice lomo.
+							        宽度：<select id="boderWidth" style="width:150px; height:30px;" value=""
+											 onchange="changeBoderWidth()">
+												<option></option>
+												<option value="thin">thin</option>
+												<option value="medium">medium</option>
+												<option value="thick">thick</option>
+												<option value="length">length</option>
+											</select>
+											<br /><br />
+								样式：<select id="boderStyle" style="width:150px; height:30px;" value=""
+											 onchange="changeBoderStyle()">
+												<option value="none">none</option>
+												<option value="hidden">hidden</option>
+												<option value="dotted">dotted</option>
+												<option value="dashed">dashed</option>
+												<option value="solid">solid</option>
+												<option value="double">double</option>
+												<option value="groove">groove</option>
+												<option value="ridge">ridge</option>
+												<option value="inset">inset</option>
+												<option value="outset">outset</option>
+											</select>
+											<br /><br />
+								边框颜色<input type='text' id="boderColor" style="width: 120px" onchange="changeBoderColor()"/>
 						      </div>
 						    </div>
 						  </div>
@@ -345,8 +384,30 @@
 				   </script>
 				   
 				   <div class="tab-pane fade" id="personnal">
-				      <p>iOS 是一个由苹果公司开发和发布的手机操作系统。最初是于 2007 年首次发布 iPhone、iPod Touch 和 Apple 
-				      TV。iOS 派生自 OS X，它们共享 Darwin 基础。OS X 操作系统是用在苹果电脑上，iOS 是苹果的移动版本。</p>
+				      <div id="wordEdit" hidden="true">
+				      	<br />
+			      	字体大小:<input type="text" id="fontSize" style="width: 150px;" onchange="changeFontSize()"/>px
+			      		<br /><br />
+		      		字体样式:<input type="text" id="fontStyle" style="width: 150px;" onchange="changeFontStyle()"/>
+		      		   <br /><br />
+				         字体颜色:<input type="text" id="fontColor"  onchange="changeFontColor()"/>&nbsp;&nbsp;&nbsp;
+				         字体阴影:<input type="text" id="fontShadow"  onchange="changeFontColor()"/>
+					   <br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					  <button id="fontBold" type="button" class="btn btn-default btn-sm" 
+						style="font-size: 18px" data-toggle="tooltip" 
+		   				data-placement="bottom" title="粗体"
+						onclick="changeFontBold()">
+						 <span class="glyphicon glyphicon-bold"></span>
+					   </button>
+					   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					   <button id="fontItalic" type="button" class="btn btn-default btn-sm" 
+							style="font-size: 18px" data-toggle="tooltip" 
+			   				data-placement="bottom" title="斜体"
+							onclick="changeFontItalic()">
+						 <span class="glyphicon glyphicon-italic"></span>
+					   </button>
+				      </div><br/>
+				     
 				   </div>
 				   <div class="tab-pane fade" id="animtion">
 				      <p>i    OS 是一个 由苹果公司开发和发布的手机操作系统。最初是于 2007 年首次发布 iPhone、iPod Touch 和 Apple 

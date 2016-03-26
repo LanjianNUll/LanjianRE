@@ -98,7 +98,7 @@ function CreateChirdren(e){//鼠标按下时的事件
 						  		"top":"0px",
 						  		"width":"100%",
 						  		"height":"100%"
-									})
+									}).addClass("selectTag")
 			.bind("mouseover",function(event){keyCanMoveDiv = true;})
 			.bind("mouseout",function(event){keyCanMoveDiv = false;})
 						  .appendTo($(currentDragDiv));
@@ -131,6 +131,7 @@ function getcurrentXandY(e){//鼠标在工作区域时 更新位置信息
 		for(var i = 0;i<currentDragDivMap.values().length;i++){
 			if(isContain(e.clientX,e.clientY,currentDragDivMap.values()[i])){
 				currentDragDiv = currentDragDivMap.values()[i];
+				initPropertySomeMsg();//为属性框初始化一些信息
 			}
 		}
 		//console.log("当前的divId是  ———"+$(currentDragDiv).attr("id"));
@@ -212,7 +213,7 @@ window.onmousemove = function(e){
 function rightMove(e){
 	var x = e.clientX;//鼠标x坐标
 	var addWidth = "";//鼠标移动后选取框增加的宽度
-	var widthBefore = currentDragDiv.offsetWidth -2;//选取框变化前的宽度
+	var widthBefore = currentDragDiv.offsetWidth;//选取框变化前的宽度
 	addWidth = x - getPosition(currentDragDiv).left - widthBefore;//鼠标移动后增加的宽度
 	currentDragDiv.style.width = addWidth + widthBefore + "px";//选取框变化后
 }
@@ -221,7 +222,7 @@ function upMove(e){
 	var y = e.clientY;//鼠标纵坐标
 	var mainY = getPosition(currentDragDiv).top;//选取框相对于屏幕上边的距离
 	var addHeight = mainY - y;//增加的高度
-	var heightBefore = currentDragDiv.offsetHeight -2;//原来的高度
+	var heightBefore = currentDragDiv.offsetHeight;//原来的高度
 	currentDragDiv.style.height = 	heightBefore + addHeight + "px";
 	currentDragDiv.style.top = currentDragDiv.offsetTop - addHeight + "px";
 }
@@ -230,14 +231,14 @@ function leftMove(e){
 	var x = e.clientX;//鼠标横坐标
 	var mainX  = getPosition(currentDragDiv).left;
 	var addWidth = 	mainX - x;//增加的宽度
-	var widthBefore = currentDragDiv.offsetWidth -2;//原来的宽度
+	var widthBefore = currentDragDiv.offsetWidth;//原来的宽度
 	currentDragDiv.style.width = widthBefore + addWidth +"px";
 	currentDragDiv.style.left = currentDragDiv.offsetLeft - addWidth + "px";
 }
 //down移动
 function downMove(e){
 	var y = e.clientY;//鼠标纵坐标
-	var heightBefore = currentDragDiv.offsetHeight-2//原来的高度 -2是减去两边边框的大小和
+	var heightBefore = currentDragDiv.offsetHeight//原来的高度 -2是减去两边边框的大小和
 	var mainY = getPosition(currentDragDiv).top;
 	var addHeight = y - heightBefore - 	mainY;//增加的高度
 	currentDragDiv.style.height = addHeight + heightBefore + "px";
@@ -294,7 +295,7 @@ function isContain(x,y,opreaObj){
 		
 }
 //键盘上下左右控制大小 
-$(document).keydown(function(event){
+$(document).keydown(function(){
 	//左37上38右39下40event.keyCode
 	//console.log("要移动的边框"+keyControlAction);
 	//console.log("按下的键值"+event.keyCode)
@@ -371,48 +372,51 @@ $(document).keydown(function(event){
 });
 //左边框 向左移动
 function keyLeftMoveLeft(){
-	var widthBefore = currentDragDiv.offsetWidth -2;//原来的宽度
+	var widthBefore = currentDragDiv.offsetWidth ;//原来的宽度
 	currentDragDiv.style.width = widthBefore + 1 +"px";
 	currentDragDiv.style.left = currentDragDiv.offsetLeft - 1 + "px";
+	
+	console.log("left:"+currentDragDiv.style.left);
+	console.log("width"+currentDragDiv.style.width);
 }
 //左边框 向右移动
 function keyLeftMoveRight(){
-	var widthBefore = currentDragDiv.offsetWidth -2;//原来的宽度
+	var widthBefore = currentDragDiv.offsetWidth ;//原来的宽度
 	currentDragDiv.style.width = widthBefore -1 +"px";
 	currentDragDiv.style.left = currentDragDiv.offsetLeft + 1 + "px";
 }
 //右边框 向右移动
 function keyRightMoveLeft(){
-	currentDragDiv.style.width = currentDragDiv.offsetWidth - 2 - 1 +"px";
+	currentDragDiv.style.width = currentDragDiv.offsetWidth  - 1 +"px";
 	//console.log(currentDragDiv.offsetWidth)
 }
 //右边框 向左移动
 function keyRightMoveRight(){
-	currentDragDiv.style.width = currentDragDiv.offsetWidth - 2 + 1 +"px";
+	currentDragDiv.style.width = currentDragDiv.offsetWidth  + 1 +"px";
 	//console.log(currentDragDiv.offsetWidth)
 }
 //上边框 向上移动
 function keyUpMoveUp(){
-	var heightBefore = currentDragDiv.offsetHeight -2;//原来的高度
+	var heightBefore = currentDragDiv.offsetHeight ;//原来的高度
 	currentDragDiv.style.height = 	heightBefore + 1 + "px";
 	currentDragDiv.style.top = currentDragDiv.offsetTop - 1 + "px";
 }
 //上边框 向下移动
 function keyUpMoveDown(){
-	var heightBefore = currentDragDiv.offsetHeight -2;//原来的高度
-	currentDragDiv.style.height = 	heightBefore - 1 + "px";
+	var heightBefore = currentDragDiv.offsetHeight ;//原来的高度
+	currentDragDiv.style.height = heightBefore - 1 + "px";
 	currentDragDiv.style.top = currentDragDiv.offsetTop + 1 + "px";
 	
 	//console.log(currentDragDiv.offsetHeight)
 }
 //下边框 向上移动
 function keyDownMoveUp(){
-	currentDragDiv.style.height = currentDragDiv.offsetHeight -2  - 1 +"px";
+	currentDragDiv.style.height = currentDragDiv.offsetHeight   - 1 +"px";
 	//console.log(currentDragDiv.offsetHeight)
 }
 //下边框 向下移动
 function keyDownMoveDown(){
-	currentDragDiv.style.height = currentDragDiv.offsetHeight - 2 + 1 +"px";
+	currentDragDiv.style.height = currentDragDiv.offsetHeight  + 1 +"px";
 	//console.log(currentDragDiv.offsetHeight)
 }
 //键盘控制微调
