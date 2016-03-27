@@ -2,9 +2,27 @@
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <title></title>
-  <script type="text/javascript" src="js/jquery-2.1.1.js" ></script>
-  <script type="text/javascript" src="js/jquery-ui.js" ></script>
-  <script type="text/javascript" src="js/definedFromControls.js"></script>
+  <script type="text/javascript" src="js/definedMap.js" ></script>
+		<script type="text/javascript" src="js/jquery-2.1.1.js" ></script>
+		<script type="text/javascript" src="js/jquery-ui.js" ></script>
+		<script type="text/javascript" src="js/jquery.contextmenu.js" ></script>
+		<script type="text/javascript" src="myWriteJs/alignAction.js" ></script>
+		<script type="text/javascript" src="myWriteJs/common.js" ></script>
+		<script type="text/javascript" src="myWriteJs/contextMenu.js" ></script>
+		<script type="text/javascript" src="myWriteJs/definedFromControls.js" ></script>
+		<script type="text/javascript" src="js/bootstrap.js" ></script>
+		<script type="text/javascript" src="js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="js/spectrum.js" ></script>
+		<script type="text/javascript" src="myWriteJs/propertyControls.js" ></script>
+		
+		<link rel="stylesheet" href="myWriteCss/common.css" />
+		<link rel="stylesheet" href="myWriteCss/prettyBtn.css" />
+		<link rel="stylesheet" href="css/jquery.contextmenu.css" />
+		<link rel="stylesheet" href="css/jquery-ui.css" />
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/bootstrap.css" />
+		<link rel="stylesheet" href="css/spectrum.css" />
+  
   <head></head>
   <body>
 <style type="text/css">
@@ -39,19 +57,8 @@ $(function(){
 	var ps = $("#dragDiv").detach("div");
 	ps.appendTo("#456");
 	
-});
-	
-	
+});	
 </script>
-
- <script>
-  	$(function(){
-  	//createRadio().appendTo($("#he"));
-  	//createSelect().appendTo($("#he"));
-  	//createInputOne().appendTo($('#he'));
-  	document.write($("#radiotpro").offsetHeight+":"+$("#radiotpro").offsetWidth);
-  	});
-  </script>
 <body>
 	<!--
     	作者：765797511@qq.com
@@ -106,47 +113,22 @@ $(function(){
 		    <label><input type="checkbox" value="" />香蕉 </label> 
 		    <label><input type="checkbox" value="" />梨 </label> 
   </span>
-  <div id="he"></div>
   
-<button type="button" class="btn btn-default" data-toggle="tooltip" 
-   title="默认的 Tooltip">
-   默认的 Tooltip
-</button>
-<button type="button" class="btn btn-default" data-toggle="tooltip" 
-   data-placement="left" title="左侧的 Tooltip">
-   左侧的 Tooltip
-</button>
-<button type="button" class="btn btn-default" data-toggle="tooltip" 
-   data-placement="top" title="顶部的 Tooltip">
-   顶部的 Tooltip
-</button>
-<button type="button" class="btn btn-default" data-toggle="tooltip" 
-   data-placement="bottom" title="底部的 Tooltip">
-   底部的 Tooltip
-</button>
-<button type="button" class="btn btn-default" data-toggle="tooltip" 
-   data-placement="right" title="右侧的 Tooltip">
-   右侧的 Tooltip
-</button>
-<script>
-   $(function () { $("[data-toggle='tooltip']").tooltip(); });
-</script>
-
+  <span >
+  	<div></div>
+  </span>
+  
+  <span style="background: red;">
+  	<hr style="width: 100px;"/>
+  </span>
+  
+  <span>
+  	<img src="img/erweima.png"/>
+  </span>
+  
+    
 </body>
 </html>
-
-<!--
-	<div id="dragDiv">
-  <div id="rRightDown"> </div>
-  <div id="rLeftDown"> </div>
-  <div id="rRightUp"> </div>
-  <div id="rLeftUp"> </div>
-  <div id="rRight"> </div>
-  <div id="rLeft"> </div>
-  <div id="rUp"> </div>
-  <div id="rDown"></div>
-</div>
--->
 
 
 

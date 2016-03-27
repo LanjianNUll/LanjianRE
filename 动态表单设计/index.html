@@ -19,6 +19,7 @@
 		<link rel="stylesheet" href="myWriteCss/common.css" />
 		<link rel="stylesheet" href="myWriteCss/prettyBtn.css" />
 		<link rel="stylesheet" href="css/jquery.contextmenu.css" />
+		<link rel="stylesheet" href="css/jquery-ui.css" />
 		<link rel="stylesheet" href="css/bootstrap.min.css" />
 		<link rel="stylesheet" href="css/bootstrap.css" />
 		<link rel="stylesheet" href="css/spectrum.css" />
@@ -41,41 +42,41 @@
             -->
 			<div id="selectTagDiv" style="overflow:scroll; width:100%; height: 90%;
 				padding-top:5px;padding-bottom: 45px;">
-				<button id="divContainer" class="btn btn-default btn-sm SelectBtn"
+				<button id="Recbox" class="btn btn-default btn-sm SelectBtn"
 					data-toggle="tooltip" data-placement="right" 
 		   			title="绘制一个方框">
 					<img src="img/rect.png"/>
 				</br>方	框
 				</button></br>
-				<button id="comboBox" class="btn btn-default btn-sm SelectBtn"
+				<button id="wordBtn" class="btn btn-default btn-sm SelectBtn"
 					data-toggle="tooltip" data-placement="right" 
 		   			title="绘制一个文本标签">
 					<img src="img/word.png"/>
 				</br>文	字
 				</button></br>
 				
-				<button id="inputFrame" class="btn btn-default btn-sm SelectBtn"
+				<button id="straightLine" class="btn btn-default btn-sm SelectBtn"
 					data-toggle="tooltip" data-placement="right" 
 		   			title="绘制一条直线">
 					<img src="img/line.png"/>
 				</br>直	线
 				</button></br>
 				
-				<button id="divContainer" class="btn btn-default btn-sm SelectBtn"
+				<button id="inputFrame" class="btn btn-default btn-sm SelectBtn"
 					data-toggle="tooltip" data-placement="right" 
 		   			title="绘制一个单行输入框表单控件">
 					<img src="img/input.png"/>
 				</br>输入框 
 				</button></br>
 				
-				<button id="radioButton" class="btn btn-default btn-sm SelectBtn"
+				<button id="textarea" class="btn btn-default btn-sm SelectBtn"
 					data-toggle="tooltip" data-placement="right" 
 		   			title="绘制一个多行文本输入控件">
 					<img src="img/textarea.png"/>
 				</br>文本框 
 				</button></br>
 				
-				<button id="divContainer" class="btn btn-default btn-sm SelectBtn"
+				<button id="downselect" class="btn btn-default btn-sm SelectBtn"
 					data-toggle="tooltip" data-placement="right" 
 		   			title="绘制一个表单下拉控件">
 					<img src="img/xialaselect.png"/>
@@ -88,7 +89,7 @@
 				</br>列表框 
 				</button></br>
 				
-				<button id="divContainer" class="btn btn-default btn-sm SelectBtn"
+				<button id="dateBtn" class="btn btn-default btn-sm SelectBtn"
 					data-toggle="tooltip" data-placement="right" 
 		   			title="绘制一个可选择日期的控件">
 					<img src="img/date.png"/>
@@ -100,28 +101,28 @@
 					<img src="img/file.png"/>
 				</br>文件框 
 				</button></br>
-				<button id="divContainer" class="btn btn-default btn-sm SelectBtn"
+				<button id="erweimaBtn" class="btn btn-default btn-sm SelectBtn"
 				data-toggle="tooltip" data-placement="right" 
 		   			title="绘制一张二维码图片">
 					<img src="img/erweima.png"/>
 				</br>二维码 
 				</button></br>
 				
-				<button id="divContainer" class="btn btn-default btn-sm SelectBtn"
+				<button id="radio" class="btn btn-default btn-sm SelectBtn"
 					data-toggle="tooltip" data-placement="right" 
 		   			title="绘制一个单选的表单控件">
 					<img src="img/radio.png"/>
 				</br>单选框 
 				</button></br>
 				
-				<button id="divContainer" class="btn btn-default btn-sm SelectBtn"
+				<button id="combox" class="btn btn-default btn-sm SelectBtn"
 					data-toggle="tooltip" data-placement="right" 
 		   			title="绘制一个复选的表单控件">
 					<img src="img/combox.png"/>
 				</br>复选框 
 				</button></br>
 				
-				<button id="divContainer" class="btn btn-default btn-sm SelectBtn"
+				<button id="submitBtn" class="btn btn-default btn-sm SelectBtn"
 					data-toggle="tooltip" data-placement="right" 
 		   			title="绘制一个用于提交表单的控件">
 					<img src="img/sumbit.png"/>
@@ -382,8 +383,21 @@
 		       		 	});
 				   	}
 				   </script>
-				   
 				   <div class="tab-pane fade" id="personnal">
+				   	<!--
+                       	作者：765797511@qq.com
+                       	时间：2016-03-27
+                       	描述：边框的个性设置
+                       -->
+				   	<div id="recEdit">
+				   		
+				   	</div>
+				   	
+				   	<!--
+                       	作者：765797511@qq.com
+                       	时间：2016-03-27
+                       	描述：文本的个性属性设置
+                       -->
 				      <div id="wordEdit" hidden="true">
 				      	<br />
 			      	字体大小:<input type="text" id="fontSize" style="width: 150px;" onchange="changeFontSize()"/>px
@@ -407,7 +421,24 @@
 						 <span class="glyphicon glyphicon-italic"></span>
 					   </button>
 				      </div><br/>
-				     
+				      
+				      <!--
+                      	作者：765797511@qq.com
+                      	时间：2016-03-27
+                      	描述：直线的个性设置
+                      -->
+				      <div id="lineEdit"></div>
+				      
+				      <!--
+                      	作者：765797511@qq.com
+                      	时间：2016-03-27
+                      	描述：输入框的个性设置
+                      -->
+				      <div id="inputEdit" hidden="true">
+				      	文本值：<input type="text" id="inputNameId" onchange="changeInputName()"/>
+				      </div>
+				      
+				      
 				   </div>
 				   <div class="tab-pane fade" id="animtion">
 				      <p>i    OS 是一个 由苹果公司开发和发布的手机操作系统。最初是于 2007 年首次发布 iPhone、iPod Touch 和 Apple 

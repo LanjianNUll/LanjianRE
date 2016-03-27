@@ -111,8 +111,10 @@ function changeBoderColor(){
 	//console.log($("#boderColor").val());
 	$(currentDragDiv).children(".selectTag").css({"border-color":$("#boderColor").val()});
 }
-
-
+//改变输入框控件的名称
+function changeInputName(){
+	
+}
 
 
 

@@ -12,12 +12,12 @@ $(document).ready(function(){
    	$(this).addClass("clickedButton");//添加当前按钮被点击了的效果
    	$("#workSpace").addClass("cursorClass")//设置进入workSpace的鼠标图标效果
    switch ($(this).attr("id")){//这里匹配可能乱序了  因为不影响所以就不改了 
-   	case "divContainer":
+   	case "radio":
    		ww = 180;
    		hh = 80;
    		createTag(createRadio());
    		break;
-   	case "comboBox":
+   	case "downselect":
    		ww = 182;
    		hh = 62;
    		createTag(createSelect());
@@ -27,30 +27,45 @@ $(document).ready(function(){
    		hh = 30;
 			createTag(createInputOne());
    		break;
-	case "radioButton":
-			ww = 200;
-   		hh = 84;
-   		createTag(createInputTwo());
-   		break;
-	case "TextFrame":
+	case "submitBtn":
 			ww = 55;
    		hh = 30;
 			createTag(createSubmit());
    		break;
-	case "iamge":
+	case "textarea":
 			ww = 270;
    		hh = 120;
    		createTag(createTextArea());
    		break;
-	case "checkBox":
+	case "combox":
 			ww = 210;
    		hh = 80;
    		createTag(createCheckBox());
    		break;
-   case "submitButton":
+   case "wordBtn":
    		ww = 155;
    		hh = 45;
    		createTag(createP());
+   		break;
+   	case "Recbox":
+   		ww = 120;
+   		hh = 120;
+   		createTag(createRec());
+   		break;
+   	case "straightLine":
+   		ww =100;
+   		hh = 1;
+   		createTag(createLine());
+   		break;
+   	case "erweimaBtn":
+   		ww=100;
+   		hh=100;
+   		createTag(createErWeiMa());
+   		break;
+   	case "dateBtn":
+   		ww = 230;
+   		hh = 30;
+   		createTag(createDateBox());
    		break;
    	default:
    		break;
@@ -92,7 +107,7 @@ function CreateChirdren(e){//鼠标按下时的事件
 			currentDragDiv.style.width = ww + "px";
 			currentDragDiv.style.height = hh + "px";
 			//主边框的css
-			currentSelectedTag.css({"background-color":"white",
+			currentSelectedTag.css({"background-color":"#d9d9d9",
 						  		"position":"absolute",
 						  		"left":"0px",
 						  		"top":"0px",
@@ -119,6 +134,8 @@ function getXandY(e){
 		Math.floor(e.pageX-$("#workSpace").offset().left)+","+Math.floor(e.pageY-$("#workSpace").offset().top)+")"
 				+"当前的控件ID:"+$(currentDragDiv).attr("id")
 				+"当前控件的name值为："+$(currentDragDiv).children("span").attr("name"));
+		//显示那个个性属性设置
+		displayPersonalProerty($(currentDragDiv).children("span").attr("name"));		
 		isActiveSelectRec = true;//激活鼠标选框动作
 }
 function iceSelectRecAction(e){
@@ -574,4 +591,46 @@ function isInSelectDiv(lux,luy,rux,ruy,ldx,ldy,rdx,rdy){
 		return true;
 	return false;
 }
-	
+//显示具体个性属性
+function displayPersonalProerty(str){
+	hiddenAllPersonalProerty();
+	switch (str){
+		case "Rec":
+			break;
+		case "P":
+			$("#wordEdit").show();
+			break;
+		case "Line":
+			break;
+		case "InputOne":
+			$("#inputEdit").show();
+			break;
+		case "TextArea":
+			break;
+		case "DateBox":
+			break;
+		case "ErWeiMa":
+			break;
+		case "Radio":
+			break;
+		case "Select":
+			break;
+		case "Submit":
+			break;
+		case "CheckBox":
+			break;
+		default:
+			break;
+	}
+}
+//隐藏所有的个性属性
+function hiddenAllPersonalProerty(){
+	$("#personnal").children("div").hide();
+}
+
+
+
+
+
+
+

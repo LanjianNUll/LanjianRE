@@ -28,23 +28,17 @@ function createSelect(){
 //创建输入文本框一
 function createInputOne(){
 	var publicSpan = $("<span>",{"name":"InputOne"});
-	$("<label>").text("姓   名").appendTo(publicSpan);
+	$("<label>",{"name":"inputName"}).text("姓   名").appendTo(publicSpan);
 	$("<input>",{'class':'inputOne','type':'text','name':'inputOne'})
 		.appendTo(publicSpan);
 	return publicSpan;
 }
-//创建输入文本框二
-function createInputTwo(){
-	var publicSpan = $("<span>",{"name":"InputTwo"});
-	$("<p>").text("姓   名").appendTo(publicSpan);
-	$("<input>",{'class':'inputTwo','type':'text','name':'inputTwo'})
-		.appendTo(publicSpan);
-	return publicSpan;
-}
+
 //创建提交按钮
 function createSubmit(){
 	var publicSpan = $("<span>",{"name":"Submit"});
 	$("<input>",{'class':'submitBtn','type':'submit','name':'submitBtn'})
+		.css({"width":"100%","height":"100%"})
 		.appendTo(publicSpan);
 	return publicSpan;
 }
@@ -53,7 +47,9 @@ function createTextArea(){
 	var publicSpan = $("<span>",{"name":"TextArea"});
 	$("<p>",{'class':'textAreaP'}).text("您的意见对我很重要:")
 		.appendTo(publicSpan);
-	$('<textarea>',{'class':'textArea'}).text("这里可以输入你想说的话").appendTo(publicSpan);
+	$('<textarea>',{'class':'textArea'}).text("这里可以输入你想说的话")
+		.css({"width":"100%","height":"75%"})
+		.appendTo(publicSpan);
 	return publicSpan;
 }
 //创建复选框
@@ -76,10 +72,38 @@ function createCheckBox(){
 }
 function createP(){
 	var publicSpan = $("<span>",{"name":"P"}); 
-	$("<p>",{'class':'pP'}).text("我是一个单纯的文本").appendTo(publicSpan);
+	$("<p>",{'class':'pP'}).text("我是一个单纯的文本").css({"width":"100%","height":"100%"}).appendTo(publicSpan);
 	return publicSpan;
-	
 }
+function createRec(){
+	var publicSpan = $("<span>",{"name":"Rec"}).css({"width":"100%","height":"100%","background":"grey"});
+	return publicSpan;
+}
+function createLine(){
+	var publicSpan = $("<span>",{"name":"Line"});
+	$("<hr>",{'class':'Hr'}).appendTo(publicSpan);
+	return publicSpan;
+}
+function createErWeiMa(){
+	var publicSpan = $("<span>",{"name":"ErWeiMa"});
+	$("<img>",{'class':'Img'}).attr("src","img/erweima.png").css({"width":"100%","height":"100%"})
+	.appendTo(publicSpan);
+	return publicSpan;
+}
+function createDateBox(){
+	var publicSpan = $("<span>",{"name":"DateBox"});
+	$("<label>").text("日 期").appendTo(publicSpan);
+	$("<input>",{'class':'dateBox','type':'text','name':'dateBox'}).datepicker()
+		.appendTo(publicSpan);
+	return publicSpan;
+}
+
+
+
+
+
+
+
 
 
 
