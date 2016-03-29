@@ -54,7 +54,7 @@ $(document).ready(function(){
    		break;
    	case "straightLine":
    		ww =100;
-   		hh = 1;
+   		hh = 45;
    		createTag(createLine());
    		break;
    	case "erweimaBtn":
@@ -107,7 +107,7 @@ function CreateChirdren(e){//鼠标按下时的事件
 			currentDragDiv.style.width = ww + "px";
 			currentDragDiv.style.height = hh + "px";
 			//主边框的css
-			currentSelectedTag.css({"background-color":"#d9d9d9",
+			currentSelectedTag.css({"background-color":"#FFFFFF",
 						  		"position":"absolute",
 						  		"left":"0px",
 						  		"top":"0px",
@@ -596,28 +596,43 @@ function displayPersonalProerty(str){
 	hiddenAllPersonalProerty();
 	switch (str){
 		case "Rec":
+		$("#RecEdit").show();
 			break;
 		case "P":
 			$("#wordEdit").show();
 			break;
 		case "Line":
+			$("#lineEdit").show();
 			break;
 		case "InputOne":
 			$("#inputEdit").show();
 			break;
 		case "TextArea":
+		$("#textAreaEdit").show();
+			break;
+		case "xialaSelect":
+		$("#xialaSelectEdit").show();
+			break;
+		case "listSelect":
+		$("#listSelectEdit").show();
 			break;
 		case "DateBox":
+		$("#dateBoxEdit").show();
+			break;
+		case "fileSelect":
+		$("#fileSelectEdit").show();
 			break;
 		case "ErWeiMa":
+		$("#erWeiMaEdit").show();
 			break;
 		case "Radio":
-			break;
-		case "Select":
-			break;
-		case "Submit":
+		$("#radioEdit").show();
 			break;
 		case "CheckBox":
+		$("#checkEdit").show();
+			break;
+		case "Submit":
+		$("#submitEdit").show();
 			break;
 		default:
 			break;

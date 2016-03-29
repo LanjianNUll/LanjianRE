@@ -1,5 +1,7 @@
+//调色板
 $(function(){
-	$("#full,#fontColor,#boderColor,#fontShadow").spectrum({
+	$("#full,#fontColor,#boderColor,#LineColor,#fontShadow,#inputBoderColor,#inputBackgroundColor,#textAreaBoderColor,#textAreaBackgroundColor,#xialaSelectBoderColor,#xialaSelectBackgroundColor")
+	.spectrum({
 	    color: "#ffffff",//显示当前选定的颜色
 	    flat: false,
 	    showInput: true,
@@ -111,18 +113,104 @@ function changeBoderColor(){
 	//console.log($("#boderColor").val());
 	$(currentDragDiv).children(".selectTag").css({"border-color":$("#boderColor").val()});
 }
+/**个性属性**/
+
+//文字大小
+function changeFontSize(){
+	$(currentDragDiv).children(".selectTag").children(".pP").css({"font-size":$("#fontSize").val()+"px"});
+}
+//改变文字颜色
+function changeFontColor(){
+	$(currentDragDiv).children(".selectTag").children(".pP").css({"color":$("#fontColor").val()});
+}
+//粗体
+var isBold = false;
+function changeFontBold(){
+	isBold = !isBold;
+	if(isBold)
+		$(currentDragDiv).children(".selectTag").children(".pP").css({"font-weight":"bold"});
+	else
+		$(currentDragDiv).children(".selectTag").children(".pP").css({"font-weight":""});
+}
+//斜体
+var isItalic = false;
+function changeFontItalic(){
+	isItalic = !isItalic;
+	if(isItalic)
+		$(currentDragDiv).children(".selectTag").children(".pP").css({"font-style":"italic"});
+	else
+		$(currentDragDiv).children(".selectTag").children(".pP").css({"font-style":""});
+}
+//直线  的宽度
+function changeLineWidth(){
+	$(currentDragDiv).children(".selectTag").children(".Hr").css({"boder-width":$("#LineWidth").val()});
+}
+//直线的样式
+function changeLineStyle(){
+	$(currentDragDiv).children(".selectTag").children(".Hr").css({"boder-style":$("#LineStyle").val()});
+}
+//直线的颜色
+function changeLineColor(){
+	$(currentDragDiv).children(".selectTag").children(".Hr").css({"boder-color":$("#LineColor").val()});
+}
 //改变输入框控件的名称
 function changeInputName(){
-	
+	$(currentDragDiv).children(".selectTag").children(".inputName").text($("#inputNameId").val());
 }
-
-
-
-
-
-
-
-
+function changeInputTip(){
+	$(currentDragDiv).children(".selectTag").children(".inputOne").attr("placeholder",$("#inputTip").val());
+}
+//改变输入框的边框样式
+function changeInputStyle(){
+	$(currentDragDiv).children(".selectTag").children(".inputOne").css({"border-style":$("#inputBoderStyle").val()});
+}
+function changeInputBoderColor(){
+	$(currentDragDiv).children(".selectTag").children(".inputOne").css({"border-color":$("#inputBoderColor").val()});
+}
+function changeInputBackgroundColor(){
+	$(currentDragDiv).children(".selectTag").children(".inputOne").css({"background":$("#inputBackgroundColor").val()});
+}
+var isPassword = false;
+function isPasswordInputmethod(){
+	isPassword = !isPassword;
+	if(isPassword)
+		$(currentDragDiv).children(".selectTag").children(".inputOne").attr("type","password");
+	else
+		$(currentDragDiv).children(".selectTag").children(".inputOne").attr("type","text");
+}
+//文本框
+function changetextAreaName(){
+	$(currentDragDiv).children(".selectTag").children(".textAreaP").text($("#textAreaNameId").val());
+}
+function changetextAreaTip(){
+	$(currentDragDiv).children(".selectTag").children(".textAreaclass").attr("placeholder",$("#textAreaTip").val());
+}
+//改变输入框的边框样式
+function changetextAreaStyle(){
+	$(currentDragDiv).children(".selectTag").children(".textAreaclass").css({"border-style":$("#textAreaBoderStyle").val()});
+}
+function changetextAreaBoderColor(){
+	$(currentDragDiv).children(".selectTag").children(".textAreaclass").css({"border-color":$("#textAreaBoderColor").val()});
+}
+function changetextAreaBackgroundColor(){
+	$(currentDragDiv).children(".selectTag").children(".textAreaclass").css({"background-color":$("#textAreaBackgroundColor").val()});
+}
+function changetextAreaOverflowStyle(){
+	$(currentDragDiv).children(".selectTag").children(".textAreaclass").attr("overflow",$("#textAreaOverflowStyle").val());
+}
+//下拉框的个性设置
+function changexialaSelectName(){
+	$(currentDragDiv).children(".selectTag").children(".xialaSeclectClass").text($("#xialaSelectNameId").val());
+}
+function changexialaSelectBoderStyle(){
+	$(currentDragDiv).children(".selectTag").children(".xialaselectTag").css({"border-style":$("#ixialaSelectStyle").val()});
+}
+function changexialaSelectBoderColor(){
+	$(currentDragDiv).children(".selectTag").children(".xialaselectTag").css({"border-color":$("#xialaSelectBoderColor").val()});
+}
+function changexialaSelectBackgroundColor(){
+	$(currentDragDiv).children(".selectTag").children(".xialaselectTag").css({"background":$("#xialaSelectBackgroundColor").val()});
+}
 
 
 

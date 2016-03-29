@@ -244,7 +244,7 @@
             	时间：2016-03-24
             	描述：画板 工作区
             -->
-			<div id="workSpace" onmousedown="CreateChirdren(event)" 
+			<div id="workSpace" onmousedown="CreateChirdren(event)" style="background: #FFF8DC;"
 			 onmousemove="getXandY(event)" onmouseout ="iceSelectRecAction(event)">
 				<div id="workspaceCurrntXandY" style="float: right;">
 				</div>
@@ -255,7 +255,7 @@
         	时间：2016-03-24
         	描述：属性和历史记录面板
         -->
-		<div id="historyAndProperty" >
+		<div id="historyAndProperty" style="background: #FFFFFF;">
 			<div id="property">
 				<div id="propertybody">
 					<!--
@@ -405,15 +405,14 @@
 		      		字体样式:<input type="text" id="fontStyle" style="width: 150px;" onchange="changeFontStyle()"/>
 		      		   <br /><br />
 				         字体颜色:<input type="text" id="fontColor"  onchange="changeFontColor()"/>&nbsp;&nbsp;&nbsp;
-				         字体阴影:<input type="text" id="fontShadow"  onchange="changeFontColor()"/>
-					   <br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					  &nbsp;
 					  <button id="fontBold" type="button" class="btn btn-default btn-sm" 
 						style="font-size: 18px" data-toggle="tooltip" 
 		   				data-placement="bottom" title="粗体"
 						onclick="changeFontBold()">
 						 <span class="glyphicon glyphicon-bold"></span>
 					   </button>
-					   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					   &nbsp;&nbsp;
 					   <button id="fontItalic" type="button" class="btn btn-default btn-sm" 
 							style="font-size: 18px" data-toggle="tooltip" 
 			   				data-placement="bottom" title="斜体"
@@ -427,7 +426,32 @@
                       	时间：2016-03-27
                       	描述：直线的个性设置
                       -->
-				      <div id="lineEdit"></div>
+				      <div id="lineEdit">
+				      	 宽度：<select id="LineWidth" style="width:150px; height:30px;" value=""
+											 onchange="changeLineWidth()">
+												<option></option>
+												<option value="thin">thin</option>
+												<option value="medium">medium</option>
+												<option value="thick">thick</option>
+												<option value="length">length</option>
+											</select>
+											<br /><br />
+						样式：<select id="LineStyle" style="width:150px; height:30px;" value=""
+									 onchange="changeLineStyle()">
+										<option value="none">none</option>
+										<option value="hidden">hidden</option>
+										<option value="dotted">dotted</option>
+										<option value="dashed">dashed</option>
+										<option value="solid">solid</option>
+										<option value="double">double</option>
+										<option value="groove">groove</option>
+										<option value="ridge">ridge</option>
+										<option value="inset">inset</option>
+										<option value="outset">outset</option>
+									</select>
+									<br /><br />
+						直线颜色<input type='text' id="LineColor" style="width: 120px" onchange="changeLineColor()"/>
+				      </div>
 				      
 				      <!--
                       	作者：765797511@qq.com
@@ -435,10 +459,79 @@
                       	描述：输入框的个性设置
                       -->
 				      <div id="inputEdit" hidden="true">
-				      	文本值：<input type="text" id="inputNameId" onchange="changeInputName()"/>
+				      	文本值：<input type="text" id="inputNameId" onchange="changeInputName()"/><br /><br />
+				      	提示文本：<input type="text" id="inputTip" onchange="changeInputTip()"/><br /><br />
+				      	边框样式：<select id="inputBoderStyle" style="width:150px; height:30px;" value=""
+									 onchange="changeInputStyle()">
+										<option value="solid">solid</option>
+										<option value="hidden">hidden</option>
+										<option value="dotted">dotted</option>
+										<option value="dashed">dashed</option>
+										<option value="double">double</option>
+										<option value="groove">groove</option>
+										<option value="ridge">ridge</option>
+										<option value="inset">inset</option>
+										<option value="outset">outset</option>
+									</select><br />  <br />
+						边框颜色：<input type='text' id="inputBoderColor" style="width: 120px" onchange="changeInputBoderColor()"/>	<br />  <br />
+						背景色：<input type='text' id="inputBackgroundColor" style="width: 120px" onchange="changeInputBackgroundColor()"/><br /><br />
+						是否为密码域：<input type="checkbox" id="isPasswordInput" style="width: 20px; height: 20px; margin-top: 2px;" onchange="isPasswordInputmethod()"/>
 				      </div>
-				      
-				      
+				      <div id="textAreaEdit" hidden="true">
+				      	
+				      	文本值：<input type="text" id="textAreaNameId" onchange="changetextAreaName()"/><br /><br />
+				      	提示文本：<input type="text" id="textAreaTip" onchange="changetextAreaTip()"/><br /><br />
+				      	边框样式：<select id="textAreaBoderStyle" style="width:150px; height:30px;" value=""
+									 onchange="changetextAreaStyle()">
+										<option value="solid">solid</option>
+										<option value="hidden">hidden</option>
+										<option value="dotted">dotted</option>
+										<option value="dashed">dashed</option>
+										<option value="double">double</option>
+										<option value="groove">groove</option>
+										<option value="ridge">ridge</option>
+										<option value="inset">inset</option>
+										<option value="outset">outset</option>
+									</select><br />  <br />
+						文本溢出：<select id="textAreaOverflowStyle" style="width:150px; height:30px;" value=""
+						 onchange="changetextAreaOverflowStyle()">
+							<option value="visible">visible</option>
+							<option value="hidden">hidden</option>
+							<option value="scroll">scroll</option>
+							<option value="auto">auto</option>
+							<option value="inherit">inherit</option>
+						</select><br />  <br />
+						边框颜色：<input type='text' id="textAreaBoderColor" style="width: 120px" onchange="changetextAreaBoderColor()"/>	<br />  <br />
+						背景色：<input type='text' id="textAreaBackgroundColor" style="width: 120px" onchange="changetextAreaBackgroundColor()"/><br /><br />
+				      </div>
+				      <div id="xialaSelectEdit" hidden="true">
+				      	
+				      	文本值：<input type="text" id="xialaSelectNameId" onchange="changexialaSelectName()"/><br /><br />
+				      	边框样式：<select id="ixialaSelectStyle" style="width:150px; height:30px;" value=""
+									 onchange="changexialaSelectBoderStyle()">
+										<option value="solid">solid</option>
+										<option value="hidden">hidden</option>
+										<option value="dotted">dotted</option>
+										<option value="dashed">dashed</option>
+										<option value="double">double</option>
+										<option value="groove">groove</option>
+										<option value="ridge">ridge</option>
+										<option value="inset">inset</option>
+										<option value="outset">outset</option>
+									</select><br />  <br />
+						边框颜色：<input type='text' id="xialaSelectBoderColor" style="width: 120px" onchange="changexialaSelectBoderColor()"/>&nbsp;&nbsp;&nbsp;
+						背景色：<input type='text' id="xialaSelectBackgroundColor" style="width: 120px" onchange="changexialaSelectBackgroundColor()"/><br /><br />
+				      	
+				      	
+				      	
+				      </div>
+				      <div id="listSelectEdit" hidden="true"></div>
+				      <div id="dateBoxEdit" hidden="true"></div>
+				      <div id="fileSelectEdit" hidden="true"></div>
+				      <div id="erWeiMaEdit" hidden="true"></div>
+				      <div id="radioEdit" hidden="true"></div>
+				      <div id="checkEdit" hidden="true"></div>
+				      <div id="submitEdit" hidden="true"></div>
 				   </div>
 				   <div class="tab-pane fade" id="animtion">
 				      <p>i    OS 是一个 由苹果公司开发和发布的手机操作系统。最初是于 2007 年首次发布 iPhone、iPod Touch 和 Apple 

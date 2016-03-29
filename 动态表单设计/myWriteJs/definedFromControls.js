@@ -17,9 +17,9 @@ function createRadio(){//创建一个单项标签
 }
 //创建下拉菜单
 function createSelect(){
-	var publicSpan = $("<span>",{"name":"Select"});
-	$("<label>").text("来吧 选个你想要的").appendTo(publicSpan);
-	var selectTag = $('<select>',{'class':'selectTag'}).appendTo(publicSpan);
+	var publicSpan = $("<span>",{"name":"xialaSelect"});
+	$("<label>",{'class':'xialaSeclectClass'}).text("来吧 选个你想要的").appendTo(publicSpan);
+	var selectTag = $('<select>',{'class':'xialaselectTag'}).appendTo(publicSpan);
 	$('<option>',{'class':'selectOption'}).text("我的选择与众不同").appendTo(selectTag);
 	$('<option>',{'class':'selectOption'}).text("选择品牌1").appendTo(selectTag);
 	$('<option>',{'class':'selectOption'}).text("选择品牌2").appendTo(selectTag);
@@ -28,8 +28,8 @@ function createSelect(){
 //创建输入文本框一
 function createInputOne(){
 	var publicSpan = $("<span>",{"name":"InputOne"});
-	$("<label>",{"name":"inputName"}).text("姓   名").appendTo(publicSpan);
-	$("<input>",{'class':'inputOne','type':'text','name':'inputOne'})
+	$("<label>",{"class":"inputName"}).text("姓   名").appendTo(publicSpan);
+	$("<input>",{'class':'inputOne','type':'text','name':'inputOne','placeholder':'请输入。。。'})
 		.appendTo(publicSpan);
 	return publicSpan;
 }
@@ -47,7 +47,7 @@ function createTextArea(){
 	var publicSpan = $("<span>",{"name":"TextArea"});
 	$("<p>",{'class':'textAreaP'}).text("您的意见对我很重要:")
 		.appendTo(publicSpan);
-	$('<textarea>',{'class':'textArea'}).text("这里可以输入你想说的话")
+	$('<textarea>',{'class':'textAreaclass','placeholder':'说的什么吧。。。','overflow':'visible'})
 		.css({"width":"100%","height":"75%"})
 		.appendTo(publicSpan);
 	return publicSpan;
@@ -81,7 +81,7 @@ function createRec(){
 }
 function createLine(){
 	var publicSpan = $("<span>",{"name":"Line"});
-	$("<hr>",{'class':'Hr'}).appendTo(publicSpan);
+	$("<hr>",{'class':'Hr'}).appendTo(publicSpan).css({"width":"100%","height":"100%"});
 	return publicSpan;
 }
 function createErWeiMa(){
@@ -98,8 +98,10 @@ function createDateBox(){
 	return publicSpan;
 }
 
-
-
+function createListBox(){
+	var publicSpan = $("<span>",{"name":"listSelect"});
+	return publicSpan;
+}
 
 
 
