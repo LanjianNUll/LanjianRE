@@ -60,9 +60,31 @@
 <input type="text" class="file" id="f_file">
 <input type="button" value="上传文件" class="file" onClick="t_file.click()">
 <input name="upload" type="file" id="t_file" onchange="f_file.value=this.value" style="display:none">
+	
+	<button onclick="transf()">转换</button>
+	
+	<script>
+	function transf(){
+		var publicSpan = $("<span>",{"name":"ListBoxOne"});
+		$("<label>",{"class":"ListBoxOneName"}).text("姓   名").appendTo(publicSpan);
+		$("<input>",{'class':'listBoxOneinputClass'}).appendTo(publicSpan);
+		var selectTag = $('<select>',{'class':'listBoxOneinputTag','multiple':'multiple','change':function(){
+			getOptionAndToStr(event);
+		}}).appendTo(publicSpan);
+		$('<option>',{'class':'listBoxOneOption1'}).text("我的选择与众不同").appendTo(selectTag);
+		$('<option>',{'class':'listBoxOneOption2'}).text("选择品牌1").appendTo(selectTag);
+		$('<option>',{'class':'listBoxOneOption3'}).text("选择品牌2").appendTo(selectTag);
+		$('<option>',{'class':'listBoxOneOption4'}).text("23").appendTo(selectTag);
+		$('<option>',{'class':'listBoxOneOption5'}).text("23").appendTo(selectTag);
+		$('<option>',{'class':'listBoxOneOption6'}).text("255").appendTo(selectTag);
+			
+		console.log($.toJSON(publicSpan));
+	}
+	
+	</script>
+	
+	
     
-    
-<p style='color: red;'><b>链表</b></p>    
 </body>
 </html>
 

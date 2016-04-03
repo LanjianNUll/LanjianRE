@@ -107,7 +107,9 @@ function createListBoxOne(){
 	var publicSpan = $("<span>",{"name":"ListBoxOne"});
 	$("<label>",{"class":"ListBoxOneName"}).text("姓   名").appendTo(publicSpan);
 	$("<input>",{'class':'listBoxOneinputClass'}).appendTo(publicSpan);
-	var selectTag = $('<select>',{'class':'listBoxOneinputTag','multiple':'multiple'}).appendTo(publicSpan);
+	var selectTag = $('<select>',{'class':'listBoxOneinputTag','multiple':'multiple','change':function(){
+		getOptionAndToStr(event);
+	}}).appendTo(publicSpan);
 	$('<option>',{'class':'listBoxOneOption1'}).text("我的选择与众不同").appendTo(selectTag);
 	$('<option>',{'class':'listBoxOneOption2'}).text("选择品牌1").appendTo(selectTag);
 	$('<option>',{'class':'listBoxOneOption3'}).text("选择品牌2").appendTo(selectTag);
@@ -116,11 +118,21 @@ function createListBoxOne(){
 	$('<option>',{'class':'listBoxOneOption6'}).text("255").appendTo(selectTag);
 	return publicSpan;
 }
+//将选择的拼接起来
+function getOptionAndToStr(e){
+	//console.log($(e.srcElement).children(":selected").val())
+	var str = $(e.srcElement).prev(".listBoxOneinputClass").val();
+	if(str != '')
+		str+='\\';
+	$(e.srcElement).prev(".listBoxOneinputClass").val(str+$(e.srcElement).children(":selected").val())
+}
 function createListBoxTwo(){
 	var publicSpan = $("<span>",{"name":"ListBoxTwo"});
 	$("<label>",{"class":"ListBoxTwoName"}).text("姓   名").appendTo(publicSpan);
 	$("<input>",{'class':'listBoxTwoinputClass'}).appendTo(publicSpan);
-	var selectTag = $('<select>',{'class':'listBoxOneinputTag'}).appendTo(publicSpan);
+	var selectTag = $('<select>',{'name':'selectTag','class':'listBoxTwoinputTag','change':function (){
+		getOption(event);
+	}}).appendTo(publicSpan);
 	$('<option>',{'class':'listBoxTwoOption1'}).text("我的选择与众不同").appendTo(selectTag);
 	$('<option>',{'class':'listBoxTwoOption2'}).text("选择品牌1").appendTo(selectTag);
 	$('<option>',{'class':'listBoxTwoOption3'}).text("选择品牌2").appendTo(selectTag);
@@ -128,6 +140,12 @@ function createListBoxTwo(){
 	$('<option>',{'class':'listBoxTwoOption5'}).text("23").appendTo(selectTag);
 	$('<option>',{'class':'listBoxTwoOption6'}).text("255").appendTo(selectTag);
 	return publicSpan;
+}
+//将下列选中的选项填到input中
+function getOption(e){
+	//console.log("hello world");
+	//console.log($(e.srcElement).children(":selected").val());
+	$(e.srcElement).prev(".listBoxTwoinputClass").val($(e.srcElement).children(":selected").val());
 }
 
 function createfileBox(){

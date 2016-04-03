@@ -122,8 +122,30 @@ function initPropertySomeMsg(currentName){
 		var xxx = i+1;
 		$("#optioncheck"+xxx).val(CheckOptionList[i]);
 	}
-	
-	
+	//处理列表框一的初始化
+	//console.log(currentName);
+	if(lastcurrentDragDiv != currentDragDiv && currentName == 'ListBoxOne'){
+		console.log(currentName);
+		$("#itemOne").children('input').remove();
+		$('select.listBoxOneinputTag > option').each(function(i){
+			//console.log($(this).val());
+			$("<input>",{'class':'listBoxOneinputClass'}).val($(this).val()).appendTo($("#itemOne"));
+		});
+		//console.log(lis.length);
+		lastcurrentDragDiv = currentDragDiv;
+	}
+	if(lastcurrentDragDiv != currentDragDiv && currentName == 'ListBoxTwo'){
+		console.log(currentName);
+		$("#itemTwo").children('input').remove();
+		$('select.listBoxTwoinputTag > option').each(function(i){
+			//console.log($(this).val());
+			$("<input>",{'class':'listBoxOneinputClass','change':function(i){
+				console.log()
+			}}).val($(this).val()).appendTo($("#itemTwo"));
+		});
+		//console.log(lis.length);
+		lastcurrentDragDiv = currentDragDiv;
+	}
 }
 //改变控件的背景颜色
 function changeBackgroundColor(){

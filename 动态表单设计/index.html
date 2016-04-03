@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>动态表单设计</title>
-		<script type="text/javascript" src="js/definedMap.js" ></script>
 		<script type="text/javascript" src="js/jquery-2.1.1.js" ></script>
+		<script type="text/javascript" src="js/definedMap.js" ></script>
 		<script type="text/javascript" src="js/jquery-ui.js" ></script>
 		<script type="text/javascript" src="js/jquery.contextmenu.js" ></script>
 		<script type="text/javascript" src="myWriteJs/alignAction.js" ></script>
@@ -16,6 +16,7 @@
 		<script type="text/javascript" src="js/spectrum.js" ></script>
 		<script type="text/javascript" src="myWriteJs/propertyControls.js" ></script>
 		<script type="text/javascript" src="js/jquery.json-2.3.js" ></script>
+		
 		
 		<link rel="stylesheet" href="myWriteCss/common.css" />
 		<link rel="stylesheet" href="myWriteCss/prettyBtn.css" />
@@ -560,6 +561,12 @@
 					边框颜色：<input type='text' id="listBoxOneBoderColor" style="width: 120px" onchange="changelistBoxOneBoderColor()"/>&nbsp;&nbsp;&nbsp;
 					背景色：<input type='text' id="listBoxOneBackgroundColor" style="width: 120px" onchange="changelistBoxOneBackgroundColor()"/><br />
 				      	
+				      	<button id="addBtnOne">添加条目</button>
+				      	<div id="itemOne" style="overflow: auto;">
+				      	</div>
+				    	
+				      	
+				      	
 				      </div>
 				       <div id="ListBoxTwoEdit" hidden="true">
 					      文本值：<input type="text" id="ListBoxTwoNameId" onchange="changeListBoxTwoName()"/><br /><br />
@@ -577,7 +584,10 @@
 										</select><br />  <br />
 							边框颜色：<input type='text' id="listBoxTwoBoderColor" style="width: 120px" onchange="changelistBoxTwoBoderColor()"/>&nbsp;&nbsp;&nbsp;
 						背景色：<input type='text' id="listBoxTwoBackgroundColor" style="width: 120px" onchange="changelistBoxTwoBackgroundColor()"/><br />
-				      	
+				      		<button id="addBtnTwo">添加条目</button>
+				      	<div id="itemTwo" style="overflow: auto;">
+				      	</div>
+				    	
 				      </div>
 				      <div id="dateBoxEdit" hidden="true">
 				     	 文本值：<input type="text" id="dateBoxNameId" onchange="changedateBoxName()"/><br /><br />

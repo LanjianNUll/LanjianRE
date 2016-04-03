@@ -99,6 +99,18 @@ html, body {
 .rDown{bottom:-4px;left:50%;margin-left:-4px;cursor:n-resize;}
 .publicdragDiv{border:1px solid #000000; width:100px; height:60px; background:#fff;	position:absolute;}
 .publicDiv{}
+
+/*标签提示div*/
+.tipDiv{
+	position:absolute;
+	border: 1px snow;
+	width:50px;
+	height:20px;
+	z-index:0;
+	left:10px;
+	top:-20px;
+	color: silver;
+}
 /*鼠标选框*/
 .selectRec{
 	position:absolute;

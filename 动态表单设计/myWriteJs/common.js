@@ -45,7 +45,7 @@ $(document).ready(function(){
    		break;
    case "wordBtn":
    		ww = 155;
-   		hh = 45;
+   		hh = 26;
    		createTag(createP());
    		break;
    	case "Recbox":
@@ -151,11 +151,11 @@ function getXandY(e){
 		$("#afterbody").html("工作区域的当前坐标点：(<b>"+
 			Math.floor(e.pageX-$("#workSpace").offset().left)+"</b>,<b>"+Math.floor(e.pageY-$("#workSpace").offset().top)+"</b>)"
 					+"当前的控件ID:<b>"+$(currentDragDiv).attr("id")
-					+"</b>当前控件名称为：<b>"+realName(currentDragDiv)
+					+"</b>当前控件名称为：<b>"+realName($(currentDragDiv).children("span").attr("name"))
 					+"</b><br/>"
 					+"当前控件的宽度：<b>"+currentDragDiv.offsetWidth +"</b>px"
 					+"当前控件的高度度：<b>"+currentDragDiv.offsetHeight+"</b>px");
-		disPlayHistory();
+		disPlayHistory();//显示用到的控件
 	}
 		//显示那个个性属性设置
 		displayPersonalProerty($(currentDragDiv).children("span").attr("name"));		
@@ -213,6 +213,11 @@ function creatBoder(){
 		$('<div>',{'id':'rDown'+currentSerialNum,'class':'rDown',
 		'mouseover':function(){keyControlAction = 'rDown';keyCanMoveDiv = false;},
 		'mousedown':function(event){ resizeAction(event,"rDown")}}).addClass("publicDiv").appendTo($("#dragDiv"+currentSerialNum));
+		//创建一个标签的div
+		$('<div>',{'id':'tipDiv'+currentSerialNum,'class':'tipDiv'})
+		.text(realName($(currentSelectedTag).attr("name")))
+		.addClass("publicDiv").appendTo($("#dragDiv"+currentSerialNum));
+		
 		currentDragDiv = document.getElementById("dragDiv"+currentSerialNum);
 		currentDragDivMap.put($(currentDragDiv).attr("id"),currentDragDiv);
 	}
@@ -679,9 +684,9 @@ function disPlayHistory(){
 		//historyArray.reverse();//反转数组
 		for(var i = 0;i<historyArray.length;i++){
 			if(i==historyArray.length-1)
-				historyStr+="<p style='color: red;'><b>"+ realName(historyArray[i])+"</b></p>";
+				historyStr+="<p style='color: red;'><b>"+ realName($(historyArray[i]).children("span").attr("name"))+"</b></p>";
 			else
-				historyStr += i + 1 +"<b>"+realName(historyArray[i])+"</b><br/>";
+				historyStr += i + 1 +"<b>"+realName($(historyArray[i]).children("span").attr("name"))+"</b><br/>";
 			}
 		}
 	$("#historyBox").html(historyStr);
@@ -692,8 +697,7 @@ function scrollBottom(){
 		$div.scrollTop($div[0].scrollHeight); 
 }
 //返回控件的真实名称
-function realName(virName){
-	var realNameStr = $(virName).children("span").attr("name");
+function realName(realNameStr){
 	switch (realNameStr){
 		case "Rec":
 		return "方	框";
