@@ -4,6 +4,7 @@ var ww;
 var hh;
 var isCanCreateChirdren = false;
 $(document).ready(function(){
+	disPlayHistory();//显示用到的控件页面
   $("button.btn").click(function(){
   	isCanCreateChirdren = true;
    //alert("你点击按钮"+$(this).text());
@@ -18,8 +19,8 @@ $(document).ready(function(){
    		createTag(createRadio());
    		break;
    	case "downselect":
-   		ww = 182;
-   		hh = 62;
+   		ww = 291;
+   		hh = 36;
    		createTag(createSelect());
    		break;
 	case "inputFrame":
@@ -67,6 +68,21 @@ $(document).ready(function(){
    		hh = 30;
    		createTag(createDateBox());
    		break;
+   	case "ListAndComboxOne":
+   		ww = 377;
+   		hh = 90;
+   		createTag(createListBoxOne());
+   		break;
+   	case "ListAndComboxTwo":
+   		ww = 380;
+   		hh = 40;
+   		createTag(createListBoxTwo());
+   		break;
+   	case "fileBox":
+   		ww = 294;
+   		hh = 39;
+   		createTag(createfileBox());
+   		break;
    	default:
    		break;
      }
@@ -112,7 +128,8 @@ function CreateChirdren(e){//鼠标按下时的事件
 						  		"left":"0px",
 						  		"top":"0px",
 						  		"width":"100%",
-						  		"height":"100%"
+						  		"height":"100%",
+						  		"overflow":"hidden"
 									}).addClass("selectTag")
 			.bind("mouseover",function(event){keyCanMoveDiv = true;})
 			.bind("mouseout",function(event){keyCanMoveDiv = false;})
@@ -130,10 +147,16 @@ function CreateChirdren(e){//鼠标按下时的事件
 }
 var piontX,piontY;//记录坐标点
 function getXandY(e){
-	$("#afterbody").html("工作区域的当前坐标点：("+
-		Math.floor(e.pageX-$("#workSpace").offset().left)+","+Math.floor(e.pageY-$("#workSpace").offset().top)+")"
-				+"当前的控件ID:"+$(currentDragDiv).attr("id")
-				+"当前控件的name值为："+$(currentDragDiv).children("span").attr("name"));
+	if(currentDragDiv != null){
+		$("#afterbody").html("工作区域的当前坐标点：(<b>"+
+			Math.floor(e.pageX-$("#workSpace").offset().left)+"</b>,<b>"+Math.floor(e.pageY-$("#workSpace").offset().top)+"</b>)"
+					+"当前的控件ID:<b>"+$(currentDragDiv).attr("id")
+					+"</b>当前控件名称为：<b>"+realName(currentDragDiv)
+					+"</b><br/>"
+					+"当前控件的宽度：<b>"+currentDragDiv.offsetWidth +"</b>px"
+					+"当前控件的高度度：<b>"+currentDragDiv.offsetHeight+"</b>px");
+		disPlayHistory();
+	}
 		//显示那个个性属性设置
 		displayPersonalProerty($(currentDragDiv).children("span").attr("name"));		
 		isActiveSelectRec = true;//激活鼠标选框动作
@@ -148,7 +171,7 @@ function getcurrentXandY(e){//鼠标在工作区域时 更新位置信息
 		for(var i = 0;i<currentDragDivMap.values().length;i++){
 			if(isContain(e.clientX,e.clientY,currentDragDivMap.values()[i])){
 				currentDragDiv = currentDragDivMap.values()[i];
-				initPropertySomeMsg();//为属性框初始化一些信息
+				initPropertySomeMsg($(currentDragDiv).children("span").attr("name"));//为属性框初始化一些信息
 			}
 		}
 		//console.log("当前的divId是  ———"+$(currentDragDiv).attr("id"));
@@ -613,8 +636,11 @@ function displayPersonalProerty(str){
 		case "xialaSelect":
 		$("#xialaSelectEdit").show();
 			break;
-		case "listSelect":
-		$("#listSelectEdit").show();
+		case "ListBoxOne":
+		$("#ListBoxOneEdit").show();
+			break;
+		case "ListBoxTwo":
+		$("#ListBoxTwoEdit").show();
 			break;
 		case "DateBox":
 		$("#dateBoxEdit").show();
@@ -642,6 +668,97 @@ function displayPersonalProerty(str){
 function hiddenAllPersonalProerty(){
 	$("#personnal").children("div").hide();
 }
+//显示已经用到的控件
+function disPlayHistory(){
+	var historyStr = "空空如也";
+	var historyArray = new Array();
+		historyArray = null;
+	if(!currentDragDivMap.isEmpty()){
+		historyStr = "";
+		historyArray = currentDragDivMap.values();
+		//historyArray.reverse();//反转数组
+		for(var i = 0;i<historyArray.length;i++){
+			if(i==historyArray.length-1)
+				historyStr+="<p style='color: red;'><b>"+ realName(historyArray[i])+"</b></p>";
+			else
+				historyStr += i + 1 +"<b>"+realName(historyArray[i])+"</b><br/>";
+			}
+		}
+	$("#historyBox").html(historyStr);
+	scrollBottom()
+ }
+function scrollBottom(){
+		var $div = $('#history'); 
+		$div.scrollTop($div[0].scrollHeight); 
+}
+//返回控件的真实名称
+function realName(virName){
+	var realNameStr = $(virName).children("span").attr("name");
+	switch (realNameStr){
+		case "Rec":
+		return "方	框";
+			break;
+		case "P":
+		return "文字";
+			break;
+		case "Line":
+		return "直线";
+			break;
+		case "InputOne":
+		return "输入框";
+			break;
+		case "TextArea":
+	return "文本域";
+			break;
+		case "xialaSelect":
+		return "下拉框";
+			break;
+		case "ListBoxOne":
+		return "列表框一";
+			break;
+		case "ListBoxTwo":
+		return "列表框二";
+			break;
+		case "DateBox":
+		return "日期框";
+			break;
+		case "fileSelect":
+		return "文件管理框";
+			break;
+		case "ErWeiMa":
+		return "二维码图片";
+			break;
+		case "Radio":
+		return "单选框";
+			break;
+		case "CheckBox":
+		return "复选框";
+			break;
+		case "Submit":
+		return "提交按钮";
+			break;
+		default:
+			break;
+	}
+}
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

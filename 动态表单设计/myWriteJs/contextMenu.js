@@ -27,7 +27,7 @@ function aboutProperty(){
 function deleteDivAction(){
   	if (confirm("确定删除当前控件？")) {  
            $(currentDragDiv).remove();
-        }  
+        }
 }
 //复制当前div
 function copyCurrentDiv(){

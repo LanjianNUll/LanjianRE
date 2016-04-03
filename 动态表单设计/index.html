@@ -15,6 +15,7 @@
 		<script type="text/javascript" src="js/bootstrap.min.js" ></script>
 		<script type="text/javascript" src="js/spectrum.js" ></script>
 		<script type="text/javascript" src="myWriteJs/propertyControls.js" ></script>
+		<script type="text/javascript" src="js/jquery.json-2.3.js" ></script>
 		
 		<link rel="stylesheet" href="myWriteCss/common.css" />
 		<link rel="stylesheet" href="myWriteCss/prettyBtn.css" />
@@ -23,6 +24,7 @@
 		<link rel="stylesheet" href="css/bootstrap.min.css" />
 		<link rel="stylesheet" href="css/bootstrap.css" />
 		<link rel="stylesheet" href="css/spectrum.css" />
+		
 		
 	</head>
 	<body>
@@ -82,11 +84,17 @@
 					<img src="img/xialaselect.png"/>
 				</br>下拉框  
 				</button></br>
-				<button id="divContainer" class="btn btn-default btn-sm SelectBtn"
+				<button id="ListAndComboxOne" class="btn btn-default btn-sm SelectBtn"
 					data-toggle="tooltip" data-placement="right" 
-		   			title="绘制一个带列表的输入框控件">
+		   			title="绘制一个带展开列表的输入框控件">
 					<img src="img/list.png"/>
-				</br>列表框 
+				</br>列表一
+				</button></br>
+				<button id="ListAndComboxTwo" class="btn btn-default btn-sm SelectBtn"
+					data-toggle="tooltip" data-placement="right" 
+		   			title="绘制一个带隐藏列表的输入框控件">
+					<img src="img/list.png"/>
+				</br>列表二
 				</button></br>
 				
 				<button id="dateBtn" class="btn btn-default btn-sm SelectBtn"
@@ -95,7 +103,7 @@
 					<img src="img/date.png"/>
 				</br>日期框 
 				</button></br>
-				<button id="divContainer" class="btn btn-default btn-sm SelectBtn"
+				<button id="fileBox" class="btn btn-default btn-sm SelectBtn"
 					data-toggle="tooltip" data-placement="right" 
 		   			title="绘制一个文件管理框控件">
 					<img src="img/file.png"/>
@@ -221,12 +229,14 @@
 					</button>
 					<button id="save" type="button" class="btn btn-default btn-sm" 
 						style="font-size: 18px" data-toggle="tooltip" 
-		   				data-placement="bottom" title="保存"  >
+		   				data-placement="bottom" title="保存"
+						onclick="saveCurrentDivPage()">
 						<span class="glyphicon glyphicon-save-file"></span>
 					</button>
 					<button id="preview" type="button" class="btn btn-default btn-sm" 
 						style="font-size: 18px" data-toggle="tooltip" 
-		   				data-placement="bottom" title="预览"  >
+		   				data-placement="bottom" title="预览"
+		   				onclick="previewOtherPage()">
 						<img src="img/preview.png" width="18px" height="15px"/>
 					</button>
 					<button id="exitpage" type="button" class="btn btn-default btn-sm" 
@@ -400,7 +410,9 @@
                        -->
 				      <div id="wordEdit" hidden="true">
 				      	<br />
-			      	字体大小:<input type="text" id="fontSize" style="width: 150px;" onchange="changeFontSize()"/>px
+				    内容：<input type="text" id="fontContent" style="width: 150px;" onchange="changeFontContent()"/>
+			      	<br /><br />
+			      	字体大小:<input type="text" id="fontSize" style="width: 150px;" onchange="changeFontSize()"/>&nbsp;px
 			      		<br /><br />
 		      		字体样式:<input type="text" id="fontStyle" style="width: 150px;" onchange="changeFontStyle()"/>
 		      		   <br /><br />
@@ -507,7 +519,7 @@
 				      <div id="xialaSelectEdit" hidden="true">
 				      	
 				      	文本值：<input type="text" id="xialaSelectNameId" onchange="changexialaSelectName()"/><br /><br />
-				      	边框样式：<select id="ixialaSelectStyle" style="width:150px; height:30px;" value=""
+				      	边框样式：<select id="ixialaSelectStyle" style="width:150px; height:30px ;" value=""
 									 onchange="changexialaSelectBoderStyle()">
 										<option value="solid">solid</option>
 										<option value="hidden">hidden</option>
@@ -520,18 +532,98 @@
 										<option value="outset">outset</option>
 									</select><br />  <br />
 						边框颜色：<input type='text' id="xialaSelectBoderColor" style="width: 120px" onchange="changexialaSelectBoderColor()"/>&nbsp;&nbsp;&nbsp;
-						背景色：<input type='text' id="xialaSelectBackgroundColor" style="width: 120px" onchange="changexialaSelectBackgroundColor()"/><br /><br />
+						背景色：<input type='text' id="xialaSelectBackgroundColor" style="width: 120px" onchange="changexialaSelectBackgroundColor()"/><br />
 				      	
+				      	<h5>下拉条目编辑</h5>
+						
+				 		 选项一：<input id="optionXiala1" onchange="changeXialaOption1()"/><br />
+				 		 选项二：<input id="optionXiala2" onchange="changeXialaOption2()"/><br />
+				 		 选项三：<input id="optionXiala3" onchange="changeXialaOption3()"/><br />
+				 		 选项四：<input id="optionXiala4" onchange="changeXialaOption4()"/><br />
+				 		 选项五：<input id="optionXiala5" onchange="changeXialaOption5()"/><br />
+				 		 选项六：<input id="optionXiala6" onchange="changeXialaOption6()"/><br />
+				      </div>
+				      <div id="ListBoxOneEdit" hidden="true">
+				      文本值：<input type="text" id="ListBoxOneNameId" onchange="changeListBoxOneName()"/><br /><br />
+				     边框样式：<select id="listBoxOnetStyle" style="width:150px; height:30px ;" value=""
+									 onchange="changelistBoxOneBoderStyle()">
+										<option value="solid">solid</option>
+										<option value="hidden">hidden</option>
+										<option value="dotted">dotted</option>
+										<option value="dashed">dashed</option>
+										<option value="double">double</option>
+										<option value="groove">groove</option>
+										<option value="ridge">ridge</option>
+										<option value="inset">inset</option>
+										<option value="outset">outset</option>
+									</select><br />  <br />
+					边框颜色：<input type='text' id="listBoxOneBoderColor" style="width: 120px" onchange="changelistBoxOneBoderColor()"/>&nbsp;&nbsp;&nbsp;
+					背景色：<input type='text' id="listBoxOneBackgroundColor" style="width: 120px" onchange="changelistBoxOneBackgroundColor()"/><br />
+				      	
+				      </div>
+				       <div id="ListBoxTwoEdit" hidden="true">
+					      文本值：<input type="text" id="ListBoxTwoNameId" onchange="changeListBoxTwoName()"/><br /><br />
+					     边框样式：<select id="listBoxTwoStyle" style="width:150px; height:30px ;" value=""
+										 onchange="changelistBoxTwoBoderStyle()">
+											<option value="solid">solid</option>
+											<option value="hidden">hidden</option>
+											<option value="dotted">dotted</option>
+											<option value="dashed">dashed</option>
+											<option value="double">double</option>
+											<option value="groove">groove</option>
+											<option value="ridge">ridge</option>
+											<option value="inset">inset</option>
+											<option value="outset">outset</option>
+										</select><br />  <br />
+							边框颜色：<input type='text' id="listBoxTwoBoderColor" style="width: 120px" onchange="changelistBoxTwoBoderColor()"/>&nbsp;&nbsp;&nbsp;
+						背景色：<input type='text' id="listBoxTwoBackgroundColor" style="width: 120px" onchange="changelistBoxTwoBackgroundColor()"/><br />
+				      	
+				      </div>
+				      <div id="dateBoxEdit" hidden="true">
+				     	 文本值：<input type="text" id="dateBoxNameId" onchange="changedateBoxName()"/><br /><br />
+				      	边框样式：<select id="dateBoxStyle" style="width:150px; height:30px ;" value=""
+									 onchange="changedateBoxBoderStyle()">
+										<option value="solid">solid</option>
+										<option value="hidden">hidden</option>
+										<option value="dotted">dotted</option>
+										<option value="dashed">dashed</option>
+										<option value="double">double</option>
+										<option value="groove">groove</option>
+										<option value="ridge">ridge</option>
+										<option value="inset">inset</option>
+										<option value="outset">outset</option>
+									</select><br />  <br />
+						边框颜色：<input type='text' id="dateBoxBoderColor" style="width: 120px" onchange="changedateBoxBoderColor()"/>&nbsp;&nbsp;&nbsp;
+						背景色：<input type='text' id="dateBoxBackgroundColor" style="width: 120px" onchange="changedateBoxBackgroundColor()"/><br />
+				      </div>
+				      <div id="fileSelectEdit" hidden="true"></div>
+				      <div id="erWeiMaEdit" hidden="true">
+				      	
+				      	更换图片：<input type="file" id="erWeiMaUrl" style="width: 200px; height: 20px;" onchange="changeErWeiMaUrl()"/>
 				      	
 				      	
 				      </div>
-				      <div id="listSelectEdit" hidden="true"></div>
-				      <div id="dateBoxEdit" hidden="true"></div>
-				      <div id="fileSelectEdit" hidden="true"></div>
-				      <div id="erWeiMaEdit" hidden="true"></div>
-				      <div id="radioEdit" hidden="true"></div>
-				      <div id="checkEdit" hidden="true"></div>
-				      <div id="submitEdit" hidden="true"></div>
+				      <div id="radioEdit" hidden="true">
+				      	主题：<input type="text" id="Radio1NameId" onchange="changeRadioSelectName()"/><br /><br />
+				      	
+				      	<h5>选项条目编辑</h5>
+				 		 选项一：<input id="optionRadio1" onchange="changeRadioOption1()"/><br />
+				 		 选项二：<input id="optionRadio2" onchange="changeRadioOption2()"/><br />
+				 		 选项三：<input id="optionRadio3" onchange="changeRadioOption3()"/><br />
+				 		 选项四：<input id="optionRadio4" onchange="changeRadioOption4()"/><br />
+				      </div>
+				      <div id="checkEdit" hidden="true">
+				      	主题：<input type="text" id="checkNameId" onchange="changecheckSelectName()"/><br /><br />
+				      	<h5>选项条目编辑</h5>
+				 		 选项一：<input id="optioncheck1" onchange="changecheckOption1()"/><br />
+				 		 选项二：<input id="optioncheck2" onchange="changecheckOption2()"/><br />
+				 		 选项三：<input id="optioncheck3" onchange="changecheckOption3()"/><br />
+				 		 选项四：<input id="optioncheck4" onchange="changecheckOption4()"/><br />
+				      </div>
+				      <div id="submitEdit" hidden="true">
+				      	文本：<input type="text" id="submitNameId" onchange="changeSubmitName()"/><br /><br />
+				      	背景色：<input type="text" id="submitBackgroundColor" style="width: 120px" onchange="changeSubmitBackgroundColor()" />
+				      </div>
 				   </div>
 				   <div class="tab-pane fade" id="animtion">
 				      <p>i    OS 是一个 由苹果公司开发和发布的手机操作系统。最初是于 2007 年首次发布 iPhone、iPod Touch 和 Apple 
@@ -540,7 +632,15 @@
 				</div>
 			</div>
 			<div style="background-color:#A8A8A8 ; width: 100%;height: 2px;"></div>
-			<div id="history">history</div>
+			<div id="historyContent" align="center">
+					<h5> 用到的控件</h5>
+				</div>
+			<div id="history" style="overflow: auto;">
+				
+				<div id="historyBox" style=" margin: 15px;">
+						
+				</div>
+			</div>
 		</div>
 		<div id="afterbody">afterbody</div>
 	</body>

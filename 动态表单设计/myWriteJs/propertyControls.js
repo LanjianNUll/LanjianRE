@@ -1,6 +1,6 @@
 //调色板
 $(function(){
-	$("#full,#fontColor,#boderColor,#LineColor,#fontShadow,#inputBoderColor,#inputBackgroundColor,#textAreaBoderColor,#textAreaBackgroundColor,#xialaSelectBoderColor,#xialaSelectBackgroundColor")
+	$("#listBoxTwoBackgroundColor,#listBoxTwoBoderColor,#listBoxOneBackgroundColor,#listBoxOneBoderColor,#full,#fontColor,#boderColor,#LineColor,#fontShadow,#inputBoderColor,#inputBackgroundColor,#textAreaBoderColor,#textAreaBackgroundColor,#xialaSelectBoderColor,#xialaSelectBackgroundColor,#dateBoxBoderColor,#dateBoxBackgroundColor,#submitBackgroundColor")
 	.spectrum({
 	    color: "#ffffff",//显示当前选定的颜色
 	    flat: false,
@@ -45,8 +45,12 @@ $(function(){
 	});	
 });
 
+var lastcurrentDragDiv = null;
+var xialaOptionList = new Array();
+var RadioOptionList = new Array();
+var CheckOptionList = new Array();
 //当鼠标选定某个控件是初始化属性栏的值
-function initPropertySomeMsg(){
+function initPropertySomeMsg(currentName){
 	//初始化大小和位置的值
 	var DX = $(currentDragDiv).css("left");
 	DX = DX.substring(0,DX.length-2);//去除"px"
@@ -70,8 +74,57 @@ function initPropertySomeMsg(){
 	$("#boderWidth").val(BD);
 	$("#boderStyle").val(BS);
 	$("#boderColor").val(BC);
+	
+	if(lastcurrentDragDiv != currentDragDiv && currentName == 'xialaSelect'){
+		//选定下拉框是初始化
+		var OptionList = $(currentDragDiv).children(".selectTag").children(".xialaselectTag").children();
+		
+		for (var i = 0; i<OptionList.length;i++) {
+			//console.log(OptionList.length);
+			xialaOptionList[i] = $(OptionList[i]).text();
+		}
+		lastcurrentDragDiv = currentDragDiv;
+	}
+	for (var i = 0; i < xialaOptionList.length; i++) {
+		//console.log(xialaOptionList[i]);
+		var x = i+1;
+		$("#optionXiala"+x).val(xialaOptionList[i]);
+	}
+	
+	if(lastcurrentDragDiv != currentDragDiv && currentName == 'Radio'){
+		//选定下拉框是初始化
+		var LabelList = $(currentDragDiv).children(".selectTag").children("label");
+		
+		for (var i = 0; i<LabelList.length;i++) {
+			//console.log(OptionList.length);
+			RadioOptionList[i] = $(LabelList[i]).text();
+		}
+		lastcurrentDragDiv = currentDragDiv;
+	}
+	for (var i = 0; i < RadioOptionList.length; i++) {
+		//console.log(RadioOptionList[i]);
+		var xx = i+1;
+		$("#optionRadio"+xx).val(RadioOptionList[i]);
+	}
+	
+	if(lastcurrentDragDiv != currentDragDiv && currentName == 'CheckBox'){
+		//选定下拉框是初始化
+		var labelList2 = $(currentDragDiv).children(".selectTag").children("label");
+		
+		for (var i = 0; i<labelList2.length;i++) {
+			//console.log(OptionList.length);
+			CheckOptionList[i] = $(labelList2[i]).text();
+		}
+		lastcurrentDragDiv = currentDragDiv;
+	}
+	for (var i = 0; i < CheckOptionList.length; i++) {
+		//console.log(RadioOptionList[i]);
+		var xxx = i+1;
+		$("#optioncheck"+xxx).val(CheckOptionList[i]);
+	}
+	
+	
 }
-
 //改变控件的背景颜色
 function changeBackgroundColor(){
 	//console.log($("#full").val())
@@ -116,6 +169,9 @@ function changeBoderColor(){
 /**个性属性**/
 
 //文字大小
+function changeFontContent(){
+	$(currentDragDiv).children(".selectTag").children(".pP").text($("#fontContent").val());
+}
 function changeFontSize(){
 	$(currentDragDiv).children(".selectTag").children(".pP").css({"font-size":$("#fontSize").val()+"px"});
 }
@@ -210,6 +266,215 @@ function changexialaSelectBoderColor(){
 }
 function changexialaSelectBackgroundColor(){
 	$(currentDragDiv).children(".selectTag").children(".xialaselectTag").css({"background":$("#xialaSelectBackgroundColor").val()});
+}
+function changeXialaOption1(){
+	
+	if($("#optionXiala1").val() != ''){
+			xialaOptionList[0] = $("#optionXiala1").val();
+		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption1").text($("#optionXiala1").val()).show();
+	}else{
+		xialaOptionList[0] = null;
+		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption6").text("").hide();
+	}
+}
+function changeXialaOption2(){
+	if($("#optionXiala2").val() != ''){
+			xialaOptionList[1] = $("#optionXiala2").val();
+		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption2").text($("#optionXiala2").val()).show();
+	}else{
+		xialaOptionList[1] = null;
+		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption6").text("").hide();
+	}
+}
+function changeXialaOption3(){
+	if($("#optionXiala3").val() != ''){
+			xialaOptionList[2] = $("#optionXiala3").val();
+		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption3").text($("#optionXiala3").val()).show();
+	}else{
+		xialaOptionList[2] = null;
+		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption6").text("").hide();
+	}
+}
+function changeXialaOption4(){
+	if($("#optionXiala4").val() != ''){
+			xialaOptionList[3] = $("#optionXiala4").val();
+		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption4").text($("#optionXiala4").val()).show();
+	}else{
+		xialaOptionList[3] = null;
+		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption4").text("").hide();
+	}
+}
+function changeXialaOption5(){
+	if($("#optionXiala5").val() != ''){
+			xialaOptionList[4] = $("#optionXiala5").val();
+		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption5").text($("#optionXiala5").val()).show();
+	}else{
+		xialaOptionList[4] = null;
+		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption5").text("").hide();
+	}
+}
+function changeXialaOption6(){
+	if($("#optionXiala6").val() != ''){
+			xialaOptionList[5] = $("#optionXiala6").val();
+		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption6").text($("#optionXiala6").val()).show();
+	}else{
+		xialaOptionList[5] = null;
+		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption6").text("").hide();
+	}
+}
+
+//日期控件的个性
+//下拉框的个性设置
+function changedateBoxName(){
+	$(currentDragDiv).children(".selectTag").children(".dateBoxlabel").text($("#dateBoxNameId").val());
+}
+function changedateBoxBoderStyle(){
+	$(currentDragDiv).children(".selectTag").children(".dateBoxinput").css({"border-style":$("#dateBoxStyle").val()});
+}
+function changedateBoxBoderColor(){
+	$(currentDragDiv).children(".selectTag").children(".dateBoxinput").css({"border-color":$("#dateBoxBoderColor").val()});
+}
+function changedateBoxBackgroundColor(){
+	$(currentDragDiv).children(".selectTag").children(".dateBoxinput").css({"background":$("#dateBoxBackgroundColor").val()});
+}
+//二维码
+function changeErWeiMaUrl(){
+	//console.log($("#erWeiMaUrl").val());
+	$(currentDragDiv).children(".selectTag").children(".Img").attr("src",$("#erWeiMaUrl").val());
+}
+//单选
+function changeRadioSelectName(){
+	//console.log($(currentDragDiv).children(".selectTag").children(".radioP").text());
+	$(currentDragDiv).children(".selectTag").children(".radioP").text($("#Radio1NameId").val())
+}
+function changeRadioOption1(){
+	if($("#optionRadio1").val()!=''){
+		RadioOptionList[0] = $("#optionRadio1").val();
+		$(currentDragDiv).children(".selectTag").children(".radioLabel1").text(RadioOptionList[0]).show();
+		$(currentDragDiv).children(".selectTag").children(".radioInput1").show();
+	}else{
+		RadioOptionList[0] = null;
+		$(currentDragDiv).children(".selectTag").children(".radioLabel1").text("").hide();
+		$(currentDragDiv).children(".selectTag").children(".radioInput1").hide();
+	}
+}
+function changeRadioOption2(){
+	if($("#optionRadio2").val()!=''){
+		RadioOptionList[1] = $("#optionRadio2").val();
+		$(currentDragDiv).children(".selectTag").children(".radioLabel2").text(RadioOptionList[1]).show();
+		$(currentDragDiv).children(".selectTag").children(".radioInput2").show();
+	}else{
+		RadioOptionList[1] = null;
+		$(currentDragDiv).children(".selectTag").children(".radioLabel2").text("").hide();
+		$(currentDragDiv).children(".selectTag").children(".radioInput2").hide();
+	}
+}
+function changeRadioOption3(){
+	if($("#optionRadio3").val()!=''){
+		RadioOptionList[2] = $("#optionRadio3").val();
+		$(currentDragDiv).children(".selectTag").children(".radioLabel3").text(RadioOptionList[2]).show();
+		$(currentDragDiv).children(".selectTag").children(".radioInput3").show();
+	}else{
+		RadioOptionList[2] = null;
+		$(currentDragDiv).children(".selectTag").children(".radioLabel3").text("").hide();
+		$(currentDragDiv).children(".selectTag").children(".radioInput3").hide();
+	}
+}
+function changeRadioOption4(){
+	if($("#optionRadio4").val()!=''){
+		RadioOptionList[3] = $("#optionRadio4").val();
+		$(currentDragDiv).children(".selectTag").children(".radioLabel4").text(RadioOptionList[3]).show();
+		$(currentDragDiv).children(".selectTag").children(".radioInput4").show();
+	}else{
+		RadioOptionList[3] = null;
+		$(currentDragDiv).children(".selectTag").children(".radioLabel4").text("").hide();
+		$(currentDragDiv).children(".selectTag").children(".radioInput4").hide();
+	}
+}
+//复选框
+function changecheckSelectName(){
+		$(currentDragDiv).children(".selectTag").children(".checkBoxP").text($("#checkNameId").val())
+}
+function changecheckOption1(){
+	if($("#optioncheck1").val()!=''){
+		CheckOptionList[0] = $("#optioncheck1").val();
+		$(currentDragDiv).children(".selectTag").children(".Clabel1").text(CheckOptionList[0]).show();
+		$(currentDragDiv).children(".selectTag").children(".checkBox1").show();
+	}else{
+		CheckOptionList[0] = null;
+		$(currentDragDiv).children(".selectTag").children(".Clabel1").text("").hide();
+		$(currentDragDiv).children(".selectTag").children(".checkBox1").hide();
+	}
+}
+
+function changecheckOption2(){
+	if($("#optioncheck2").val()!=''){
+		CheckOptionList[1] = $("#optioncheck2").val();
+		$(currentDragDiv).children(".selectTag").children(".Clabel2").text(CheckOptionList[1]).show();
+		$(currentDragDiv).children(".selectTag").children(".checkBox2").show();
+	}else{
+		CheckOptionList[1] = null;
+		$(currentDragDiv).children(".selectTag").children(".Clabel2").text("").hide();
+		$(currentDragDiv).children(".selectTag").children(".checkBox2").hide();
+	}
+}
+
+function changecheckOption3(){
+	if($("#optioncheck3").val()!=''){
+		CheckOptionList[2] = $("#optioncheck3").val();
+		$(currentDragDiv).children(".selectTag").children(".Clabel3").text(CheckOptionList[2]).show();
+		$(currentDragDiv).children(".selectTag").children(".checkBox3").show();
+	}else{
+		CheckOptionList[2] = null;
+		$(currentDragDiv).children(".selectTag").children(".Clabel3").text("").hide();
+		$(currentDragDiv).children(".selectTag").children(".checkBox3").hide();
+	}
+}
+
+function changecheckOption4(){
+	if($("#optioncheck4").val()!=''){
+		CheckOptionList[3] = $("#optioncheck4").val();
+		$(currentDragDiv).children(".selectTag").children(".Clabel4").text(CheckOptionList[3]).show();
+		$(currentDragDiv).children(".selectTag").children(".checkBox4").show();
+	}else{
+		CheckOptionList[3] = null;
+		$(currentDragDiv).children(".selectTag").children(".Clabel4").text("").hide();
+		$(currentDragDiv).children(".selectTag").children(".checkBox4").hide();
+	}
+}
+//提交按钮
+function changeSubmitName(){
+	$(currentDragDiv).children(".selectTag").children(".submitBtn").val($("#submitNameId").val())
+}
+function changeSubmitBackgroundColor(){
+	$(currentDragDiv).children(".selectTag").children(".submitBtn").css({"background":$("#submitBackgroundColor").val()});
+}
+//列表框一
+function changeListBoxOneName(){
+	$(currentDragDiv).children(".selectTag").children(".ListBoxOneName").text($("#ListBoxOneNameId").val())
+}
+function changelistBoxOneBoderStyle(){
+	$(currentDragDiv).children(".selectTag").children(".listBoxOneinputClass").css({"border-style":$("#listBoxOnetStyle").val()})
+}
+function changelistBoxOneBoderColor(){
+	$(currentDragDiv).children(".selectTag").children(".listBoxOneinputClass").css({"border-color":$("#listBoxOneBoderColor").val()})
+}
+function changelistBoxOneBackgroundColor(){
+	$(currentDragDiv).children(".selectTag").children(".listBoxOneinputClass").css({"background-color":$("#listBoxOneBackgroundColor").val()})
+}
+
+//列表框二
+function changeListBoxTwoName(){
+	$(currentDragDiv).children(".selectTag").children(".ListBoxTwoName").text($("#ListBoxTwoNameId").val())
+}
+function changelistBoxTwoBoderStyle(){
+	$(currentDragDiv).children(".selectTag").children(".listBoxTwoinputClass").css({"border-style":$("#listBoxTwoStyle").val()})
+}
+function changelistBoxTwoBoderColor(){
+	$(currentDragDiv).children(".selectTag").children(".listBoxTwoinputClass").css({"border-color":$("#listBoxTwoBoderColor").val()})
+}
+function changelistBoxTwoBackgroundColor(){
+		$(currentDragDiv).children(".selectTag").children(".listBoxTwoinputClass").css({"background-color":$("#listBoxTwoBackgroundColor").val()})
 }
 
 

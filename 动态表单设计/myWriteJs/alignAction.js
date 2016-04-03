@@ -36,6 +36,8 @@ function clearAll(){
 	currentDriection = null;
 	keyControlAction = null;
 	keyCanMoveDiv = false;
+	//清空用到的控件
+	disPlayHistory();
 }
 //等高
 function equalHeight(){
@@ -69,9 +71,51 @@ function centerAlign(){
 	}
 	removeAllDivBoder();//操作完成，取消边框
 }
+//预览
+function previewOtherPage(){
+	 
+	
+
+
+	
+//	var oblist = new Array();
+//	
+//	for (var ooj = 0; ooj<currentDragDivMap.values().length; ooj++){
+//		var xxoo = currentDragDivMap.values()[ooj]
+//		while($(xxoo).children())
+//	}
+//		
+//	
+//
+//　　var obj1 = createObject("zhangsan","123456");
+//　　obj1.get();
+//	
+//
+// console.log($.toJSON(oblist));
+//	
+	
+}
+
+
+function fillObject(divObj){
+}
 
 
 
+//创建画板中的元素的js对象
+function createObject(tagN,tagI,tagL,tagT,tagW,tagH,tagC,tagBC,tagCt,tagChilidren){
+	var obj = new Object();
+　　	obj.tagName = tagN;
+　　	obj.tagId = tagI;
+	obj.tagLeft = tagL;
+	obj.tagTop = tagT;
+	obj.tagWidth = tagW;
+	obj.tagHeight = tagH;
+	obj.tagClass = tagC;
+	obj.tagContent = tagCt;
+	obj.tagChlidren = tagChilidren;
+	return obj;
+　　}
 
 
 
