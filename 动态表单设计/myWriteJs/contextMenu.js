@@ -25,10 +25,22 @@ function aboutProperty(){
 }
 //删除当前div
 function deleteDivAction(){
-  	if (confirm("确定删除当前控件？")) {  
-           $(currentDragDiv).remove();
+	
+	$('#dialog_deleteCurrentDiv').dialog({
+      resizable: false,
+      height:140,
+      modal: true,
+      buttons: {
+        "删除": function() {
+          $( this ).dialog( "close" );
+          $(currentDragDiv).remove();
+        },
+        "取消": function() {
+          $( this ).dialog( "close" );
         }
-}
+      }
+    });
+ }
 //复制当前div
 function copyCurrentDiv(){
 	if(currentDragDiv!=null){

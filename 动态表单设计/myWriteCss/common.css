@@ -30,6 +30,8 @@ html, body {
 	width: 100%;
 	height: 90%;
 	float: left;
+	background: #FFF8DC;
+	background-size:cover;
 }
 /**属性和历史记录区*/
 #historyAndProperty{
@@ -52,6 +54,7 @@ html, body {
 	width: 100%;
 	height: 70%;
 	margin: 5px;
+	overflow: auto;
 }
 /**页面底部的画板动作状态区*/
 #afterbody{

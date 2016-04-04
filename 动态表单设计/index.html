@@ -12,7 +12,6 @@
 		<script type="text/javascript" src="myWriteJs/contextMenu.js" ></script>
 		<script type="text/javascript" src="myWriteJs/definedFromControls.js" ></script>
 		<script type="text/javascript" src="js/bootstrap.js" ></script>
-		<script type="text/javascript" src="js/bootstrap.min.js" ></script>
 		<script type="text/javascript" src="js/spectrum.js" ></script>
 		<script type="text/javascript" src="myWriteJs/propertyControls.js" ></script>
 		<script type="text/javascript" src="js/jquery.json-2.3.js" ></script>
@@ -22,13 +21,30 @@
 		<link rel="stylesheet" href="myWriteCss/prettyBtn.css" />
 		<link rel="stylesheet" href="css/jquery.contextmenu.css" />
 		<link rel="stylesheet" href="css/jquery-ui.css" />
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
 		<link rel="stylesheet" href="css/bootstrap.css" />
 		<link rel="stylesheet" href="css/spectrum.css" />
 		
 		
 	</head>
 	<body>
+		<!--
+        	作者：765797511@qq.com
+        	时间：2016-04-04
+        	描述：一个隐藏的div  用来存放对话框之类的div
+        -->
+		<div style="width:0px;height: 0px;" hidden="true">
+			<div id="dialog_deleteCurrentDiv" title="删除">
+      			<p> 你确定删除当前控件</p>
+    		</div>
+    		
+    		<div id="dialog_simple" title="删除">
+      			<p> 你确定清空当前画板</p>
+    		</div>
+    		
+    		
+		</div>
+		
+		
 		<div id="selectTag" align="center">
 			<!--
             	作者：765797511@qq.com
@@ -255,7 +271,7 @@
             	时间：2016-03-24
             	描述：画板 工作区
             -->
-			<div id="workSpace" onmousedown="CreateChirdren(event)" style="background: #FFF8DC;"
+			<div id="workSpace" onmousedown="CreateChirdren(event)"
 			 onmousemove="getXandY(event)" onmouseout ="iceSelectRecAction(event)">
 				<div id="workspaceCurrntXandY" style="float: right;">
 				</div>
@@ -309,7 +325,7 @@
 						    	data-toggle="collapse" data-parent="#accordion" 
 						        href="#collapseOne" onclick="chageTriangelImag(this)">
 						    	<img src="img/triangle.png" height="15px" width="15px" style="margin-bottom: 3px;" />
-						         	背景
+						         	控件背景
 						    </div>
 						    <div id="collapseOne" class="panel-collapse collapse">
 						      <div class="panel-body">
@@ -380,6 +396,31 @@
 						      </div>
 						    </div>
 						  </div>
+						  
+						  <div class="panel panel-default">
+						    <div class="panel-heading" style="cursor: pointer;" 
+						    	data-toggle="collapse" data-parent="#accordion" 
+						        href="#collapseFour" onclick="chageTriangelImag(this)">
+						        <img src="img/triangle.png" height="15px" width="15px" style="margin-bottom: 3px;" />
+						       画板设置
+						    </div>
+						    <div id="collapseFour" class="panel-collapse collapse">
+						      <div class="panel-body">
+						      	纯色<input type='text' id="WorkspaceBackgroundColor" style="width: 120px" onchange="changeWorkspaceBackgroundColor()"/>
+									<br/><br/>
+ 								 	<span>
+									图案<select id="WorkspaceBackgroundPicture" style="width:150px; height:30px;" value=""
+										 onchange="changeWorkspaceBackgroundPicture()">
+											<option></option>
+											<option value="sky">天空</option>
+											<option value="flowers">鲜花</option>
+										</select>
+									</span>
+						      </div>
+						    </div>
+						  </div>
+						  
+						  
 						</div>
 				   </div>
 				   
@@ -561,14 +602,11 @@
 					边框颜色：<input type='text' id="listBoxOneBoderColor" style="width: 120px" onchange="changelistBoxOneBoderColor()"/>&nbsp;&nbsp;&nbsp;
 					背景色：<input type='text' id="listBoxOneBackgroundColor" style="width: 120px" onchange="changelistBoxOneBackgroundColor()"/><br />
 				      	
-				      	<button id="addBtnOne">添加条目</button>
+				      	<button id="addBtnOne" onclick="addItemOne()">添加条目</button>
 				      	<div id="itemOne" style="overflow: auto;">
 				      	</div>
-				    	
-				      	
-				      	
 				      </div>
-				       <div id="ListBoxTwoEdit" hidden="true">
+				       <div id="ListBoxTwoEdit">
 					      文本值：<input type="text" id="ListBoxTwoNameId" onchange="changeListBoxTwoName()"/><br /><br />
 					     边框样式：<select id="listBoxTwoStyle" style="width:150px; height:30px ;" value=""
 										 onchange="changelistBoxTwoBoderStyle()">
@@ -584,7 +622,7 @@
 										</select><br />  <br />
 							边框颜色：<input type='text' id="listBoxTwoBoderColor" style="width: 120px" onchange="changelistBoxTwoBoderColor()"/>&nbsp;&nbsp;&nbsp;
 						背景色：<input type='text' id="listBoxTwoBackgroundColor" style="width: 120px" onchange="changelistBoxTwoBackgroundColor()"/><br />
-				      		<button id="addBtnTwo">添加条目</button>
+				      	<button id="addBtnTwo" onclick="addItemTwo()">添加条目</button>
 				      	<div id="itemTwo" style="overflow: auto;">
 				      	</div>
 				    	

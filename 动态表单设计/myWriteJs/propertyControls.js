@@ -1,6 +1,6 @@
 //调色板
 $(function(){
-	$("#listBoxTwoBackgroundColor,#listBoxTwoBoderColor,#listBoxOneBackgroundColor,#listBoxOneBoderColor,#full,#fontColor,#boderColor,#LineColor,#fontShadow,#inputBoderColor,#inputBackgroundColor,#textAreaBoderColor,#textAreaBackgroundColor,#xialaSelectBoderColor,#xialaSelectBackgroundColor,#dateBoxBoderColor,#dateBoxBackgroundColor,#submitBackgroundColor")
+	$("#WorkspaceBackgroundColor,#listBoxTwoBackgroundColor,#listBoxTwoBoderColor,#listBoxOneBackgroundColor,#listBoxOneBoderColor,#full,#fontColor,#boderColor,#LineColor,#fontShadow,#inputBoderColor,#inputBackgroundColor,#textAreaBoderColor,#textAreaBackgroundColor,#xialaSelectBoderColor,#xialaSelectBackgroundColor,#dateBoxBoderColor,#dateBoxBackgroundColor,#submitBackgroundColor")
 	.spectrum({
 	    color: "#ffffff",//显示当前选定的颜色
 	    flat: false,
@@ -94,7 +94,6 @@ function initPropertySomeMsg(currentName){
 	if(lastcurrentDragDiv != currentDragDiv && currentName == 'Radio'){
 		//选定下拉框是初始化
 		var LabelList = $(currentDragDiv).children(".selectTag").children("label");
-		
 		for (var i = 0; i<LabelList.length;i++) {
 			//console.log(OptionList.length);
 			RadioOptionList[i] = $(LabelList[i]).text();
@@ -110,7 +109,6 @@ function initPropertySomeMsg(currentName){
 	if(lastcurrentDragDiv != currentDragDiv && currentName == 'CheckBox'){
 		//选定下拉框是初始化
 		var labelList2 = $(currentDragDiv).children(".selectTag").children("label");
-		
 		for (var i = 0; i<labelList2.length;i++) {
 			//console.log(OptionList.length);
 			CheckOptionList[i] = $(labelList2[i]).text();
@@ -125,23 +123,46 @@ function initPropertySomeMsg(currentName){
 	//处理列表框一的初始化
 	//console.log(currentName);
 	if(lastcurrentDragDiv != currentDragDiv && currentName == 'ListBoxOne'){
-		console.log(currentName);
-		$("#itemOne").children('input').remove();
+		//console.log(currentName);
+		$("#itemOne").children('input').remove();//防止二次进入这个个性设置是有添加到itemOne，进入之前先清空
+		$("#itemOne").children('button').remove();
 		$('select.listBoxOneinputTag > option').each(function(i){
-			//console.log($(this).val());
-			$("<input>",{'class':'listBoxOneinputClass'}).val($(this).val()).appendTo($("#itemOne"));
+		 	//console.log( $(this).attr("class"));
+			var classStr = $(this).attr("class").substring(16,$(this).attr("class").length);
+			//创建一个input并绑定函数
+			$("<input>",{'class':'listBoxOneinputClass','change':function(){
+				$('select.listBoxOneinputTag > option.listBoxOneOption'+classStr).text($(this).val());
+			}}).val($(this).val()).appendTo($("#itemOne"));
+			//删除条目的按钮
+			$('<button>',{'click':function(){
+				$('select.listBoxOneinputTag > option.listBoxOneOption'+classStr).remove();//去除控件里的选项
+				$(event.srcElement).prev(".listBoxOneinputClass").remove();//将个性面板中的相应的条目删除
+				$(event.srcElement).remove();//把自己也干掉
+			}}).text('删除').appendTo($("#itemOne"));
 		});
 		//console.log(lis.length);
 		lastcurrentDragDiv = currentDragDiv;
 	}
 	if(lastcurrentDragDiv != currentDragDiv && currentName == 'ListBoxTwo'){
-		console.log(currentName);
+		//console.log(currentName);
 		$("#itemTwo").children('input').remove();
+		$("#itemTwo").children('button').remove();
 		$('select.listBoxTwoinputTag > option').each(function(i){
 			//console.log($(this).val());
-			$("<input>",{'class':'listBoxOneinputClass','change':function(i){
-				console.log()
+			var classStr = $(this).attr("class").substring(16,$(this).attr("class").length);
+			$("<input>",{'class':'listBoxTwoinputClass','change':function(){
+				$('select.listBoxTwoinputTag > option.listBoxTwoOption'+classStr).text($(this).val());
+				//console.log("选项"+i);
+				//console.log($(this).val());
 			}}).val($(this).val()).appendTo($("#itemTwo"));
+			
+			//删除条目的按钮
+			$('<button>',{'click':function(){
+				$('select.listBoxTwoinputTag > option.listBoxTwoOption'+classStr).remove();//去除控件里的选项
+				$(event.srcElement).prev(".listBoxTwoinputClass").remove();//将个性面板中的相应的条目删除
+				$(event.srcElement).remove();//把自己也干掉
+			}}).text('删除').appendTo($("#itemTwo"));
+			
 		});
 		//console.log(lis.length);
 		lastcurrentDragDiv = currentDragDiv;
@@ -498,6 +519,64 @@ function changelistBoxTwoBoderColor(){
 function changelistBoxTwoBackgroundColor(){
 		$(currentDragDiv).children(".selectTag").children(".listBoxTwoinputClass").css({"background-color":$("#listBoxTwoBackgroundColor").val()})
 }
+//为列表框添加条目
+var newStatrOne = 50;//设置一个  设50应该不会重复了 
+function addItemOne(){
+	newStatrOne++;
+	//console.log(newStatrOne);
+	var selectObj = $(currentDragDiv).children(".selectTag").children(".listBoxOneinputTag");
+	$('<option>',{'class':'listBoxOneOption'+newStatrOne}).appendTo(selectObj);
+	//创建一个input并绑定函数
+	$("<input>",{'class':'listBoxOneinputClass'+newStatrOne,'change':function(){
+		var ser = $(event.srcElement).attr('class').substring(20,$(event.srcElement).attr('class').length);
+		$('select.listBoxOneinputTag > option.listBoxOneOption'+ser).text($(event.srcElement).val());
+	}}).appendTo($("#itemOne"));
 
 
+	//删除条目的按钮
+	$('<button>',{'class':'listBoxOnebuttonClass'+newStatrOne,'click':function(){
+		var ser = $(event.srcElement).attr('class').substring(21,$(event.srcElement).attr('class').length);
+		$('select.listBoxOneinputTag > option.listBoxOneOption'+ser).remove();//去除控件里的选项
+		$(event.srcElement).prev("input").remove();//将个性面板中的相应的条目删除
+		$(event.srcElement).remove();//把自己也干掉
+	}}).text('删除').appendTo($("#itemOne"));
+}
+var  newStatrTwo = 50;
+function addItemTwo(){
+	newStatrTwo++;
+	var selectObj = $(currentDragDiv).children(".selectTag").children(".listBoxTwoinputTag");
+	$('<option>',{'class':'listBoxTwoOption'+newStatrTwo}).appendTo(selectObj);
+	//创建一个input并绑定函数
+	$("<input>",{'class':'listBoxTwoinputClass'+newStatrTwo,'change':function(){
+		var ser = $(event.srcElement).attr('class').substring(20,$(event.srcElement).attr('class').length);
+		$('select.listBoxTwoinputTag > option.listBoxTwoOption'+ser).text($(event.srcElement).val());
+	}}).appendTo($("#itemTwo"));
+	//删除条目的按钮
+	$('<button>',{'class':'listBoxOnebuttonClass'+newStatrOne,'click':function(){
+		var ser = $(event.srcElement).attr('class').substring(21,$(event.srcElement).attr('class').length);
+		$('select.listBoxTwoinputTag > option.listBoxTwoOption'+ser).remove();//去除控件里的选项
+		$(event.srcElement).prev("input").remove();//将个性面板中的相应的条目删除
+		$(event.srcElement).remove();//把自己也干掉
+	}}).text('删除').appendTo($("#itemTwo"));
+}
+//画板设置
+function changeWorkspaceBackgroundColor(){
+	$("#workSpace").css({"background":$("#WorkspaceBackgroundColor").val()})
+}
+function changeWorkspaceBackgroundPicture(){
+	if($("#WorkspaceBackgroundPicture").val() =="")
+		$("#workSpace").css({"background":"#FFF8DC"})
+	else{
+		var picurl = null;
+		//console.log($("#WorkspaceBackgroundPicture").val());
+		if($("#WorkspaceBackgroundPicture").val() =="sky")
+			picurl = "url(/动态表单设计/img/sky.jpg)";
+		if($("#WorkspaceBackgroundPicture").val() =="flowers")
+			picurl = "url(/动态表单设计/img/flowers.jpg)";
+		$("#workSpace").css({
+			"background-image":picurl,
+			"background-repeat":"no-repeat",
+			"background-size":"cover"})
+	}
+}
 
