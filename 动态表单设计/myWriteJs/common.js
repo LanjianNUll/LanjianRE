@@ -110,7 +110,7 @@ function createTag(obj){
 
 var flag;//设置一个标志确保一次只创建一div
 var keyCanMoveDiv = false;
-function CreateChirdren(e){//鼠标按下时的事件
+function CreateChirdren(e,comf){//鼠标按下时的事件
 	piontX = e.clientX;//记录当前的坐标点
 	piontY = e.clientY;
 	getcurrentXandY(e);
@@ -135,10 +135,16 @@ function CreateChirdren(e){//鼠标按下时的事件
 			.bind("mouseout",function(event){keyCanMoveDiv = false;})
 						  .appendTo($(currentDragDiv));
 			//var event = event||window.event 为了兼容FF
+			//根据comf粘贴 在那个地方
+			if(comf == 'top'){
+				piontX = currentDragDiv.style.left;
+				piontY = currentDragDiv.style.top;//20是便签的高度
+			}
 			$(currentDragDiv).bind("mousedown",function(event){var event = event || window.event; move(event);}),
 			$(currentDragDiv).css({
 					"left":piontX+"px",
-					"top":piontY+"px"
+					"top":piontY+"px",
+					"z-index":0,
 			})
 		}
 		flag = false;

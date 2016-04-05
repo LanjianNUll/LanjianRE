@@ -15,6 +15,7 @@
 		<script type="text/javascript" src="js/spectrum.js" ></script>
 		<script type="text/javascript" src="myWriteJs/propertyControls.js" ></script>
 		<script type="text/javascript" src="js/jquery.json-2.3.js" ></script>
+		<script type="text/javascript" src="js/dom2json.js" ></script>
 		
 		
 		<link rel="stylesheet" href="myWriteCss/common.css" />
@@ -34,11 +35,11 @@
         -->
 		<div style="width:0px;height: 0px;" hidden="true">
 			<div id="dialog_deleteCurrentDiv" title="删除">
-      			<p> 你确定删除当前控件</p>
+      			<p> 确定删除当前控件！！！</p>
     		</div>
     		
-    		<div id="dialog_simple" title="删除">
-      			<p> 你确定清空当前画板</p>
+    		<div id="dialog_clearAllDiv" title="清空">
+      			<p> 确定清空当前画板！！！</p>
     		</div>
     		
     		
@@ -170,6 +171,13 @@
             	描述：工具栏div
             -->
 			<div id="top" align="center"> 
+				
+				<div style="float: right;margin-top: 15px;">
+				<span><a>用户名</a></span>
+				<span><a>注销</a></span>
+				<span><a>注册</a></span>
+				</div>
+				
 				<div style="margin-top: 12px;">
 					<button id="leftAlign" type="button" class="btn btn-default btn-sm" 
 						style="font-size: 18px" data-toggle="tooltip" 
@@ -229,7 +237,7 @@
 					<button id="pasteCurrentDiv" type="button" class="btn btn-default btn-sm" 
 						style="font-size: 18px" data-toggle="tooltip" 
 		   				data-placement="bottom" title="粘贴"
-		   				onclick="pasteCurrentDiv()">
+		   				onclick="pasteCurrentDiv('top')">
 						<span class="glyphicon glyphicon-paste"></span>
 					</button>
 					<button id="otherSave" type="button" class="btn btn-default btn-sm" 

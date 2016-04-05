@@ -15,7 +15,6 @@
 		<script type="text/javascript" src="js/spectrum.js" ></script>
 		<script type="text/javascript" src="myWriteJs/propertyControls.js" ></script>
 		<script type="text/javascript" src="js/jquery.json-2.3.js" ></script>
-		<script type="text/javascript" src="js/fileinput.js" ></script>
 		<script type="text/javascript" src="js/dom2json.js" ></script>
 		
 		<link rel="stylesheet" href="myWriteCss/common.css" />
@@ -25,7 +24,6 @@
 		<link rel="stylesheet" href="css/bootstrap.min.css" />
 		<link rel="stylesheet" href="css/bootstrap.css" />
 		<link rel="stylesheet" href="css/spectrum.css" />
-		<link rel="stylesheet" href="css/fileinput.min.css" />
   
   <head></head>
   <body>
@@ -63,11 +61,113 @@
 <input type="button" value="上传文件" class="file" onClick="t_file.click()">
 <input name="upload" type="file" id="t_file" onchange="f_file.value=this.value" style="display:none">
 	-->
-	<button onclick="transf()">转换</button>
 	
+	<div id="selectTagDiv" style="overflow:scroll; width:100%; height: 90%;
+				padding-top:5px;padding-bottom: 45px;">
+				<button id="Recbox" class="btn btn-default btn-sm SelectBtn"
+					data-toggle="tooltip" data-placement="right" 
+		   			title="绘制一个方框">
+					<img src="img/rect.png"/>
+				</br>方	框
+				</button></br>
+				<button id="wordBtn" class="btn btn-default btn-sm SelectBtn"
+					data-toggle="tooltip" data-placement="right" 
+		   			title="绘制一个文本标签">
+					<img src="img/word.png"/>
+				</br>文	字
+				</button></br>
+				
+				<button id="straightLine" class="btn btn-default btn-sm SelectBtn"
+					data-toggle="tooltip" data-placement="right" 
+		   			title="绘制一条直线">
+					<img src="img/line.png"/>
+				</br>直	线
+				</button></br>
+				
+				<button id="inputFrame" class="btn btn-default btn-sm SelectBtn"
+					data-toggle="tooltip" data-placement="right" 
+		   			title="绘制一个单行输入框表单控件">
+					<img src="img/input.png"/>
+				</br>输入框 
+				</button></br>
+				
+				<button id="textarea" class="btn btn-default btn-sm SelectBtn"
+					data-toggle="tooltip" data-placement="right" 
+		   			title="绘制一个多行文本输入控件">
+					<img src="img/textarea.png"/>
+				</br>文本框 
+				</button></br>
+				
+				<button id="downselect" class="btn btn-default btn-sm SelectBtn"
+					data-toggle="tooltip" data-placement="right" 
+		   			title="绘制一个表单下拉控件">
+					<img src="img/xialaselect.png"/>
+				</br>下拉框  
+				</button></br>
+				<button id="ListAndComboxOne" class="btn btn-default btn-sm SelectBtn"
+					data-toggle="tooltip" data-placement="right" 
+		   			title="绘制一个带展开列表的输入框控件">
+					<img src="img/list.png"/>
+				</br>列表一
+				</button></br>
+				<button id="ListAndComboxTwo" class="btn btn-default btn-sm SelectBtn"
+					data-toggle="tooltip" data-placement="right" 
+		   			title="绘制一个带隐藏列表的输入框控件">
+					<img src="img/list.png"/>
+				</br>列表二
+				</button></br>
+				
+				<button id="dateBtn" class="btn btn-default btn-sm SelectBtn"
+					data-toggle="tooltip" data-placement="right" 
+		   			title="绘制一个可选择日期的控件">
+					<img src="img/date.png"/>
+				</br>日期框 
+				</button></br>
+				<button id="fileBox" class="btn btn-default btn-sm SelectBtn"
+					data-toggle="tooltip" data-placement="right" 
+		   			title="绘制一个文件管理框控件">
+					<img src="img/file.png"/>
+				</br>文件框 
+				</button></br>
+				<button id="erweimaBtn" class="btn btn-default btn-sm SelectBtn"
+				data-toggle="tooltip" data-placement="right" 
+		   			title="绘制一张二维码图片">
+					<img src="img/erweima.png"/>
+				</br>二维码 
+				</button></br>
+				
+				<button id="radio" class="btn btn-default btn-sm SelectBtn"
+					data-toggle="tooltip" data-placement="right" 
+		   			title="绘制一个单选的表单控件">
+					<img src="img/radio.png"/>
+				</br>单选框 
+				</button></br>
+				
+				<button id="combox" class="btn btn-default btn-sm SelectBtn"
+					data-toggle="tooltip" data-placement="right" 
+		   			title="绘制一个复选的表单控件">
+					<img src="img/combox.png"/>
+				</br>复选框 
+				</button></br>
+				
+				<button id="submitBtn" class="btn btn-default btn-sm SelectBtn"
+					data-toggle="tooltip" data-placement="right" 
+		   			title="绘制一个用于提交表单的控件">
+					<img src="img/sumbit.png"/>
+				</br>提 交
+				</button></br>
+				<script>
+					$(function () { $("[data-toggle='tooltip']").tooltip(); });
+				</script>
+			</div>
+	
+	
+	
+	<button onclick="transf()">转换</button>
+		<button onclick="toJsonMethod()">ToJson</button>
 	<script>
 	function transf(){
-		var publicSpan = $("<span>",{"name":"ListBoxOne"});
+		var publicSpan = $("<span>",{"id":"ListBoxOne","class":"publ"});
 		$("<label>",{"class":"ListBoxOneName"}).text("姓   名").appendTo(publicSpan);
 		$("<input>",{'class':'listBoxOneinputClass'}).appendTo(publicSpan);
 		var selectTag = $('<select>',{'class':'listBoxOneinputTag','multiple':'multiple','change':function(){
@@ -79,21 +179,19 @@
 		$('<option>',{'class':'listBoxOneOption4'}).text("23").appendTo(selectTag);
 		$('<option>',{'class':'listBoxOneOption5'}).text("23").appendTo(selectTag);
 		$('<option>',{'class':'listBoxOneOption6'}).text("255").appendTo(selectTag);
-			
-	//	console.log($.toJSON(publicSpan));
 		
-		var doc = document.getElementsByTagName("span");
-		   
-		var htmlStr = $(publicSpan).html();
-		
-		console.log(JsonML.fromHTML(doc));
+		$(publicSpan).appendTo("body");
 		
 	}
-	
+	function toJsonMethod(){
+		var doc = document.getElementById("selectTagDiv");	
+		var publicSpanDoc = document.getElementById("ListBoxOne");
+		console.log($(publicSpanDoc).width());
+		console.log(JsonML.fromHTML(publicSpanDoc));
+		var Dom = JsonML.fromHTMLText(publicSpanDoc.outerHTML);
+		console.log(Dom);
+	}
 	</script>
-	
-	
-    
 </body>
 </html>
 

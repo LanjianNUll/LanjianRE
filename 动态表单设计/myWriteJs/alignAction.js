@@ -28,16 +28,33 @@ function rightAlign(){
 }
 //清空工作区
 function clearAll(){
-	$("#workSpace").children().remove();
-	currentDragDivMap.clear();
-	currentSerialNum = 0;
-	currentDragDiv = null;
-	isMouseLeftKeyDown = false;
-	currentDriection = null;
-	keyControlAction = null;
-	keyCanMoveDiv = false;
-	//清空用到的控件
-	disPlayHistory();
+	
+	$('#dialog_clearAllDiv').dialog({
+      resizable: false,
+      height:140,
+      modal: true,
+      buttons: {
+        "确定": function() {
+          $( this ).dialog( "close" );
+          $("#workSpace").children().remove();
+			currentDragDivMap.clear();
+			currentSerialNum = 0;
+			currentDragDiv = null;
+			isMouseLeftKeyDown = false;
+			currentDriection = null;
+			keyControlAction = null;
+			keyCanMoveDiv = false;
+			//清空用到的控件
+			disPlayHistory();
+		  },
+        "取消": function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+	
+	
+	
 }
 //等高
 function equalHeight(){
@@ -73,49 +90,15 @@ function centerAlign(){
 }
 //预览
 function previewOtherPage(){
-	 
+	var workSpaceDomObj = document.getElementById("workSpace");
+	var workSpaceJson = JsonML.fromHTML(workSpaceDomObj);
+	console.log(workSpaceJson);
 	
-
-
 	
-//	var oblist = new Array();
-//	
-//	for (var ooj = 0; ooj<currentDragDivMap.values().length; ooj++){
-//		var xxoo = currentDragDivMap.values()[ooj]
-//		while($(xxoo).children())
-//	}
-//		
-//	
-//
-//　　var obj1 = createObject("zhangsan","123456");
-//　　obj1.get();
-//	
-//
-// console.log($.toJSON(oblist));
-//	
 	
 }
 
 
-function fillObject(divObj){
-}
-
-
-
-//创建画板中的元素的js对象
-function createObject(tagN,tagI,tagL,tagT,tagW,tagH,tagC,tagBC,tagCt,tagChilidren){
-	var obj = new Object();
-　　	obj.tagName = tagN;
-　　	obj.tagId = tagI;
-	obj.tagLeft = tagL;
-	obj.tagTop = tagT;
-	obj.tagWidth = tagW;
-	obj.tagHeight = tagH;
-	obj.tagClass = tagC;
-	obj.tagContent = tagCt;
-	obj.tagChlidren = tagChilidren;
-	return obj;
-　　}
 
 
 

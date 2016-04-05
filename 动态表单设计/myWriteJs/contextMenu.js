@@ -7,15 +7,15 @@ function openContextMeun() {
         {label:'删除', icon:'img/contextMeunDelete.png',  
         	action:function() { deleteDivAction(); } },
         {label:'复制',         icon:'img/contextMeunCopy.png',  
-        	action:function() { copyCurrentDiv(); } }
-//      {label:'置于顶层',         icon:'img/contextMeunTest.png', 
-//      	action:function() { moveToUpTop(); } },
-//      {label:'上移一层',       icon:'img/contextMeunTest.png',   
-//      	action:function() { moveToUp(); } },
-//      {label:'置于底层',      icon:'img/contextMeunTest.png',     
-//      	action:function() { moveToDownDown(); } },
-//  	{label:'下移一层',      icon:'img/contextMeunTest.png',     
-//  	action:function() { moveToDowm(); } }
+        	action:function() { copyCurrentDiv(); } },
+        {label:'置于顶层',         icon:'img/toTop.png', 
+        	action:function() { moveToTop(); } },
+      	{label:'上移一层',       icon:'img/toUp.png',   
+      	action:function() { moveToUp(); } },
+        {label:'置于底层',      icon:'img/toBottom.png',     
+        	action:function() { moveToBottom(); } },
+		{label:'下移一层',      icon:'img/toDown.png',     
+		action:function() { moveToDowm(); } }
       ]
     });
   };
@@ -25,13 +25,13 @@ function aboutProperty(){
 }
 //删除当前div
 function deleteDivAction(){
-	
+	//删除提示对话框
 	$('#dialog_deleteCurrentDiv').dialog({
       resizable: false,
       height:140,
       modal: true,
       buttons: {
-        "删除": function() {
+        "确定": function() {
           $( this ).dialog( "close" );
           $(currentDragDiv).remove();
         },
@@ -61,29 +61,25 @@ function copyCurrentDiv(){
 //return myNewObj;  
 //}  
 //粘贴当前div
-function pasteCurrentDiv(){
+function pasteCurrentDiv(comeForm){
 	if(copyCurrentDivTempName!=null){
+		console.log("粘贴");
 		isCanCreateChirdren = true;
-		switch (copyCurrentDivTempName){//这里匹配可能乱序了  因为不影响所以就不改了 
+		switch (copyCurrentDivTempName){
 		   	case "Radio":
 		   		ww = 180;
 		   		hh = 80;
 		   		createTag(createRadio());
 		   		break;
-		   	case "Select":
-		   		ww = 182;
-		   		hh = 62;
+		   	case "xialaSelect":
+		   		ww = 291;
+		   		hh = 36;
 		   		createTag(createSelect());
 		   		break;
 			case "InputOne":
 					ww = 230;
 		   		hh = 30;
 					createTag(createInputOne());
-		   		break;
-			case "InputTwo":
-					ww = 200;
-		   		hh = 84;
-		   		createTag(createInputTwo());
 		   		break;
 			case "Submit":
 					ww = 55;
@@ -102,30 +98,69 @@ function pasteCurrentDiv(){
 		   		break;
 		   case "P":
 		   		ww = 155;
-		   		hh = 45;
+		   		hh = 26;
 		   		createTag(createP());
+		   		break;
+		   	case "Rec":
+		   		ww = 120;
+		   		hh = 120;
+		   		createTag(createRec());
+		   		break;
+		   	case "Line":
+		   		ww =100;
+		   		hh = 45;
+		   		createTag(createLine());
+		   		break;
+		   	case "ErWeiMa":
+		   		ww=100;
+		   		hh=100;
+		   		createTag(createErWeiMa());
+		   		break;
+		   	case "DateBox":
+		   		ww = 230;
+		   		hh = 30;
+		   		createTag(createDateBox());
+		   		break;
+		   	case "ListBoxOne":
+		   		ww = 377;
+		   		hh = 90;
+		   		createTag(createListBoxOne());
+		   		break;
+		   	case "ListBoxTwo":
+		   		ww = 380;
+		   		hh = 40;
+		   		createTag(createListBoxTwo());
+		   		break;
+		   	case "fileSelect":
+		   		ww = 294;
+		   		hh = 39;
+		   		createTag(createfileBox());
 		   		break;
 		   	default:
 		   		break;
 		}
-		$('#workSpace').trigger(CreateChirdren(event));//模拟鼠标点击事件  触发创建新对象函数
 	}
+	$('#workSpace').trigger(CreateChirdren(event,comeForm));//模拟鼠标点击事件  触发创建新对象函数
 }
 //移动至最上层
-function moveToUpTop(){
-	
+function moveToTop(){
+	$(currentDragDiv).css({"z-index":5});
 }
 //上移一层
 function moveToUp(){
-	
+	var zIndex =parseInt($(currentDragDiv).css("z-index"));
+	$(currentDragDiv).css({"z-index":zIndex+1});
+	//console.log($(currentDragDiv).css("z-index"));
 }
 //移动到最下层
-function moveToDownDown(){
-	
+function moveToBottom(){
+	$(currentDragDiv).css({"z-index":0});
 }
 //下移一层
 function moveToDowm(){
-	
+	var zIndex =parseInt($(currentDragDiv).css("z-index"));
+	$(currentDragDiv).css({"z-index":zIndex-1});
+	//console.log($(currentDragDiv).css("z-index"));
 }
 //页面属性
 function pageAboutProperty(){
@@ -135,7 +170,7 @@ var workspaceItems = [
 		{label:'页面属性',     icon:'img/contextMeunProperties.png',
         	action:function() { pageAboutProperty(); } },
         {label:'粘贴', icon:'img/contextMeunPaste.png',  
-        	action:function() { pasteCurrentDiv(); } },
+        	action:function() { pasteCurrentDiv("mouse"); } },
      	 ]
 $(function(){
 	$("#workSpace").contextPopup({
