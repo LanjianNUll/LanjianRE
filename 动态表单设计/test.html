@@ -16,6 +16,7 @@
 		<script type="text/javascript" src="myWriteJs/propertyControls.js" ></script>
 		<script type="text/javascript" src="js/jquery.json-2.3.js" ></script>
 		<script type="text/javascript" src="js/dom2json.js" ></script>
+		<script type="text/javascript" src="js/jsonml2html.js" ></script>
 		
 		<link rel="stylesheet" href="myWriteCss/common.css" />
 		<link rel="stylesheet" href="myWriteCss/prettyBtn.css" />
@@ -181,16 +182,22 @@
 		$('<option>',{'class':'listBoxOneOption6'}).text("255").appendTo(selectTag);
 		
 		$(publicSpan).appendTo("body");
-		
 	}
 	function toJsonMethod(){
+		
+		
 		var doc = document.getElementById("selectTagDiv");	
 		var publicSpanDoc = document.getElementById("ListBoxOne");
 		console.log($(publicSpanDoc).width());
+		//将dom2json
 		console.log(JsonML.fromHTML(publicSpanDoc));
-		var Dom = JsonML.fromHTMLText(publicSpanDoc.outerHTML);
-		console.log(Dom);
+		
+		//Json2Html
+		var Dom = JsonML.toHTMLText(JsonML.fromHTML(publicSpanDoc))
+		$(Dom).appendTo("body");
 	}
+	//将选择的拼接起来
+
 	</script>
 </body>
 </html>

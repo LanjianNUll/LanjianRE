@@ -165,6 +165,7 @@ function moveToDowm(){
 //页面属性
 function pageAboutProperty(){
 	
+	
 }
 var workspaceItems = [
 		{label:'页面属性',     icon:'img/contextMeunProperties.png',

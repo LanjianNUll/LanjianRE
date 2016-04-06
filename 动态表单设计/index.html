@@ -16,15 +16,14 @@
 		<script type="text/javascript" src="myWriteJs/propertyControls.js" ></script>
 		<script type="text/javascript" src="js/jquery.json-2.3.js" ></script>
 		<script type="text/javascript" src="js/dom2json.js" ></script>
-		
-		
+		<script type="text/javascript" src="js/jsonml2html.js" ></script>
+
 		<link rel="stylesheet" href="myWriteCss/common.css" />
 		<link rel="stylesheet" href="myWriteCss/prettyBtn.css" />
 		<link rel="stylesheet" href="css/jquery.contextmenu.css" />
 		<link rel="stylesheet" href="css/jquery-ui.css" />
 		<link rel="stylesheet" href="css/bootstrap.css" />
 		<link rel="stylesheet" href="css/spectrum.css" />
-		
 		
 	</head>
 	<body>
@@ -41,10 +40,7 @@
     		<div id="dialog_clearAllDiv" title="清空">
       			<p> 确定清空当前画板！！！</p>
     		</div>
-    		
-    		
 		</div>
-		
 		
 		<div id="selectTag" align="center">
 			<!--
@@ -281,8 +277,14 @@
             -->
 			<div id="workSpace" onmousedown="CreateChirdren(event)"
 			 onmousemove="getXandY(event)" onmouseout ="iceSelectRecAction(event)">
-				<div id="workspaceCurrntXandY" style="float: right;">
-				</div>
+				<button id="exitPreViewpage" type="button" class="btn btn-default btn-lg" 
+						style="font-size: 25px;float: right;margin-right: 20px;"
+		   				onclick="exitPreViewPage()">
+						<span class="glyphicon glyphicon-off"><p style="font-size:12px">退出预览</p></span>
+					</button>
+				
+				
+				
 			</div>
 		</div>
 		<!--

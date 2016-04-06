@@ -3,10 +3,13 @@ var currentSelectedTag;
 var ww;
 var hh;
 var isCanCreateChirdren = false;
+var isPreViewIng = false;
 $(document).ready(function(){
+	$("#exitPreViewpage").hide();//隐藏退出预览的按钮
 	disPlayHistory();//显示用到的控件页面
   $("button.btn").click(function(){
-  	isCanCreateChirdren = true;
+  	if(!isPreViewIng)
+  		isCanCreateChirdren = true;
    //alert("你点击按钮"+$(this).text());
    //alert($(this).attr("id"));
    	$("button").removeClass("clickedButton");//移除所有点击了按钮的效果
@@ -115,6 +118,7 @@ function CreateChirdren(e,comf){//鼠标按下时的事件
 	piontY = e.clientY;
 	getcurrentXandY(e);
 	if(isCanCreateChirdren){
+		//console.log("创建了一个对象");
 		$("button").removeClass("clickedButton");//移除所有点击了按钮的效果	
 		if(flag){
 			creatBoder();//创建边框
@@ -140,7 +144,7 @@ function CreateChirdren(e,comf){//鼠标按下时的事件
 				piontX = currentDragDiv.style.left;
 				piontY = currentDragDiv.style.top;//20是便签的高度
 			}
-			$(currentDragDiv).bind("mousedown",function(event){var event = event || window.event; move(event);}),
+			$(currentDragDiv).on("mousedown",function(event){var event = event || window.event; move(event);});
 			$(currentDragDiv).css({
 					"left":piontX+"px",
 					"top":piontY+"px",
@@ -173,7 +177,7 @@ function iceSelectRecAction(e){
 function getcurrentXandY(e){//鼠标在工作区域时 更新位置信息
 //	if(currentDragDiv!=null)
 //		isContain(e.clientX,e.clientY);//判读鼠标是否在当前的div
-	if(!currentDragDivMap.isEmpty())
+	if(!currentDragDivMap.isEmpty()&&!isPreViewIng)
 		for(var i = 0;i<currentDragDivMap.values().length;i++){
 			if(isContain(e.clientX,e.clientY,currentDragDivMap.values()[i])){
 				currentDragDiv = currentDragDivMap.values()[i];
@@ -241,8 +245,8 @@ function resizeAction(e,action){
 }
 //鼠标松开事件
 window.onmouseup = function(){
-	isMouseLeftKeyDown = false;	
-	$(currentDragDiv).draggable("enable");//解除拖动当前的div
+		isMouseLeftKeyDown = false;	
+		$(currentDragDiv).draggable("enable");//解除拖动当前的div
 }
 //鼠标移动事件
 window.onmousemove = function(e){
@@ -326,7 +330,7 @@ function displayBoder(oob){
 	//$(currentSelectedTag).appendTo($(oob));//将选择的标签添加进来
 	//console.log("显示边框");
 	if(!saveCurrntBoder.isEmpty())
-			saveCurrntBoder.get($(oob).attr("id")+"boder").appendTo(oob);//取到map中的边框值(这里加一个boder是为了不和前面div的ID重复了)
+			(saveCurrntBoder.get($(oob).attr("id")+"boder")).appendTo(oob);//取到map中的边框值(这里加一个boder是为了不和前面div的ID重复了)
 	//console.log("显示边框"+$(oob).attr("id")+"_boder");
 }
 //判读鼠标是否在当前div中
@@ -531,7 +535,7 @@ var sDiv;
 //鼠标按下
 document.onmousedown = function(event){
 	//if判断是否按下的鼠标的左键
-	if(event.which ==1 && isActiveSelectRec){
+	if(event.which ==1 && isActiveSelectRec &&!isPreViewIng){
 		currentDivArrayList.length = 0;//清空选择框里
 		//console.log("onmousedown");
 		 flag = true;
@@ -549,7 +553,7 @@ document.onmousedown = function(event){
 }
 //鼠标移动
 document.onmousemove = function(event){
-	if(event.which == 1 && isActiveSelectRec){
+	if(event.which == 1 && isActiveSelectRec &&!isPreViewIng){
 		//console.log("onmousemove");
 		if(flag){
 			document.getElementById("workSpace").appendChild(sDiv);
@@ -571,7 +575,7 @@ document.onmousemove = function(event){
 }
 //鼠标抬起
 document.onmouseup = function(event){
-	if(event.which == 1 && isActiveSelectRec){
+	if(event.which == 1 && isActiveSelectRec&&!isPreViewIng){
 			//console.log("onmouseup");
 			try{
 			  //document.getElementById("workSpace").removeChild(sDiv);
