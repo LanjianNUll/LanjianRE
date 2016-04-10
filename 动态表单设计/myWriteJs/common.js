@@ -67,7 +67,7 @@ $(document).ready(function(){
    		createTag(createErWeiMa());
    		break;
    	case "dateBtn":
-   		ww = 230;
+   		ww = 260;
    		hh = 30;
    		createTag(createDateBox());
    		break;

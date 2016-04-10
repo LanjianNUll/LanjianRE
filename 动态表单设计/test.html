@@ -63,21 +63,7 @@
 <input name="upload" type="file" id="t_file" onchange="f_file.value=this.value" style="display:none">
 	-->
 	
-	<div id="selectTagDiv" style="overflow:scroll; width:100%; height: 90%;
-				padding-top:5px;padding-bottom: 45px;">
-				<button id="Recbox" class="btn btn-default btn-sm SelectBtn"
-					data-toggle="tooltip" data-placement="right" 
-		   			title="绘制一个方框">
-					<img src="img/rect.png"/>
-				</br>方	框
-				</button></br>
-				<button id="wordBtn" class="btn btn-default btn-sm SelectBtn"
-					data-toggle="tooltip" data-placement="right" 
-		   			title="绘制一个文本标签">
-					<img src="img/word.png"/>
-				</br>文	字
-				</button></br>
-				
+	
 				<button id="straightLine" class="btn btn-default btn-sm SelectBtn"
 					data-toggle="tooltip" data-placement="right" 
 		   			title="绘制一条直线">
@@ -85,84 +71,7 @@
 				</br>直	线
 				</button></br>
 				
-				<button id="inputFrame" class="btn btn-default btn-sm SelectBtn"
-					data-toggle="tooltip" data-placement="right" 
-		   			title="绘制一个单行输入框表单控件">
-					<img src="img/input.png"/>
-				</br>输入框 
-				</button></br>
-				
-				<button id="textarea" class="btn btn-default btn-sm SelectBtn"
-					data-toggle="tooltip" data-placement="right" 
-		   			title="绘制一个多行文本输入控件">
-					<img src="img/textarea.png"/>
-				</br>文本框 
-				</button></br>
-				
-				<button id="downselect" class="btn btn-default btn-sm SelectBtn"
-					data-toggle="tooltip" data-placement="right" 
-		   			title="绘制一个表单下拉控件">
-					<img src="img/xialaselect.png"/>
-				</br>下拉框  
-				</button></br>
-				<button id="ListAndComboxOne" class="btn btn-default btn-sm SelectBtn"
-					data-toggle="tooltip" data-placement="right" 
-		   			title="绘制一个带展开列表的输入框控件">
-					<img src="img/list.png"/>
-				</br>列表一
-				</button></br>
-				<button id="ListAndComboxTwo" class="btn btn-default btn-sm SelectBtn"
-					data-toggle="tooltip" data-placement="right" 
-		   			title="绘制一个带隐藏列表的输入框控件">
-					<img src="img/list.png"/>
-				</br>列表二
-				</button></br>
-				
-				<button id="dateBtn" class="btn btn-default btn-sm SelectBtn"
-					data-toggle="tooltip" data-placement="right" 
-		   			title="绘制一个可选择日期的控件">
-					<img src="img/date.png"/>
-				</br>日期框 
-				</button></br>
-				<button id="fileBox" class="btn btn-default btn-sm SelectBtn"
-					data-toggle="tooltip" data-placement="right" 
-		   			title="绘制一个文件管理框控件">
-					<img src="img/file.png"/>
-				</br>文件框 
-				</button></br>
-				<button id="erweimaBtn" class="btn btn-default btn-sm SelectBtn"
-				data-toggle="tooltip" data-placement="right" 
-		   			title="绘制一张二维码图片">
-					<img src="img/erweima.png"/>
-				</br>二维码 
-				</button></br>
-				
-				<button id="radio" class="btn btn-default btn-sm SelectBtn"
-					data-toggle="tooltip" data-placement="right" 
-		   			title="绘制一个单选的表单控件">
-					<img src="img/radio.png"/>
-				</br>单选框 
-				</button></br>
-				
-				<button id="combox" class="btn btn-default btn-sm SelectBtn"
-					data-toggle="tooltip" data-placement="right" 
-		   			title="绘制一个复选的表单控件">
-					<img src="img/combox.png"/>
-				</br>复选框 
-				</button></br>
-				
-				<button id="submitBtn" class="btn btn-default btn-sm SelectBtn"
-					data-toggle="tooltip" data-placement="right" 
-		   			title="绘制一个用于提交表单的控件">
-					<img src="img/sumbit.png"/>
-				</br>提 交
-				</button></br>
-				<script>
-					$(function () { $("[data-toggle='tooltip']").tooltip(); });
-				</script>
-			</div>
-	
-	
+		
 	
 	<button onclick="transf()">转换</button>
 		<button onclick="toJsonMethod()">ToJson</button>
@@ -185,20 +94,22 @@
 	}
 	function toJsonMethod(){
 		
-		
 		var doc = document.getElementById("selectTagDiv");	
 		var publicSpanDoc = document.getElementById("ListBoxOne");
 		console.log($(publicSpanDoc).width());
 		//将dom2json
 		console.log(JsonML.fromHTML(publicSpanDoc));
 		
+		var jsonObj = JsonML.fromHTML(publicSpanDoc);
 		//Json2Html
-		var Dom = JsonML.toHTMLText(JsonML.fromHTML(publicSpanDoc))
+		var Dom = JsonML.toHTMLText(jsonObj)
 		$(Dom).appendTo("body");
 	}
 	//将选择的拼接起来
 
 	</script>
+	
+	</html>
 </body>
 </html>
 

@@ -26,9 +26,6 @@ function createSelect(){
 	$('<option>',{'class':'selectOption1'}).text("我的选择与众不同").appendTo(selectTag);
 	$('<option>',{'class':'selectOption2'}).text("选择品牌1").appendTo(selectTag);
 	$('<option>',{'class':'selectOption3'}).text("选择品牌2").appendTo(selectTag);
-	$('<option>',{'class':'selectOption4','hidden':'true'}).text("").appendTo(selectTag);
-	$('<option>',{'class':'selectOption5','hidden':'true'}).text("").appendTo(selectTag);
-	$('<option>',{'class':'selectOption6','hidden':'true'}).text("").appendTo(selectTag);
 	return publicSpan;
 }
 //创建输入文本框一
@@ -99,10 +96,28 @@ function createErWeiMa(){
 function createDateBox(){
 	var publicSpan = $("<span>",{"name":"DateBox"});
 	$("<label>",{'class':'dateBoxlabel'}).text("日 期").appendTo(publicSpan);
-	$("<input>",{'class':'dateBoxinput','type':'text','name':'dateBox'}).datepicker()
+	$("<input>",{'class':'dateBoxinput','type':'text','name':'dateBox'})
+		.datepicker({//添加日期选择功能
+            numberOfMonths:1,//显示几个月  
+            showButtonPanel:true,//是否显示按钮面板  
+            dateFormat: 'yy年mm月dd日',//日期格式  
+            clearText:"清除",//清除日期的按钮名称  
+            closeText:"关闭",//关闭选择框的按钮名称  
+            yearSuffix: '年', //年的后缀  
+            showMonthAfterYear:true,//是否把月放在年的后面  
+            monthNames: ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],  
+            dayNamesMin: ['日','一','二','三','四','五','六'], 
+          })
 		.appendTo(publicSpan);
+	$("<button>",{"click":function(){setCurrentDate(event)}}).text("now").appendTo(publicSpan);
 	return publicSpan;
 }
+function setCurrentDate(e){
+	var d = new Date();
+	var dStr = d.getFullYear()+"年"+(d.getMonth()+1)+"月"+d.getDate()+'日';
+	$(e.srcElement).prev(".dateBoxinput").val(dStr);
+}
+
 function createListBoxOne(){
 	var publicSpan = $("<span>",{"name":"ListBoxOne"});
 	$("<label>",{"class":"ListBoxOneName"}).text("姓   名").appendTo(publicSpan);
@@ -147,7 +162,6 @@ function getOption(e){
 	//console.log($(e.srcElement).children(":selected").val());
 	$(e.srcElement).prev(".listBoxTwoinputClass").val($(e.srcElement).children(":selected").val());
 }
-
 function createfileBox(){
 	var publicSpan = $("<span>",{"name":"fileBox"});
 	$("<input>",{'class':'file','type':'file','name':'fileBoxNaem'})

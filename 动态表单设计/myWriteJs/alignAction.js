@@ -52,9 +52,6 @@ function clearAll(){
         }
       }
     });
-	
-	
-	
 }
 //等高
 function equalHeight(){
@@ -76,15 +73,22 @@ function equalWidth(){
 }
 //居中
 function centerAlign(){
+	
+	
 	var XCenter = $("#workSpace").width()/2;
 	var XCenterLeft = $("#selectTag").width();
 	//console.log(XCenterLeft);
 	var leftVar ;
+	
+	if(currentDivArrayList.length == 0){
+		leftVar = XCenter - (currentDragDiv.offsetWidth)/2 + XCenterLeft;
+		currentDragDiv.style.left = leftVar  + "px";
+	}
 	for(var x = 0; x<currentDivArrayList.length;x++)
 	{
 		leftVar = XCenter - (currentDivArrayList[x].offsetWidth)/2 + XCenterLeft;
 		currentDivArrayList[x].style.left = leftVar  + "px";
-		console.log(currentDivArrayList[x].style.left);
+		//console.log(currentDivArrayList[x].style.left);
 	}
 	removeAllDivBoder();//操作完成，取消边框
 }
@@ -131,7 +135,6 @@ function previewOtherPage(){
 		
 	}
 }
-
 //退出预览
 function exitPreViewPage(){
 	isPreViewIng = false;
@@ -155,7 +158,85 @@ function exitPreViewPage(){
 		currentDragDivMap.values()[ic].style.height =  $(currentDragDivMap.values()[ic]).height()*(1/r) + "px";
 	}
 }
-
+//保存表单
+var t2;
+var saveSuccess = false;
+function saveCurrentDivPage(){
+	var doc = document.getElementById("workSpace");	
+	var jsonObj = JSON.stringify(JsonML.fromHTML(doc));
+	console.log(jsonObj);
+	t2 = window.setInterval("progressAdd()",500);
+	//去掉定时器的方法
+	$('#progressDiv').dialog({
+      resizable: false,
+      height:100,
+      modal: true
+    });
+    //将表单内容发送给服务器
+    $.ajax({  
+            type : "Post",  //提交方式  
+            url : "http://localhost:8080/dynamicForm/saveJsonServlet",//路径  
+            data : {  
+                "jsonObj" : jsonObj 
+            },//数据，这里使用的是Json格式进行传输  
+            success : function(result) {//返回数据根据结果进行相应的处理  
+            	if(result == "success"){
+            		saveSuccess = true;
+	               window.clearInterval(t2); 
+					$('#progressDiv').dialog("close");
+					document.getElementById("porgressBar").style.width= 0 +"%";
+					pro = 0;
+					$('#saveSuccess').dialog({
+				      resizable: false,
+				      height:150,
+				      modal: true,
+				       buttons: {
+				        "确定": function() {
+				          $( this ).dialog( "close" );
+						  }
+			       }
+			    });
+			   }else{
+			   		saveSuccess = false;
+			   }
+            }  
+       });  
+}
+var pro = 0;
+function progressAdd(){
+	
+	pro = pro +5 ;
+	document.getElementById("porgressBar").style.width= pro+"%";
+	if(pro > 100){
+		window.clearInterval(t2); 
+			$('#progressDiv').dialog("close");
+			document.getElementById("porgressBar").style.width= 0 +"%";
+			pro = 0;
+		if(saveSuccess){//保存成功
+			$('#saveSuccess').dialog({
+		      resizable: false,
+		      height:150,
+		      modal: true,
+		       buttons: {
+		        "确定": function() {
+		          $( this ).dialog( "close" );
+				  }
+	        }
+		 });
+		}else{
+			$('#saveFail').dialog({
+		      resizable: false,
+		      height:150,
+		      modal: true,
+		       buttons: {
+		        "确定": function() {
+		          $( this ).dialog( "close" );
+				  }
+	        }
+		 });
+		}
+	}
+}
 
 
 

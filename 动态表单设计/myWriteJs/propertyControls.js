@@ -76,13 +76,25 @@ function initPropertySomeMsg(currentName){
 	$("#boderColor").val(BC);
 	
 	if(lastcurrentDragDiv != currentDragDiv && currentName == 'xialaSelect'){
-		//选定下拉框是初始化
-		var OptionList = $(currentDragDiv).children(".selectTag").children(".xialaselectTag").children();
+		//console.log(currentName);
+		$("#itemXiala").children('input').remove();//防止二次进入这个个性设置是有添加到itemOne，进入之前先清空
+		$("#itemXiala").children('button').remove();
 		
-		for (var i = 0; i<OptionList.length;i++) {
-			//console.log(OptionList.length);
-			xialaOptionList[i] = $(OptionList[i]).text();
-		}
+		$('select.xialaselectTag > option').each(function(i){
+		 	//console.log( $(this).attr("class"));
+			var classStr = $(this).attr("class").substring(12,$(this).attr("class").length);
+			//创建一个input并绑定函数
+			$("<input>",{'class':'XialainputClass','change':function(){
+				$('select.xialaselectTag > option.selectOption'+classStr).text($(this).val());
+			}}).val($(this).val()).appendTo($("#itemXiala"));
+			//删除条目的按钮
+			$('<button>',{'click':function(){
+				$('select.xialaselectTag > option.selectOption'+classStr).remove();//去除控件里的选项
+				$(event.srcElement).prev(".XialainputClass").remove();//将个性面板中的相应的条目删除
+				$(event.srcElement).remove();//把自己也干掉
+			}}).text('删除').appendTo($("#itemXiala"));
+		});
+		//console.log(lis.length);
 		lastcurrentDragDiv = currentDragDiv;
 	}
 	for (var i = 0; i < xialaOptionList.length; i++) {
@@ -168,11 +180,16 @@ function initPropertySomeMsg(currentName){
 		lastcurrentDragDiv = currentDragDiv;
 	}
 }
+
 //改变控件的背景颜色
 function changeBackgroundColor(){
 	//console.log($("#full").val())
 	var color = $("#full").val();
 	$(currentDragDiv).children(".selectTag").css({"background-color":color});
+	if(currentDivArrayList.length>0)
+		for(var lx = 0; lx<currentDivArrayList.length;lx++){
+			$(currentDivArrayList[lx]).children(".selectTag").css({"background-color":color});
+		}
 }
 //改变控件的背景图案
 function changeBackgroundPicture(){
@@ -198,16 +215,29 @@ function changeDivY(){
 function changeBoderWidth(){
 	//console.log($("#boderWidth").val());
 	$(currentDragDiv).children(".selectTag").css({"border-width":$("#boderWidth").val()});
+	if(currentDivArrayList.length>0)
+			for(var lx = 0; lx<currentDivArrayList.length;lx++){
+				$(currentDivArrayList[lx]).children(".selectTag").css({"border-width":$("#boderWidth").val()});
+			}
 }
 //样式
 function changeBoderStyle(){
+	
 	//console.log($("#boderStyle").val());
 	$(currentDragDiv).children(".selectTag").css({"border-style":$("#boderStyle").val()});
+	if(currentDivArrayList.length>0)
+			for(var lx = 0; lx<currentDivArrayList.length;lx++){
+				$(currentDivArrayList[lx]).children(".selectTag").css({"border-style":$("#boderStyle").val()});
+			}
 }
 //颜色
 function changeBoderColor(){
 	//console.log($("#boderColor").val());
 	$(currentDragDiv).children(".selectTag").css({"border-color":$("#boderColor").val()});
+	if(currentDivArrayList.length>0)
+			for(var lx = 0; lx<currentDivArrayList.length;lx++){
+				$(currentDivArrayList[lx]).children(".selectTag").css({"border-color":$("#boderColor").val()});
+			}
 }
 /**个性属性**/
 
@@ -310,61 +340,83 @@ function changexialaSelectBoderColor(){
 function changexialaSelectBackgroundColor(){
 	$(currentDragDiv).children(".selectTag").children(".xialaselectTag").css({"background":$("#xialaSelectBackgroundColor").val()});
 }
-function changeXialaOption1(){
+//添加条目
+var xialaAdd = 50;
+function addItemXia(){
+	xialaAdd++;
+	var selectObj = $(currentDragDiv).children(".selectTag").children(".xialaselectTag");
+	$('<option>',{'class':'selectOption'+xialaAdd}).appendTo(selectObj);
+	//创建一个input并绑定函数
+	$("<input>",{'class':'XialainputClass'+xialaAdd,'change':function(){
+		var ser = $(event.srcElement).attr('class').substring(15,$(event.srcElement).attr('class').length);
+		$('select.xialaselectTag > option.selectOption'+ser).text($(event.srcElement).val());
+	}}).appendTo($("#itemXiala"));
 	
-	if($("#optionXiala1").val() != ''){
-			xialaOptionList[0] = $("#optionXiala1").val();
-		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption1").text($("#optionXiala1").val()).show();
-	}else{
-		xialaOptionList[0] = null;
-		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption6").text("").hide();
-	}
+	//删除条目的按钮
+	$('<button>',{'class':'XialabuttonClass'+xialaAdd,'click':function(){
+		var ser = $(event.srcElement).attr('class').substring(16,$(event.srcElement).attr('class').length);
+		$('select.xialaselectTag > option.selectOption'+ser).remove();//去除控件里的选项
+		$(event.srcElement).prev("input").remove();//将个性面板中的相应的条目删除
+		$(event.srcElement).remove();//把自己也干掉
+	}}).text('删除').appendTo($("#itemXiala"));
+	
 }
-function changeXialaOption2(){
-	if($("#optionXiala2").val() != ''){
-			xialaOptionList[1] = $("#optionXiala2").val();
-		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption2").text($("#optionXiala2").val()).show();
-	}else{
-		xialaOptionList[1] = null;
-		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption6").text("").hide();
-	}
-}
-function changeXialaOption3(){
-	if($("#optionXiala3").val() != ''){
-			xialaOptionList[2] = $("#optionXiala3").val();
-		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption3").text($("#optionXiala3").val()).show();
-	}else{
-		xialaOptionList[2] = null;
-		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption6").text("").hide();
-	}
-}
-function changeXialaOption4(){
-	if($("#optionXiala4").val() != ''){
-			xialaOptionList[3] = $("#optionXiala4").val();
-		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption4").text($("#optionXiala4").val()).show();
-	}else{
-		xialaOptionList[3] = null;
-		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption4").text("").hide();
-	}
-}
-function changeXialaOption5(){
-	if($("#optionXiala5").val() != ''){
-			xialaOptionList[4] = $("#optionXiala5").val();
-		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption5").text($("#optionXiala5").val()).show();
-	}else{
-		xialaOptionList[4] = null;
-		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption5").text("").hide();
-	}
-}
-function changeXialaOption6(){
-	if($("#optionXiala6").val() != ''){
-			xialaOptionList[5] = $("#optionXiala6").val();
-		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption6").text($("#optionXiala6").val()).show();
-	}else{
-		xialaOptionList[5] = null;
-		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption6").text("").hide();
-	}
-}
+//
+//function changeXialaOption1(){
+//	
+//	if($("#optionXiala1").val() != ''){
+//			xialaOptionList[0] = $("#optionXiala1").val();
+//		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption1").text($("#optionXiala1").val()).show();
+//	}else{
+//		xialaOptionList[0] = null;
+//		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption6").text("").hide();
+//	}
+//}
+//function changeXialaOption2(){
+//	if($("#optionXiala2").val() != ''){
+//			xialaOptionList[1] = $("#optionXiala2").val();
+//		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption2").text($("#optionXiala2").val()).show();
+//	}else{
+//		xialaOptionList[1] = null;
+//		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption6").text("").hide();
+//	}
+//}
+//function changeXialaOption3(){
+//	if($("#optionXiala3").val() != ''){
+//			xialaOptionList[2] = $("#optionXiala3").val();
+//		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption3").text($("#optionXiala3").val()).show();
+//	}else{
+//		xialaOptionList[2] = null;
+//		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption6").text("").hide();
+//	}
+//}
+//function changeXialaOption4(){
+//	if($("#optionXiala4").val() != ''){
+//			xialaOptionList[3] = $("#optionXiala4").val();
+//		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption4").text($("#optionXiala4").val()).show();
+//	}else{
+//		xialaOptionList[3] = null;
+//		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption4").text("").hide();
+//	}
+//}
+//function changeXialaOption5(){
+//	if($("#optionXiala5").val() != ''){
+//			xialaOptionList[4] = $("#optionXiala5").val();
+//		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption5").text($("#optionXiala5").val()).show();
+//	}else{
+//		xialaOptionList[4] = null;
+//		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption5").text("").hide();
+//	}
+//}
+//function changeXialaOption6(){
+//	if($("#optionXiala6").val() != ''){
+//			xialaOptionList[5] = $("#optionXiala6").val();
+//		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption6").text($("#optionXiala6").val()).show();
+//	}else{
+//		xialaOptionList[5] = null;
+//		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption6").text("").hide();
+//	}
+//}
 
 //日期控件的个性
 //下拉框的个性设置
@@ -379,6 +431,11 @@ function changedateBoxBoderColor(){
 }
 function changedateBoxBackgroundColor(){
 	$(currentDragDiv).children(".selectTag").children(".dateBoxinput").css({"background":$("#dateBoxBackgroundColor").val()});
+}
+function changedateBoxContentStyle(){
+		$(currentDragDiv).children(".selectTag").children(".dateBoxinput")
+		.datepicker('option', 'dateFormat', $(dateContenteStyle).val());
+	
 }
 //二维码
 function changeErWeiMaUrl(){
