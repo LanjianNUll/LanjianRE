@@ -1,0 +1,209 @@
+{
+	"version": "V1.0.0.1",
+	"creatDate": "2016.4.9",
+	"author": "null",
+	"canvas": {
+		"length": "500px",
+		"width": "500px",
+		"background": "#ff000000",
+		"background_picture": "bg.png"
+	},
+	"itemCount": 0,
+	"controlDivJsonArray": [[
+			"SPAN", {
+				"name": "Radio",
+				"class": "selectTag",
+				"style": "left: 247px; top: 248px; width: 180px; height: 80px; overflow: hidden; background-color: rgb(255, 255, 255);"
+			},[
+				"P", {
+					"class": "radioP"
+				},
+				"你对你的生活满意吗"
+			],[
+				"LABEL", {
+					"class": "radioLabel1"
+				},
+				"选项1"
+			],[
+				"INPUT", {
+					"class": "radioInput1",
+					"type": "radio",
+					"name": "radio",
+					"value": "on"
+				}
+			],[
+				"LABEL", {
+					"class": "radioLabel2"
+				},
+				"选项2"
+			],[
+				"INPUT", {
+					"class": "radioInput2",
+					"type": "radio",
+					"name": "radio",
+					"value": "on"
+				}
+			],[
+				"LABEL", {
+					"class": "radioLabel3"
+				},
+				"选项3"
+			],[
+				"INPUT", {
+					"class": "radioInput3",
+					"type": "radio",
+					"name": "radio",
+					"value": "on"
+				}
+			],[
+				"LABEL", {
+					"class": "radioLabel4",
+					"style": "display: none;"
+				}
+			],[
+				"INPUT", {
+					"class": "radioInput4",
+					"type": "radio",
+					"name": "radio",
+					"style": "display: none;",
+					"value": "on"
+				}
+			]
+		],[
+			"SPAN", {
+				"name": "DateBox",
+				"class": "selectTag",
+				"style": "left: 278px; top: 365px; width: 260px; height: 30px; overflow: hidden; background-color: rgb(255, 255, 255);"
+			},[
+				"LABEL", {
+					"class": "dateBoxlabel"
+				},
+				"日 期"
+			],[
+				"INPUT", {
+					"class": "dateBoxinput hasDatepicker",
+					"type": "text",
+					"name": "dateBox",
+					"id": "dp1460352229346",
+					"value": "2016|04|11"
+				}
+			],[
+				"BUTTON",
+				"now"
+			]
+		],[
+			"SPAN", {
+				"name": "Submit",
+				"class": "selectTag",
+				"style": "left: 333px; top: 507px; width: 55px; height: 30px; overflow: hidden; background-color: rgb(255, 255, 255);"
+			},[
+				"INPUT", {
+					"class": "submitBtn",
+					"type": "submit",
+					"name": "submitBtn",
+					"style": "width: 100%; height: 100%;"
+				}
+			]
+		],[
+			"SPAN", {
+				"name": "ListBoxTwo",
+				"class": "selectTag",
+				"style": "left: 602px; top: 207px; width: 380px; height: 40px; overflow: hidden; background-color: rgb(255, 255, 255);"
+			},[
+				"LABEL", {
+					"class": "ListBoxTwoName"
+				},
+				"姓   名"
+			],[
+				"INPUT", {
+					"class": "listBoxTwoinputClass"
+				}
+			],[
+				"SELECT", {
+					"name": "selectTag",
+					"class": "listBoxTwoinputTag"
+				},[
+					"OPTION", {
+						"class": "listBoxTwoOption1"
+					},
+					"我的选择与众不同"
+				],[
+					"OPTION", {
+						"class": "listBoxTwoOption2"
+					},
+					"选择品牌1"
+				],[
+					"OPTION", {
+						"class": "listBoxTwoOption3"
+					},
+					"选择品牌2"
+				],[
+					"OPTION", {
+						"class": "listBoxTwoOption4"
+					},
+					"23"
+				],[
+					"OPTION", {
+						"class": "listBoxTwoOption5"
+					},
+					"23"
+				],[
+					"OPTION", {
+						"class": "listBoxTwoOption6"
+					},
+					"255"
+				]
+			]
+		],[
+			"SPAN", {
+				"name": "ListBoxOne",
+				"class": "selectTag",
+				"style": "left: 622px; top: 333px; width: 377px; height: 90px; overflow: hidden; background-color: rgb(255, 255, 255);"
+			},[
+				"LABEL", {
+					"class": "ListBoxOneName"
+				},
+				"姓   名"
+			],[
+				"INPUT", {
+					"class": "listBoxOneinputClass"
+				}
+			],[
+				"SELECT", {
+					"class": "listBoxOneinputTag",
+					"multiple": "multiple"
+				},[
+					"OPTION", {
+						"class": "listBoxOneOption1"
+					},
+					"我的选择与众不同"
+				],[
+					"OPTION", {
+						"class": "listBoxOneOption2"
+					},
+					"选择品牌1"
+				],[
+					"OPTION", {
+						"class": "listBoxOneOption3"
+					},
+					"选择品牌2"
+				],[
+					"OPTION", {
+						"class": "listBoxOneOption4"
+					},
+					"23"
+				],[
+					"OPTION", {
+						"class": "listBoxOneOption5"
+					},
+					"23"
+				],[
+					"OPTION", {
+						"class": "listBoxOneOption6"
+					},
+					"255"
+				]
+			]
+		]
+	]
+}
