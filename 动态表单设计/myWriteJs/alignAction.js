@@ -162,9 +162,18 @@ function exitPreViewPage(){
 var t2;
 var saveSuccess = false;
 function saveCurrentDivPage(){
-	var doc = document.getElementById("workSpace");	
+	var doc = document.getElementById("workSpace");
+	
 	var jsonObj = JSON.stringify(JsonML.fromHTML(doc));
-	console.log(jsonObj);
+	
+	
+	//获取画板控件的json数组
+	obj.controlDivJsonArray = getJsonObjArray();
+	console.log(JSON.stringify(obj));
+	//将json打印到控制台
+	//printLog(getJsonObjArray())
+	
+	//console.log(jsonObj);
 	t2 = window.setInterval("progressAdd()",500);
 	//去掉定时器的方法
 	$('#progressDiv').dialog({
@@ -182,10 +191,6 @@ function saveCurrentDivPage(){
             success : function(result) {//返回数据根据结果进行相应的处理  
             	if(result == "success"){
             		saveSuccess = true;
-	               window.clearInterval(t2); 
-					$('#progressDiv').dialog("close");
-					document.getElementById("porgressBar").style.width= 0 +"%";
-					pro = 0;
 					$('#saveSuccess').dialog({
 				      resizable: false,
 				      height:150,
@@ -193,18 +198,26 @@ function saveCurrentDivPage(){
 				       buttons: {
 				        "确定": function() {
 				          $( this ).dialog( "close" );
+				          window.clearInterval(t2); 
+							$('#progressDiv').dialog("close");
+							document.getElementById("porgressBar").style.width= 0 +"%";
+							pro = 0;
 						  }
 			       }
 			    });
 			   }else{
 			   		saveSuccess = false;
+			   		 window.clearInterval(t2); 
+					$('#progressDiv').dialog("close");
+					document.getElementById("porgressBar").style.width= 0 +"%";
+					pro = 0;
 			   }
             }  
        });  
 }
 var pro = 0;
+//进度条的定时函数
 function progressAdd(){
-	
 	pro = pro +5 ;
 	document.getElementById("porgressBar").style.width= pro+"%";
 	if(pro > 100){
@@ -237,6 +250,56 @@ function progressAdd(){
 		}
 	}
 }
+//转换成标准自定义的json格式
+function getJsonObjArray(){
+	var jsonObjArray = new Array();
+	if(currentDragDivMap.values().length!=0){
+		for(var divs = 0; divs < currentDragDivMap.values().length;divs++){
+			jsonObjArray.push(toJsonObj(currentDragDivMap.values()[divs]));
+		}
+	}
+	return jsonObjArray;
+}
+//将控件转换成json对象
+function toJsonObj(currentObj){
+	//获取的jq对象
+	var spanObj = $(currentObj).children(".selectTag");
+	//将获取的jq对象转成dom对象
+	var spanDom = spanObj[0];
+	
+	return JsonML.fromHTML(spanDom);
+	
+	//return spanObj = $(currentObj).children(".selectTag").attr("name");
+	
+}
+
+//打印数组log的方法
+function printLog(arrayList){
+	for (var logi = 0 ; logi < arrayList.length;logi++) {
+		console.log(JSON.stringify(arrayList[logi]))
+	}
+}
+//json对象格式定义
+
+
+var canvasObj = new Object();
+canvasObj.length = "500px";
+canvasObj.width = "500px";
+canvasObj.background = "#ff000000";
+canvasObj.background_picture = "bg.png";
+
+var controlJsonArray = new Array();
+
+var obj = new Object();
+obj.version = "V1.0.0.1";
+obj.creatDate = "2016.4.9";
+obj.author = "null";
+obj.canvas = canvasObj;
+obj.itemCount = 0;
+obj.controlDivJsonArray = controlJsonArray;
+
+
+
 
 
 

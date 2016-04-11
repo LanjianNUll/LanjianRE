@@ -361,63 +361,6 @@ function addItemXia(){
 	}}).text('删除').appendTo($("#itemXiala"));
 	
 }
-//
-//function changeXialaOption1(){
-//	
-//	if($("#optionXiala1").val() != ''){
-//			xialaOptionList[0] = $("#optionXiala1").val();
-//		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption1").text($("#optionXiala1").val()).show();
-//	}else{
-//		xialaOptionList[0] = null;
-//		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption6").text("").hide();
-//	}
-//}
-//function changeXialaOption2(){
-//	if($("#optionXiala2").val() != ''){
-//			xialaOptionList[1] = $("#optionXiala2").val();
-//		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption2").text($("#optionXiala2").val()).show();
-//	}else{
-//		xialaOptionList[1] = null;
-//		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption6").text("").hide();
-//	}
-//}
-//function changeXialaOption3(){
-//	if($("#optionXiala3").val() != ''){
-//			xialaOptionList[2] = $("#optionXiala3").val();
-//		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption3").text($("#optionXiala3").val()).show();
-//	}else{
-//		xialaOptionList[2] = null;
-//		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption6").text("").hide();
-//	}
-//}
-//function changeXialaOption4(){
-//	if($("#optionXiala4").val() != ''){
-//			xialaOptionList[3] = $("#optionXiala4").val();
-//		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption4").text($("#optionXiala4").val()).show();
-//	}else{
-//		xialaOptionList[3] = null;
-//		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption4").text("").hide();
-//	}
-//}
-//function changeXialaOption5(){
-//	if($("#optionXiala5").val() != ''){
-//			xialaOptionList[4] = $("#optionXiala5").val();
-//		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption5").text($("#optionXiala5").val()).show();
-//	}else{
-//		xialaOptionList[4] = null;
-//		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption5").text("").hide();
-//	}
-//}
-//function changeXialaOption6(){
-//	if($("#optionXiala6").val() != ''){
-//			xialaOptionList[5] = $("#optionXiala6").val();
-//		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption6").text($("#optionXiala6").val()).show();
-//	}else{
-//		xialaOptionList[5] = null;
-//		$(currentDragDiv).children(".selectTag").children(".xialaselectTag").children(".selectOption6").text("").hide();
-//	}
-//}
-
 //日期控件的个性
 //下拉框的个性设置
 function changedateBoxName(){
@@ -636,4 +579,39 @@ function changeWorkspaceBackgroundPicture(){
 			"background-size":"cover"})
 	}
 }
-
+//默认值得选择   根据传入的当前div (这里一定是传入的div保证程序的通用性)
+function changeDefaultContent(){
+	var tipText = $(defaultContent).val();
+	//console.log($(defaultContent).val());
+	switch ($(defaultContent).val()){
+		case "currentTime":
+			tipText = "当前时间";
+			break;
+		case "currentDateTime":
+			tipText = "当前日期";
+			break;
+		case "currentUser":
+			tipText = "当前用户名";
+			break;
+		case "currentFullUser":
+			tipText = "当前用户全名";
+			break;
+		case "currentFileSer":
+			tipText = "档案号";
+			break;
+		case "currentTagRefer":
+			tipText = "主题词标引";
+			break;
+		case "currentFormSql":
+			tipText = "来自SQL语句";
+			break;
+		case "currentReferExist":
+			tipText = "已经有的录入项";
+			break;
+		default:
+			break;
+	}
+	if(currentDragDiv!=null)
+		$(displayCurrentDivDefault).html("提示：当前控件的默认值为<b>"+tipText+"</b>")
+	$(currentDragDiv).children(".selectTag").attr("defaultProerty",$(defaultContent).val());
+}

@@ -57,22 +57,6 @@
 <script>
 </script>
 <body>
-	<!--
-<input type="text" class="file" id="f_file">
-<input type="button" value="上传文件" class="file" onClick="t_file.click()">
-<input name="upload" type="file" id="t_file" onchange="f_file.value=this.value" style="display:none">
-	-->
-	
-	
-				<button id="straightLine" class="btn btn-default btn-sm SelectBtn"
-					data-toggle="tooltip" data-placement="right" 
-		   			title="绘制一条直线">
-					<img src="img/line.png"/>
-				</br>直	线
-				</button></br>
-				
-		
-	
 	<button onclick="transf()">转换</button>
 		<button onclick="toJsonMethod()">ToJson</button>
 	<script>
@@ -91,6 +75,7 @@
 		$('<option>',{'class':'listBoxOneOption6'}).text("255").appendTo(selectTag);
 		
 		$(publicSpan).appendTo("body");
+		
 	}
 	function toJsonMethod(){
 		
@@ -108,7 +93,7 @@
 	//将选择的拼接起来
 
 	</script>
-	
+
 	</html>
 </body>
 </html>

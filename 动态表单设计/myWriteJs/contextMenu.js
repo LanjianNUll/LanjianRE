@@ -34,6 +34,9 @@ function deleteDivAction(){
         "确定": function() {
           $( this ).dialog( "close" );
           $(currentDragDiv).remove();
+          //将集合中的currentDragDiv删除
+		  currentDragDivMap.remove($(currentDragDiv).attr("id"));
+		  //console.log(currentDragDivMap.values().length);
         },
         "取消": function() {
           $( this ).dialog( "close" );

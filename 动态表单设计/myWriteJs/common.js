@@ -113,6 +113,9 @@ function createTag(obj){
 
 var flag;//设置一个标志确保一次只创建一div
 var keyCanMoveDiv = false;
+
+
+
 function CreateChirdren(e,comf){//鼠标按下时的事件
 	piontX = e.clientX;//记录当前的坐标点
 	piontY = e.clientY;
@@ -128,11 +131,10 @@ function CreateChirdren(e,comf){//鼠标按下时的事件
 			currentDragDiv.style.height = hh + "px";
 			//主边框的css
 			currentSelectedTag.css({"background-color":"#FFFFFF",
-						  		"position":"absolute",
-						  		"left":"0px",
-						  		"top":"0px",
-						  		"width":"100%",
-						  		"height":"100%",
+						  		"left":piontX+"px",
+						  		"top":piontY+"px",
+						  		"width":currentDragDiv.offsetWidth+"px",
+						  		"height":currentDragDiv.offsetHeight+"px",
 						  		"overflow":"hidden"
 									}).addClass("selectTag")
 			.bind("mouseover",function(event){keyCanMoveDiv = true;})
@@ -164,7 +166,8 @@ function getXandY(e){
 					+"</b>当前控件名称为：<b>"+realName($(currentDragDiv).children("span").attr("name"))
 					+"</b><br/>"
 					+"当前控件的宽度：<b>"+currentDragDiv.offsetWidth +"</b>px"
-					+"当前控件的高度度：<b>"+currentDragDiv.offsetHeight+"</b>px");
+					+"当前控件的高度度：<b>"+currentDragDiv.offsetHeight+"</b>px"
+					+"当前控件的坐标（<b>"+$(currentDragDiv).offset().left +"</b>,<b>"+$(currentDragDiv).offset().top+"</b>）");
 		disPlayHistory();//显示用到的控件
 	}
 		//显示那个个性属性设置
