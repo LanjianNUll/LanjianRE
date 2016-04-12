@@ -96,7 +96,7 @@ function createErWeiMa(){
 function createDateBox(){
 	var publicSpan = $("<span>",{"name":"DateBox"});
 	$("<label>",{'class':'dateBoxlabel'}).text("日 期").appendTo(publicSpan);
-	$("<input>",{'class':'dateBoxinput','type':'text','name':'dateBox'})
+	$("<input>",{'class':'dateBoxinput','type':'text','name':'dateBox','dateFormat':'yy年mm月dd日'})
 		.datepicker({//添加日期选择功能
             numberOfMonths:1,//显示几个月  
             showButtonPanel:true,//是否显示按钮面板  
@@ -106,7 +106,7 @@ function createDateBox(){
             yearSuffix: '年', //年的后缀  
             showMonthAfterYear:true,//是否把月放在年的后面  
             monthNames: ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],  
-            dayNamesMin: ['日','一','二','三','四','五','六'], 
+            dayNamesMin: ['日','一','二','三','四','五','六'] 
           })
 		.appendTo(publicSpan);
 	$("<button>",{"click":function(){setCurrentDate(event)}}).text("now").appendTo(publicSpan);

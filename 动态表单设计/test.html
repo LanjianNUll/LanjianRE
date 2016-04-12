@@ -59,7 +59,21 @@
 <body>
 	<button onclick="transf()">转换</button>
 		<button onclick="toJsonMethod()">ToJson</button>
+		<input type="text" id="datePicker" class="datebox" />
 	<script>
+	
+	$(".datebox").datepicker({//添加日期选择功能
+            numberOfMonths:1,//显示几个月  
+            showButtonPanel:true,//是否显示按钮面板  
+            dateFormat: 'yy年mm月dd日',//日期格式  
+            clearText:"清除",//清除日期的按钮名称  
+            closeText:"关闭",//关闭选择框的按钮名称  
+            yearSuffix: '年', //年的后缀  
+            showMonthAfterYear:true,//是否把月放在年的后面  
+            monthNames: ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],  
+            dayNamesMin: ['日','一','二','三','四','五','六'] 
+         });
+         
 	function transf(){
 		var publicSpan = $("<span>",{"id":"ListBoxOne","class":"publ"});
 		$("<label>",{"class":"ListBoxOneName"}).text("姓   名").appendTo(publicSpan);
@@ -81,13 +95,19 @@
 		
 		var doc = document.getElementById("selectTagDiv");	
 		var publicSpanDoc = document.getElementById("ListBoxOne");
-		console.log($(publicSpanDoc).width());
+		//console.log($(publicSpanDoc).width());
 		//将dom2json
-		console.log(JsonML.fromHTML(publicSpanDoc));
+		//console.log(JsonML.fromHTML(publicSpanDoc));
 		
 		var jsonObj = JsonML.fromHTML(publicSpanDoc);
 		//Json2Html
-		var Dom = JsonML.toHTMLText(jsonObj)
+		var Dom = JsonML.toHTML(jsonObj)
+		
+		
+		$(Dom).css({"background":"red"});
+	
+		
+		
 		$(Dom).appendTo("body");
 	}
 	//将选择的拼接起来

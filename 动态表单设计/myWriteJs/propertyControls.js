@@ -362,7 +362,6 @@ function addItemXia(){
 	
 }
 //日期控件的个性
-//下拉框的个性设置
 function changedateBoxName(){
 	$(currentDragDiv).children(".selectTag").children(".dateBoxlabel").text($("#dateBoxNameId").val());
 }
@@ -376,8 +375,12 @@ function changedateBoxBackgroundColor(){
 	$(currentDragDiv).children(".selectTag").children(".dateBoxinput").css({"background":$("#dateBoxBackgroundColor").val()});
 }
 function changedateBoxContentStyle(){
-		$(currentDragDiv).children(".selectTag").children(".dateBoxinput")
+	$(currentDragDiv).children(".selectTag").children(".dateBoxinput")
 		.datepicker('option', 'dateFormat', $(dateContenteStyle).val());
+	//为input for date 添加一个属性
+	$(currentDragDiv).children(".selectTag").children(".dateBoxinput")
+		.attr("dateFormat",$(dateContenteStyle).val())
+		
 	
 }
 //二维码
@@ -614,4 +617,5 @@ function changeDefaultContent(){
 	if(currentDragDiv!=null)
 		$(displayCurrentDivDefault).html("提示：当前控件的默认值为<b>"+tipText+"</b>")
 	$(currentDragDiv).children(".selectTag").attr("defaultProerty",$(defaultContent).val());
+	
 }

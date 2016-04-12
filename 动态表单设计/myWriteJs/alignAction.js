@@ -163,17 +163,16 @@ var t2;
 var saveSuccess = false;
 function saveCurrentDivPage(){
 	var doc = document.getElementById("workSpace");
-	
-	var jsonObj = JSON.stringify(JsonML.fromHTML(doc));
-	
-	
 	//获取画板控件的json数组
 	obj.controlDivJsonArray = getJsonObjArray();
+	jsonObj = JSON.stringify(obj);
 	console.log(JSON.stringify(obj));
+	
 	//将json打印到控制台
 	//printLog(getJsonObjArray())
 	
 	//console.log(jsonObj);
+	//设定一个计时器t2
 	t2 = window.setInterval("progressAdd()",500);
 	//去掉定时器的方法
 	$('#progressDiv').dialog({
@@ -181,14 +180,18 @@ function saveCurrentDivPage(){
       height:100,
       modal: true
     });
+    //console.log(obj.version);
     //将表单内容发送给服务器
     $.ajax({  
-            type : "Post",  //提交方式  
-            url : "http://localhost:8080/dynamicForm/saveJsonServlet",//路径  
+            type : "POST",  //提交方式  
+            url : "http://127.0.0.1:8080/dynamicForm/savaJsonServlet",//路径  
+            //dataType:'jsonp',跨域就加上
             data : {  
-                "jsonObj" : jsonObj 
+            	"name":	obj.version,
+                "jsonObj" : jsonObj
             },//数据，这里使用的是Json格式进行传输  
             success : function(result) {//返回数据根据结果进行相应的处理  
+            	console.log(result);
             	if(result == "success"){
             		saveSuccess = true;
 					$('#saveSuccess').dialog({
@@ -266,11 +269,7 @@ function toJsonObj(currentObj){
 	var spanObj = $(currentObj).children(".selectTag");
 	//将获取的jq对象转成dom对象
 	var spanDom = spanObj[0];
-	
 	return JsonML.fromHTML(spanDom);
-	
-	//return spanObj = $(currentObj).children(".selectTag").attr("name");
-	
 }
 
 //打印数组log的方法
@@ -297,11 +296,5 @@ obj.author = "null";
 obj.canvas = canvasObj;
 obj.itemCount = 0;
 obj.controlDivJsonArray = controlJsonArray;
-
-
-
-
-
-
 
 

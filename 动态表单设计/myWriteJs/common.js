@@ -725,7 +725,7 @@ function realName(realNameStr){
 		return "输入框";
 			break;
 		case "TextArea":
-	return "文本域";
+		return "文本域";
 			break;
 		case "xialaSelect":
 		return "下拉框";
