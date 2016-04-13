@@ -39,6 +39,10 @@
       			<p> 确定清空当前画板！！！</p>
     		</div>
     		
+    		<div id="dialog_exit" title="退出">
+      			<p>提醒：现在退出将不会保存当前工作区的内容，是否继续退出！！！</p>
+    		</div>
+    		
     		<div class="progress progress-striped active" id="progressDiv" title="正在保存...">
 			   <div class="progress-bar progress-bar-success" role="progressbar" id="porgressBar"
 			      aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" 
@@ -54,6 +58,124 @@
     		<div id="saveFail" title="提示">
       			<p> 未知原因，保存失败！！！</p>
     		</div>
+		</div>
+		<!--
+        	作者：765797511@qq.com
+        	时间：2016-04-13
+        	描述：保存模态框
+        -->
+		<div class="modal fade" id="savaModal" tabindex="-1" role="dialog" 
+			   aria-labelledby="myModalLabel" aria-hidden="true" style="position: absolute;top: 15%;left: 10%;">
+			   <div class="modal-dialog">
+			      <div class="modal-content">
+			         <div class="modal-header">
+			            <button type="button" class="close" 
+			               data-dismiss="modal" aria-hidden="true">
+			                  &times;
+			            </button>
+			            <h4 class="modal-title" id="myModalLabel">
+			               	保存文件
+			            </h4>
+			         </div>
+			         <div class="modal-body" align="center">
+			         	<form class="form-horizontal" role="form">
+						   <div class="form-group">
+						      <label for="fileName" class="col-sm-4 control-label">文件名</label>
+						      <div class="col-sm-8">
+						         <input type="text" class="form-control" id="fileName" 
+						            placeholder="文件名">
+						      </div>
+						   </div>
+						   <div class="form-group">
+						      <label for="fileCreateDate" class="col-sm-4 control-label">文件创建日期</label>
+						      <div class="col-sm-8">
+						         <input type="text" class="form-control" id="fileCreateDate" 
+						            placeholder="文件创建日期">
+						      </div>
+						   </div>
+						   <div class="form-group">
+						      <label for="fileSavaPath" class="col-sm-4 control-label">文件保存路径</label>
+						      <div class="col-sm-8">
+						         <input type="text" class="form-control" id="fileSavaPath" 
+						            placeholder="名称文件保存路径">
+						      </div>
+						   </div>
+						   <div class="form-group">
+						      <label for="fileAuthor" class="col-sm-4 control-label">作者</label>
+						      <div class="col-sm-8">
+						         <input type="text" class="form-control" id="fileAuthor" 
+						            placeholder="作者">
+						      </div>
+						   </div>
+						   <div class="form-group">
+						      <label for="fileDocmentNumber" class="col-sm-4 control-label">档案号</label>
+						      <div class="col-sm-8">
+						         <input type="text" class="form-control" id="fileDocmentNumber" 
+						            placeholder="档案号">
+						      </div>
+						   </div>
+						</form>
+			         </div>
+			         <div class="modal-footer">
+			            <button type="button" class="btn btn-default" 
+			               data-dismiss="modal" >取消
+			            </button>
+			            <button type="button" class="btn btn-primary"
+			            	onclick="postToService()">
+			              	 确定保存
+			            </button>
+			         </div>
+			      </div><!-- /.modal-content -->
+			</div>
+		</div>
+		<!--
+            	作者：765797511@qq.com
+            	时间：2016-04-13
+            	描述：页面属性的模态框
+            -->
+		<div class="modal fade" id="pagePropertyModal" tabindex="-1" role="dialog" 
+			   aria-labelledby="myModalLabel" aria-hidden="true" style="position: absolute;top: 15%;left: 10%;">
+			   <div class="modal-dialog">
+			      <div class="modal-content">
+			         <div class="modal-header">
+			            <button type="button" class="close" 
+			               data-dismiss="modal" aria-hidden="true">
+			                  &times;
+			            </button>
+			            <h4 class="modal-title" id="myModalLabel">
+			               	页面属性
+			            </h4>
+			         </div>
+			         <div class="modal-body" align="center">
+			         	<form class="form-horizontal" role="form">
+						   <div class="form-group">
+						      <label for="pageProperty" class="col-sm-2 control-label">文件名</label>
+						      <div class="col-sm-10">
+						         <input type="" class="form-control" id="pageProperty" 
+						            placeholder="属性">
+						      </div>
+						   </div>
+ 							<div class="form-group">
+								<label for="defaultModal" class="col-sm-2 control-label">模板</label>
+								<select  class="col-sm-10 control-label" id="defaultModal" style="height:30px;width:350px;margin-left:15px;" value=""
+								 onchange="defaultModal()">
+								 	<option value="currentTime">调查表</option>
+									<option value="currentDateTime">统计表</option>
+								</select>
+							</div>
+						</form>
+			         </div>
+			         <div class="modal-footer">
+			            <button type="button" class="btn btn-default" 
+			               data-dismiss="modal" >取消
+			            </button>
+			            <button type="button" class="btn btn-primary"
+			            	onclick="okPageProperty()">
+			              	 确定
+			            </button>
+			         </div>
+			      </div><!-- /.modal-content -->
+			</div>
 		</div>
 		
 		<div id="selectTag" align="center">
@@ -183,9 +305,9 @@
 			<div id="top" align="center"> 
 				
 				<div style="float: right;margin-top: 15px;">
-				<span><a>用户名</a></span>
-				<span><a>注销</a></span>
-				<span><a>注册</a></span>
+					<span id="userName">用户名</span>
+					<span id="logOut"><a>注销</a></span>
+					<span id="resigter"><a>注册</a></span>
 				</div>
 				
 				<div style="margin-top: 12px;">
@@ -276,7 +398,8 @@
 					</button>
 					<button id="exitpage" type="button" class="btn btn-default btn-sm" 
 						style="font-size: 18px" data-toggle="tooltip" 
-		   				data-placement="bottom" title="退出"  >
+		   				data-placement="bottom" title="退出"
+		   				onclick="exitDesginForm()">
 						<span class="glyphicon glyphicon-off"></span>
 					</button>
 					<script>

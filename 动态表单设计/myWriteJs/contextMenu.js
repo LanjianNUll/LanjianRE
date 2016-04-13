@@ -165,11 +165,6 @@ function moveToDowm(){
 	$(currentDragDiv).css({"z-index":zIndex-1});
 	//console.log($(currentDragDiv).css("z-index"));
 }
-//页面属性
-function pageAboutProperty(){
-	
-	
-}
 var workspaceItems = [
 		{label:'页面属性',     icon:'img/contextMeunProperties.png',
         	action:function() { pageAboutProperty(); } },

@@ -158,11 +158,53 @@ function exitPreViewPage(){
 		currentDragDivMap.values()[ic].style.height =  $(currentDragDivMap.values()[ic]).height()*(1/r) + "px";
 	}
 }
-//保存表单
+//保存
+function saveCurrentDivPage(){
+	//打开模态框
+	$('#savaModal').modal('show');
+	//自动为用户填上
+	//文件序列号 根据时间
+	var d = new Date();
+	$("#fileName").val(""+d.getFullYear()+d.getMonth()+d.getMinutes()+d.getMilliseconds());
+	//文件创建时间
+	$("#fileCreateDate").val(d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate());
+	//文件保存路径
+	$("#fileSavaPath").val("/json");
+	//作者
+	$("#fileAuthor").val($("#userName").text());
+	//fileDocmentNumber
+	$("#fileDocmentNumber").val("服务器去");
+}
+//向服务器提交json及表单属性
 var t2;
 var saveSuccess = false;
-function saveCurrentDivPage(){
-	var doc = document.getElementById("workSpace");
+function postToService(){
+	//关闭模态框
+	$('#savaModal').modal('hide');
+	/**
+	 * h获取保存的文件名
+	 * 保存时间
+	 * 保存路径
+	 * 作者
+	 * 文档号
+	 */
+	var fileName = $("#fileName").val();
+	var fileCreateDate = $("#fileCreateDate").val();
+	var fileSavaPath = $("#fileSavaPath").val();
+	var fileAuthor = $("#fileAuthor").val();
+	var fileDocmentNumber = $("#fileDocmentNumber").val();
+	
+	//将版本之类的信息写入json，以便传给服务器
+	
+	obj.version = "V1.0.0.1";
+	obj.creatDate = new Date().getFullYear()+"-"+(new Date().getMonth()+1)+"-"+new Date().getDate();
+	obj.author = $("#userName").text();//获取用户名
+	obj.canvas = canvasObj;
+	canvasObj.height = $("#workSpace").css("height");
+	canvasObj.width =  $("#workSpace").css("width");
+	canvasObj.background = $("#workSpace").css("background");
+	canvasObj.background_picture = $("#workSpace").css("background-image");;
+	obj.itemCount = currentDragDivMap.values().length;
 	//获取画板控件的json数组
 	obj.controlDivJsonArray = getJsonObjArray();
 	jsonObj = JSON.stringify(obj);
@@ -187,7 +229,12 @@ function saveCurrentDivPage(){
             url : "http://127.0.0.1:8080/dynamicForm/savaJsonServlet",//路径  
             //dataType:'jsonp',跨域就加上
             data : {  
-            	"name":	obj.version,
+            	"fileDocmentNumber":fileDocmentNumber,
+            	"fileAuthor":fileAuthor,
+            	"fileSavaPath":fileSavaPath,
+            	"fileCreateDate":fileCreateDate,
+            	"fileName":fileName,
+            	"version":	obj.version,
                 "jsonObj" : jsonObj
             },//数据，这里使用的是Json格式进行传输  
             success : function(result) {//返回数据根据结果进行相应的处理  
@@ -279,16 +326,13 @@ function printLog(arrayList){
 	}
 }
 //json对象格式定义
-
-
 var canvasObj = new Object();
-canvasObj.length = "500px";
+canvasObj.height = "500px";
 canvasObj.width = "500px";
 canvasObj.background = "#ff000000";
 canvasObj.background_picture = "bg.png";
 
 var controlJsonArray = new Array();
-
 var obj = new Object();
 obj.version = "V1.0.0.1";
 obj.creatDate = "2016.4.9";
@@ -297,4 +341,31 @@ obj.canvas = canvasObj;
 obj.itemCount = 0;
 obj.controlDivJsonArray = controlJsonArray;
 
-
+//页面属性
+function pageAboutProperty(){
+	//打开模态框
+	$('#pagePropertyModal').modal('show');
+	//页面属性要去服务器取得相关的模板  和已经有的json界面 
+}
+//点击确定
+function okPageProperty(){
+	//隐藏模态框
+	$('#pagePropertyModal').modal('hide');
+}
+//退出表单设计界面
+function exitDesginForm(){
+	$('#dialog_exit').dialog({
+		      resizable: false,
+		      height:180,
+		      modal: true,
+		       buttons: {
+		        "继续": function() {
+		        	window.location.href="guide.html";
+		          	$( this ).dialog( "close" );
+				  },
+				 "取消": function() {
+		          $( this ).dialog( "close" );
+				  }
+	        }
+		 });
+}

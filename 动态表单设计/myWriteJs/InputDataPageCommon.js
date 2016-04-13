@@ -1,4 +1,17 @@
 $(document).ready(function(){
+	
+	 
+	$.ajax({  
+            type : "POST",  //提交方式  
+            url : "http://127.0.0.1:8080/dynamicForm/GetJosoListServlet",//路径  
+            success : function(result) {
+            	var listFilename = result.split(";");
+            	for(var li = 0; li<listFilename.length;li++){
+            		//console.log(listFilename[li]);
+            		$("<a>",{'class':'aclass'}).html(listFilename[li]+"</br>").appendTo($("#jsonList"));
+            	}
+            }
+	});
 	$.getJSON("test.json", function(json){
 		//处理json数据
 		var obj = eval(json);
@@ -109,7 +122,7 @@ function initDivMethod(divArray){
 				break;
 		}
 		//将控件加入到录入界面的div中
-		$(Dom).appendTo("#space");
+		$(Dom).appendTo("#canvasPanl");
 		//console.log(Dom);
 	}
 
