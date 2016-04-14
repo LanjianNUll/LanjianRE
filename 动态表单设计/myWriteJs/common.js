@@ -147,6 +147,7 @@ function CreateChirdren(e,comf){//鼠标按下时的事件
 				piontY = currentDragDiv.style.top;//20是便签的高度
 			}
 			$(currentDragDiv).on("mousedown",function(event){var event = event || window.event; move(event);});
+			$(currentDragDiv).draggable({containment:"#workSpace"}).css({"cursor":"move"});//设置dragDiv可以拖拽并限定器拖拽的范围，.draggable();
 			$(currentDragDiv).css({
 					"left":piontX+"px",
 					"top":piontY+"px",
@@ -195,7 +196,7 @@ function getcurrentXandY(e){//鼠标在工作区域时 更新位置信息
 function move(e){
 	//console.log(keyCanMoveDiv);
 	isActiveSelectRec = false;//阻止鼠标选框动作
-	$("#dragDiv"+currentSerialNum).draggable({containment:"#workSpace"}).css({"cursor":"move"});//设置dragDiv可以拖拽并限定器拖拽的范围，
+	//$("#dragDiv"+currentSerialNum).draggable({containment:"#workSpace"}).css({"cursor":"move"});//设置dragDiv可以拖拽并限定器拖拽的范围，
 }
 var currentSerialNum = 0;
 //创建边框

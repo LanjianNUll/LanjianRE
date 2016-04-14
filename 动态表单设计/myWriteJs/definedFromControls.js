@@ -79,7 +79,7 @@ function createP(){
 	return publicSpan;
 }
 function createRec(){
-	var publicSpan = $("<span>",{"name":"Rec"}).css({"width":"100%","height":"100%","background":"grey"});
+	var publicSpan = $("<span>",{"name":"Rec"}).css({"width":"100%","height":"100%"});
 	return publicSpan;
 }
 function createLine(){

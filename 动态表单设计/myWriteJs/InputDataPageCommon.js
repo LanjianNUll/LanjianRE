@@ -82,8 +82,9 @@ function displayJson(result){
 function initCanvas(width,height,background,background_pic){
 	//这里的画板  还没定好  毕竟 用户录入界面的需求 还没有  
 	$("#canvasPanl").css({"background-color":background});
-	$("#canvasPanl").css({"background-repeat":"no-repeat",
+	$("#canvasPanl").css({"background-image":background_pic,"background-repeat":"no-repeat",
 			"background-size":"cover"});
+	
 	//console.log(background);
 }
 //前台开始解析控件有关的函数

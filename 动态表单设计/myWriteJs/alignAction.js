@@ -199,7 +199,7 @@ function postToService(){
 	obj.author = $("#userName").text();//获取用户名
 	canvasObj.height = $("#workSpace").css("height");
 	canvasObj.width =  $("#workSpace").css("width");
-	canvasObj.background = $("#workSpace").css("background-color");
+	canvasObj.background = $("#workSpace").css("background");
 	canvasObj.background_picture = $("#workSpace").css("background-image");;
 	obj.canvas = canvasObj;
 	obj.itemCount = currentDragDivMap.values().length;

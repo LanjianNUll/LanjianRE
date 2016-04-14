@@ -1,6 +1,6 @@
 //调色板
 $(function(){
-	$("#WorkspaceBackgroundColor,#listBoxTwoBackgroundColor,#listBoxTwoBoderColor,#listBoxOneBackgroundColor,#listBoxOneBoderColor,#full,#fontColor,#boderColor,#LineColor,#fontShadow,#inputBoderColor,#inputBackgroundColor,#textAreaBoderColor,#textAreaBackgroundColor,#xialaSelectBoderColor,#xialaSelectBackgroundColor,#dateBoxBoderColor,#dateBoxBackgroundColor,#submitBackgroundColor")
+	$("#recbox,#WorkspaceBackgroundColor,#listBoxTwoBackgroundColor,#listBoxTwoBoderColor,#listBoxOneBackgroundColor,#listBoxOneBoderColor,#full,#fontColor,#boderColor,#LineColor,#fontShadow,#inputBoderColor,#inputBackgroundColor,#textAreaBoderColor,#textAreaBackgroundColor,#xialaSelectBoderColor,#xialaSelectBackgroundColor,#dateBoxBoderColor,#dateBoxBackgroundColor,#submitBackgroundColor")
 	.spectrum({
 	    color: "#ffffff",//显示当前选定的颜色
 	    flat: false,
@@ -240,7 +240,10 @@ function changeBoderColor(){
 			}
 }
 /**个性属性**/
-
+//方框
+function changeRecBackgroundColor(){
+	$(currentDragDiv).css({"background":$("#recbox").val()})
+}
 //文字大小
 function changeFontContent(){
 	$(currentDragDiv).children(".selectTag").children(".pP").text($("#fontContent").val());
@@ -572,10 +575,8 @@ function changeWorkspaceBackgroundPicture(){
 	else{
 		var picurl = null;
 		//console.log($("#WorkspaceBackgroundPicture").val());
-		if($("#WorkspaceBackgroundPicture").val() =="sky")
-			picurl = "url(/动态表单设计/img/sky.jpg)";
-		if($("#WorkspaceBackgroundPicture").val() =="flowers")
-			picurl = "url(/动态表单设计/img/flowers.jpg)";
+		if($("#WorkspaceBackgroundPicture").val() !="")
+			picurl = "url(./img/"+$('#WorkspaceBackgroundPicture').val()+".jpg)";
 		$("#workSpace").css({
 			"background-image":picurl,
 			"background-repeat":"no-repeat",
