@@ -193,17 +193,15 @@ function postToService(){
 	var fileSavaPath = $("#fileSavaPath").val();
 	var fileAuthor = $("#fileAuthor").val();
 	var fileDocmentNumber = $("#fileDocmentNumber").val();
-	
 	//将版本之类的信息写入json，以便传给服务器
-	
 	obj.version = "V1.0.0.1";
 	obj.creatDate = new Date().getFullYear()+"-"+(new Date().getMonth()+1)+"-"+new Date().getDate();
 	obj.author = $("#userName").text();//获取用户名
-	obj.canvas = canvasObj;
 	canvasObj.height = $("#workSpace").css("height");
 	canvasObj.width =  $("#workSpace").css("width");
-	canvasObj.background = $("#workSpace").css("background");
+	canvasObj.background = $("#workSpace").css("background-color");
 	canvasObj.background_picture = $("#workSpace").css("background-image");;
+	obj.canvas = canvasObj;
 	obj.itemCount = currentDragDivMap.values().length;
 	//获取画板控件的json数组
 	obj.controlDivJsonArray = getJsonObjArray();

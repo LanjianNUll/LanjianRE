@@ -564,7 +564,7 @@ function addItemTwo(){
 }
 //画板设置
 function changeWorkspaceBackgroundColor(){
-	$("#workSpace").css({"background":$("#WorkspaceBackgroundColor").val()})
+	$("#workSpace").css({"background-color":$("#WorkspaceBackgroundColor").val()})
 }
 function changeWorkspaceBackgroundPicture(){
 	if($("#WorkspaceBackgroundPicture").val() =="")

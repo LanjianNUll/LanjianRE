@@ -1,6 +1,4 @@
 $(document).ready(function(){
-	
-	 
 	$.ajax({  
             type : "POST",  //提交方式  
             url : "http://127.0.0.1:8080/dynamicForm/GetJosoListServlet",//路径  
@@ -8,13 +6,32 @@ $(document).ready(function(){
             	var listFilename = result.split(";");
             	for(var li = 0; li<listFilename.length;li++){
             		//console.log(listFilename[li]);
-            		$("<a>",{'class':'aclass'}).html(listFilename[li]+"</br>").appendTo($("#jsonList"));
+            		$("<a>",{'class':'aclass','click':function(){
+            			getJsonFile(event);}}).html(listFilename[li]+"</br>").appendTo($("#jsonList"));
             	}
             }
 	});
-	$.getJSON("test.json", function(json){
+});
+//获取具体的json文件
+function getJsonFile(event){
+	var ffileName = $(event.srcElement).text();
+	//console.log(ffileName);
+	$.ajax({  
+            type : "POST",  //提交方式  
+            url : "http://127.0.0.1:8080/dynamicForm/GetJosoListServlet",//路径  
+            data:{
+            	"filejsonFileName":ffileName
+            },
+            success : function(result) {
+//          	console.log(result);
+            	displayJson(result);
+            }
+	});
+}
+//获取指定的json文件数据
+function displayJson(result){
 		//处理json数据
-		var obj = eval(json);
+		var obj = eval("("+result+")");
 		//获取版本号
 		var version = obj.version;
 		//console.log(version);
@@ -38,11 +55,12 @@ $(document).ready(function(){
 		//获取控件数据
 		var domArray = obj.controlDivJsonArray;
 		//console.log(domArray.length);
+		//清空画板
+		$("#canvasPanl").children("span").remove();
 		//初始化控件
 		initDivMethod(domArray);
-	});
-	//初始化控件的一些函数
-});
+		
+}
 /*这是json数据的格式 
  * 
  * 
@@ -63,8 +81,10 @@ $(document).ready(function(){
 //初始化画布
 function initCanvas(width,height,background,background_pic){
 	//这里的画板  还没定好  毕竟 用户录入界面的需求 还没有  
-	//$("#space").css({"background":background});
-	
+	$("#canvasPanl").css({"background-color":background});
+	$("#canvasPanl").css({"background-repeat":"no-repeat",
+			"background-size":"cover"});
+	//console.log(background);
 }
 //前台开始解析控件有关的函数
 function initDivMethod(divArray){
