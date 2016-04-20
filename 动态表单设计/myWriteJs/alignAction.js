@@ -159,13 +159,18 @@ function exitPreViewPage(){
 	}
 }
 //保存
+//文件名
+var savaFileName = "";
 function saveCurrentDivPage(){
 	//打开模态框
 	$('#savaModal').modal('show');
 	//自动为用户填上
 	//文件序列号 根据时间
 	var d = new Date();
-	$("#fileName").val(""+d.getFullYear()+d.getMonth()+d.getMinutes()+d.getMilliseconds());
+	if(savaFileName == "")
+		$("#fileName").val(""+d.getFullYear()+d.getMonth()+d.getMinutes()+d.getMilliseconds());
+	else
+		$("#fileName").val(savaFileName);
 	//文件创建时间
 	$("#fileCreateDate").val(d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate());
 	//文件保存路径
@@ -195,12 +200,13 @@ function postToService(){
 	var fileDocmentNumber = $("#fileDocmentNumber").val();
 	//将版本之类的信息写入json，以便传给服务器
 	obj.version = "V1.0.0.1";
+	obj.category = "";
 	obj.creatDate = new Date().getFullYear()+"-"+(new Date().getMonth()+1)+"-"+new Date().getDate();
 	obj.author = $("#userName").text();//获取用户名
 	canvasObj.height = $("#workSpace").css("height");
 	canvasObj.width =  $("#workSpace").css("width");
 	canvasObj.background = $("#workSpace").css("background");
-	canvasObj.background_picture = $("#workSpace").css("background-image");;
+	canvasObj.background_picture = $("#workSpace").css("background-image");
 	obj.canvas = canvasObj;
 	obj.itemCount = currentDragDivMap.values().length;
 	//获取画板控件的json数组
@@ -238,6 +244,8 @@ function postToService(){
             success : function(result) {//返回数据根据结果进行相应的处理  
             	console.log(result);
             	if(result == "success"){
+            		//将文件名改回来,方便页面属性中设置
+            		savaFileName = "";
             		saveSuccess = true;
 					$('#saveSuccess').dialog({
 				      resizable: false,
@@ -332,6 +340,7 @@ canvasObj.background_picture = "bg.png";
 
 var controlJsonArray = new Array();
 var obj = new Object();
+obj.category = "文档";
 obj.version = "V1.0.0.1";
 obj.creatDate = "2016.4.9";
 obj.author = "null";
@@ -343,12 +352,73 @@ obj.controlDivJsonArray = controlJsonArray;
 function pageAboutProperty(){
 	//打开模态框
 	$('#pagePropertyModal').modal('show');
-	//页面属性要去服务器取得相关的模板  和已经有的json界面 
+	//页面属性要去服务器取得相关的模板  和已经有的json界面 ，用ajaxq请求服务器有的json文件
+	//清除子项，
+	$("#defaultModal").children().remove();
+	$.ajax({
+            type : "POST",  //提交方式  
+            url : "http://127.0.0.1:8080/dynamicForm/GetJosoListServlet",//路径  
+            success : function(result) {
+            	var listFilename = result.split(";");
+            	for(var li = 0; li<listFilename.length;li++){
+            		$('<option>').text(listFilename[li])
+						.val(listFilename[li]).appendTo($("#defaultModal"));
+            	}
+            }
+	});
 }
 //点击确定
 function okPageProperty(){
 	//隐藏模态框
 	$('#pagePropertyModal').modal('hide');
+	savaFileName = $("#pagePropertySaveFileName").val();
+	var getJsonModelFileName = $(defaultModal).val();
+	//console.log( $(defaultModal).val());
+	//清屏
+	$("#workSpace").children().remove();
+	currentDragDivMap.clear();//清除画板中所有的元素
+	$.ajax({  
+            type : "POST",  //提交方式  
+            url : "http://127.0.0.1:8080/dynamicForm/GetJosoListServlet",//路径  
+            data:{
+            	"filejsonFileName":getJsonModelFileName
+            },
+            success : function(result) {
+//          	console.log(result);
+            	displayJsonToWorkSpace(result);
+            }
+	});
+}
+
+//显示模板到workSpace中
+function displayJsonToWorkSpace(result){
+	//处理json数据
+	var obj = eval("("+result+")");
+	var domArray = obj.controlDivJsonArray;
+	for(var dii = 0;dii<domArray.length;dii++){
+		var ddom = JsonML.toHTML(domArray[dii]);
+		
+		var currentLeft = parseInt($(ddom).css("left").substring(0, $(ddom).css("left").length-2));
+		var currentTop = parseInt($(ddom).css("top").substring(0, $(ddom).css("top").length-2)); 
+		var currentWidth = parseInt($(ddom).css("width").substring(0, $(ddom).css("width").length-2));
+		var currentHeight = parseInt($(ddom).css("height").substring(0, $(ddom).css("height").length-2));
+		//console.log(currentLeft);
+		//console.log(currentTop);
+		//console.log(currentWidth);
+		//console.log(currentHeight);
+		ww = currentWidth;
+   		hh = currentHeight;
+   		var e = new Object();
+   		e.clientX = currentLeft;
+   		e.clientY = currentTop;
+   		//创建一个控件
+		createTag($(ddom));
+		//将标识设置为可创建
+		isCanCreateChirdren = true;
+		//模拟鼠标点击创建一个div
+		CreateChirdren(e);
+		//console.log(dii);
+	}
 }
 //退出表单设计界面
 function exitDesginForm(){
@@ -367,3 +437,5 @@ function exitDesginForm(){
 	        }
 		 });
 }
+//在页面属性中设置文件名
+

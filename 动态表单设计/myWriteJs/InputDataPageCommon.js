@@ -1,3 +1,4 @@
+var divArrayList = new Array();//存放表单 中的控件
 $(document).ready(function(){
 	$.ajax({  
             type : "POST",  //提交方式  
@@ -7,7 +8,7 @@ $(document).ready(function(){
             	for(var li = 0; li<listFilename.length;li++){
             		//console.log(listFilename[li]);
             		$("<a>",{'class':'aclass','click':function(){
-            			getJsonFile(event);}}).html(listFilename[li]+"</br>").appendTo($("#jsonList"));
+            			getJsonFile(event);}}).html(listFilename[li]+"</br>").appendTo($("#collapseOne").children(".panel-body"));
             	}
             }
 	});
@@ -59,7 +60,6 @@ function displayJson(result){
 		$("#canvasPanl").children("span").remove();
 		//初始化控件
 		initDivMethod(domArray);
-		
 }
 /*这是json数据的格式 
  * 
@@ -144,9 +144,25 @@ function initDivMethod(divArray){
 		}
 		//将控件加入到录入界面的div中
 		$(Dom).appendTo("#canvasPanl");
-		//console.log(Dom);
-	}
+		//存放divArray
+		divArrayList.push($(Dom));
+	}//for
+	initDefalutAction();
+}
 
+//初始化控件的默认动作
+function initDefalutAction(){
+	for(var di = 0 ; di<divArrayList.length; di++){
+		if($(divArrayList[di]).attr("linkDivId")!=undefined){
+			var tep = divArrayList[di];
+			$(tep).children("input").bind("change",function(){
+				//console.log("#"+$(this).parent("span").attr("linkDivId"));
+				//console.log($("#"+$(this).parent("span").attr("linkDivId")).attr("name"));
+				//被这段代码恶心到了 
+				$("#"+$(this).parent("span").attr("linkDivId")).children("input").val($(this).val());
+			});
+		}
+	}
 }
 //创建一个录入数据的输入框
 function dealWithDateBox(domObj,defaultvalue){
@@ -223,9 +239,12 @@ function defaultValueToForm(inputDiv,defaultvalue){
 				$(inputDiv).val(dstr);
 				break;
 			case "currentUser":
-				
+			//取到用户名  
+				$(inputDiv).val($("#userName"));
 				break;
 			case "currentFullUser":
+			//取到用户的全名
+				$(inputDiv).val($("#userFullName"));
 				break;
 			case "currentFileSer":
 				break;

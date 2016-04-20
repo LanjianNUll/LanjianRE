@@ -611,6 +611,7 @@ function changeDefaultContent(){
 			break;
 		case "currentReferExist":
 			tipText = "已经有的录入项";
+			displayAllUsedCurrentList($(currentDragDiv).attr("id"));
 			break;
 		default:
 			break;
@@ -620,3 +621,43 @@ function changeDefaultContent(){
 	$(currentDragDiv).children(".selectTag").attr("defaultProerty",$(defaultContent).val());
 	
 }
+//显示出所有的用到的div以便在默认已存在的输入项选择
+function displayAllUsedCurrentList(currentId){
+	$("#UsedDiv").show();
+	//显示所有的用到的div并在其中注入默认的div
+	var historyArray = new Array();
+	var tagStr = "";
+	if(!currentDragDivMap.isEmpty()){
+		historyArray = currentDragDivMap.values();
+		for(var i = 0;i<historyArray.length;i++){
+			if(currentId != $(historyArray[i]).attr("id")){
+				//console.log($(historyArray[i]).children(".selectTag").attr("name"));
+				tagStr = realName($(historyArray[i]).children(".selectTag").attr("name"));
+				//console.log($(historyArray[i]).attr("id"));
+				//将这个添加到下拉选择框
+				$('<option>').text(tagStr+"ID:"+$(historyArray[i]).attr("id"))
+				.val($(historyArray[i]).attr("id")).appendTo($("#UsedSelect"));
+			}
+			
+		}
+	}
+}
+//选择哪个默认已存在的输入项
+function changeUsedDiv(){
+	//console.log($("#UsedSelect").val());
+	var historyArray = new Array();
+	if(!currentDragDivMap.isEmpty()){
+		historyArray = currentDragDivMap.values();
+		for(var i = 0;i<historyArray.length;i++){
+			if($("#UsedSelect").val() == $(historyArray[i]).attr("id")){
+				//加一个后缀防止和前面的id冲突
+				console.log($("#UsedSelect").val());
+				$(historyArray[i]).children(".selectTag").attr("linkDivId",$(currentDragDiv).attr("id")+"linkDiv");
+				//为当前控件添加一个id属性，以便在显示的时候默认已选项
+				$(currentDragDiv).children(".selectTag").attr("id",$(currentDragDiv).attr("id")+"linkDiv");
+				//console.log("ok");
+			}
+		}
+	}
+}
+

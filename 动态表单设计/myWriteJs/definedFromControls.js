@@ -1,7 +1,7 @@
 function createRadio(){//创建一个单项标签
 	var publicSpan = $("<span>",{"name":"Radio"});
 	var radioTag = null;
-	$("<p>",{'class':'radioP'}).text("你对你的生活满意吗")
+	$("<p>",{'class':'radioP'}).text("这是一个单选控件")
 		.appendTo(publicSpan);
 	$("<label>",{'class':'radioLabel1'}).text("选项1").appendTo(publicSpan);
 	$("<input>",{'class':'radioInput1','type':'radio','name':'radio'})
@@ -21,17 +21,17 @@ function createRadio(){//创建一个单项标签
 //创建下拉菜单
 function createSelect(){
 	var publicSpan = $("<span>",{"name":"xialaSelect"});
-	$("<label>",{'class':'xialaSeclectClass'}).text("来吧 选个你想要的").appendTo(publicSpan);
+	$("<label>",{'class':'xialaSeclectClass'}).text("这是一个下拉菜单选择控件").appendTo(publicSpan);
 	var selectTag = $('<select>',{'class':'xialaselectTag'}).appendTo(publicSpan);
-	$('<option>',{'class':'selectOption1'}).text("我的选择与众不同").appendTo(selectTag);
-	$('<option>',{'class':'selectOption2'}).text("选择品牌1").appendTo(selectTag);
-	$('<option>',{'class':'selectOption3'}).text("选择品牌2").appendTo(selectTag);
+	$('<option>',{'class':'selectOption1'}).text("默认选项一").appendTo(selectTag);
+	$('<option>',{'class':'selectOption2'}).text("选择选项二").appendTo(selectTag);
+	$('<option>',{'class':'selectOption3'}).text("选择选项三").appendTo(selectTag);
 	return publicSpan;
 }
 //创建输入文本框一
 function createInputOne(){
 	var publicSpan = $("<span>",{"name":"InputOne"});
-	$("<label>",{"class":"inputName"}).text("姓   名").appendTo(publicSpan);
+	$("<label>",{"class":"inputName"}).text("单行输入框").appendTo(publicSpan);
 	$("<input>",{'class':'inputOne','type':'text','name':'inputOne','placeholder':'请输入。。。'})
 		.appendTo(publicSpan);
 	return publicSpan;
@@ -48,7 +48,7 @@ function createSubmit(){
 //创建文本域
 function createTextArea(){
 	var publicSpan = $("<span>",{"name":"TextArea"});
-	$("<p>",{'class':'textAreaP'}).text("您的意见对我很重要:")
+	$("<p>",{'class':'textAreaP'}).text("这是一个文本域输入控件:")
 		.appendTo(publicSpan);
 	$('<textarea>',{'class':'textAreaclass','placeholder':'说的什么吧。。。','overflow':'visible'})
 		.css({"width":"100%","height":"75%"})
@@ -58,24 +58,24 @@ function createTextArea(){
 //创建复选框
 function createCheckBox(){
 	var publicSpan = $("<span>",{"name":"CheckBox"}); 
-	$("<p>",{'class':'checkBoxP'}).text("您喜欢的水果？").appendTo(publicSpan);
+	$("<p>",{'class':'checkBoxP'}).text("这是一个复选框控件").appendTo(publicSpan);
 	$("<input>",{'class':'checkBox1','type':'checkbox','name':'checkBox'})
 		.appendTo(publicSpan);
-	$("<label>",{'class':'Clabel1'}).text("苹果 ").appendTo(publicSpan);
+	$("<label>",{'class':'Clabel1'}).text("选项一 ").appendTo(publicSpan);
 	$("<input>",{'class':'checkBox2','type':'checkbox','name':'checkBox'})
 		.appendTo(publicSpan);
-	$("<label>",{'class':'Clabel2'}).text("桃子").appendTo(publicSpan);
+	$("<label>",{'class':'Clabel2'}).text("选项二").appendTo(publicSpan);
 	$("<input>",{'class':'checkBox3','type':'checkbox','name':'checkBox'})
 		.appendTo(publicSpan).appendTo(publicSpan);
-	$("<label>",{'class':'Clabel3'}).text("香蕉").appendTo(publicSpan);
+	$("<label>",{'class':'Clabel3'}).text("选项三").appendTo(publicSpan);
 	$("<input>",{'class':'checkBox4','type':'checkbox','name':'checkBox'})
 		.appendTo(publicSpan).appendTo(publicSpan);
-	$("<label>",{'class':'Clabel4'}).text("梨").appendTo(publicSpan);
+	$("<label>",{'class':'Clabel4'}).text("选项四").appendTo(publicSpan);
 	return publicSpan;
 }
 function createP(){
 	var publicSpan = $("<span>",{"name":"P"}); 
-	$("<p>",{'class':'pP'}).text("我是一个单纯的文本").css({"width":"100%","height":"100%"}).appendTo(publicSpan);
+	$("<p>",{'class':'pP'}).text("这是一个静态文本").css({"width":"100%","height":"100%"}).appendTo(publicSpan);
 	return publicSpan;
 }
 function createRec(){
@@ -120,17 +120,17 @@ function setCurrentDate(e){
 
 function createListBoxOne(){
 	var publicSpan = $("<span>",{"name":"ListBoxOne"});
-	$("<label>",{"class":"ListBoxOneName"}).text("姓   名").appendTo(publicSpan);
+	$("<label>",{"class":"ListBoxOneName"}).text("这是一个列表框").appendTo(publicSpan);
 	$("<input>",{'class':'listBoxOneinputClass'}).appendTo(publicSpan);
 	var selectTag = $('<select>',{'class':'listBoxOneinputTag','multiple':'multiple','change':function(){
 		getOptionAndToStr(event);
 	}}).appendTo(publicSpan);
-	$('<option>',{'class':'listBoxOneOption1'}).text("我的选择与众不同").appendTo(selectTag);
-	$('<option>',{'class':'listBoxOneOption2'}).text("选择品牌1").appendTo(selectTag);
-	$('<option>',{'class':'listBoxOneOption3'}).text("选择品牌2").appendTo(selectTag);
-	$('<option>',{'class':'listBoxOneOption4'}).text("23").appendTo(selectTag);
-	$('<option>',{'class':'listBoxOneOption5'}).text("23").appendTo(selectTag);
-	$('<option>',{'class':'listBoxOneOption6'}).text("255").appendTo(selectTag);
+	$('<option>',{'class':'listBoxOneOption1'}).text("选项一").appendTo(selectTag);
+	$('<option>',{'class':'listBoxOneOption2'}).text("选项二").appendTo(selectTag);
+	$('<option>',{'class':'listBoxOneOption3'}).text("选项三").appendTo(selectTag);
+	$('<option>',{'class':'listBoxOneOption4'}).text("选项四").appendTo(selectTag);
+	$('<option>',{'class':'listBoxOneOption5'}).text("选项五").appendTo(selectTag);
+	$('<option>',{'class':'listBoxOneOption6'}).text("选项六").appendTo(selectTag);
 	return publicSpan;
 }
 //将选择的拼接起来
@@ -143,17 +143,17 @@ function getOptionAndToStr(e){
 }
 function createListBoxTwo(){
 	var publicSpan = $("<span>",{"name":"ListBoxTwo"});
-	$("<label>",{"class":"ListBoxTwoName"}).text("姓   名").appendTo(publicSpan);
+	$("<label>",{"class":"ListBoxTwoName"}).text("这是一个拼接列表框").appendTo(publicSpan);
 	$("<input>",{'class':'listBoxTwoinputClass'}).appendTo(publicSpan);
 	var selectTag = $('<select>',{'name':'selectTag','class':'listBoxTwoinputTag','change':function (){
 		getOption(event);
 	}}).appendTo(publicSpan);
-	$('<option>',{'class':'listBoxTwoOption1'}).text("我的选择与众不同").appendTo(selectTag);
-	$('<option>',{'class':'listBoxTwoOption2'}).text("选择品牌1").appendTo(selectTag);
-	$('<option>',{'class':'listBoxTwoOption3'}).text("选择品牌2").appendTo(selectTag);
-	$('<option>',{'class':'listBoxTwoOption4'}).text("23").appendTo(selectTag);
-	$('<option>',{'class':'listBoxTwoOption5'}).text("23").appendTo(selectTag);
-	$('<option>',{'class':'listBoxTwoOption6'}).text("255").appendTo(selectTag);
+	$('<option>',{'class':'listBoxTwoOption1'}).text("选项一").appendTo(selectTag);
+	$('<option>',{'class':'listBoxTwoOption2'}).text("选项二 ").appendTo(selectTag);
+	$('<option>',{'class':'listBoxTwoOption3'}).text("选项三").appendTo(selectTag);
+	$('<option>',{'class':'listBoxTwoOption4'}).text("选项四").appendTo(selectTag);
+	$('<option>',{'class':'listBoxTwoOption5'}).text("选项五").appendTo(selectTag);
+	$('<option>',{'class':'listBoxTwoOption6'}).text("选项六").appendTo(selectTag);
 	return publicSpan;
 }
 //将下列选中的选项填到input中
@@ -164,7 +164,7 @@ function getOption(e){
 }
 function createfileBox(){
 	var publicSpan = $("<span>",{"name":"fileBox"});
-	$("<input>",{'class':'file','type':'file','name':'fileBoxNaem'})
+	$("<input>",{'class':'file','type':'file','name':'fileBoxName'})
 	.css("border","solid 1px")
 	.appendTo(publicSpan)
 	return publicSpan;    

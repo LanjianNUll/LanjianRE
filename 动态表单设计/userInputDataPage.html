@@ -44,8 +44,7 @@
 			float: left;
 			width: 20%;
 			height: 92%;
-			background: yellowgreen;
-			text-align: center;
+			background: grey;
 			cursor:hand;
 		}
 		#canvasPanl{
@@ -62,10 +61,104 @@
 	
 	<body>
 	
-	<div id="header">
+	<div id="header" align="right">
+		<button id="saveFile" type="button" class="btn btn-default btn-sm" 
+						style="font-size: 18px;margin-top: 8px;margin-right: 15px;" data-toggle="tooltip" 
+		   				data-placement="bottom" title="保存文件"
+						onclick="Save()">
+					  <span class="glyphicon glyphicon-save-file"></span>
+		</button>
+	
+		<button id="deleteFile" type="button" class="btn btn-default btn-sm" 
+						style="font-size: 18px;margin-top: 8px;margin-right: 15px;" data-toggle="tooltip" 
+		   				data-placement="bottom" title="删除当前文件"
+						onclick="deleteFile()">
+					  <span class="glyphicon glyphicon-trash"></span>
+		</button>		<script>
+			   $(function () { $("[data-toggle='tooltip']").tooltip(); });
+		</script>
+		<div style="float: right;margin-top: 15px;">
+			
+			<!--
+                    	作者：765797511@qq.com
+                    	时间：2016-04-18
+                    	描述：这个用户名在服务器获取  这个用户名就是默认值用户名的值
+                    	而userFullName也是从服务器获取这里不再界面显示出来  取得的值只是为了给默认值用户全名的值
+                    -->
+					<span id="userName">用户名</span>
+					<span id="userFullName" hidden="true"></span>
+					<span id="logOut"><a>注销</a></span>
+					<span id="resigter"><a>注册</a></span>
+		</div>
+		
 	</div>
-	<div id="jsonList">
-		<h5>文档</h5>
+	<div id="jsonList" style="background: white;">
+		<h3 style="background: white;">文档</h3>
+		<div class="tab-pane fade in active" id="common">
+						<div class="panel-group" id="accordion">
+						  <div class="panel panel-default">
+						    <div class="panel-heading" style="cursor: pointer;"
+						    	data-toggle="collapse" data-parent="#accordion" 
+						        href="#collapseOne" onclick="chageTriangelImag(this)">
+						    	<img src="img/triangle.png" height="15px" width="15px" style="margin-bottom: 3px;" />
+						         	模板
+						    </div>
+						    <div id="collapseOne" class="panel-collapse collapse">
+						      <div class="panel-body">
+									
+						      </div>
+						    </div>
+						  </div>
+						  <div class="panel panel-default">
+						    <div class="panel-heading" style="cursor: pointer;" 
+						    	data-toggle="collapse" data-parent="#accordion" 
+						        href="#collapseTwo" onclick="chageTriangelImag(this)">
+						        <img src="img/triangle.png" height="15px" width="15px" style="margin-bottom: 3px;" />
+						       	规划文档
+						    </div>
+						    <div id="collapseTwo" class="panel-collapse collapse">
+						      <div class="panel-body">
+						      </div>
+						    </div>
+						  </div>
+						  <div class="panel panel-default">
+						    <div class="panel-heading" style="cursor: pointer;" data-toggle="collapse" data-parent="#accordion" 
+						          href="#collapseThree" onclick="chageTriangelImag(this)">
+						      	<img src="img/triangle.png" height="15px" width="15px" style="margin-bottom: 3px;" />
+						       		调查表
+						    </div>
+						    <div id="collapseThree" class="panel-collapse collapse">
+						      <div class="panel-body" >
+						      </div>
+						    </div>
+						  </div>
+						  
+						  <div class="panel panel-default">
+						    <div class="panel-heading" style="cursor: pointer;" 
+						    	data-toggle="collapse" data-parent="#accordion" 
+						        href="#collapseFour" onclick="chageTriangelImag(this)">
+						        <img src="img/triangle.png" height="15px" width="15px" style="margin-bottom: 3px;" />
+						       其他
+						    </div>
+						    <div id="collapseFour" class="panel-collapse collapse">
+						      <div class="panel-body">
+						      </div>
+						    </div>
+						  </div>
+						</div>
+				   </div>
+				   
+				   <script>
+				   //改变三角形的
+				   	function chageTriangelImag(e){
+				   		$(e).next("div").on('show.bs.collapse', function () {
+					         $(e).children("img").attr("src","img/triangle2.png");
+				        });
+				        $(e).next("div").on('hide.bs.collapse', function () {
+				        	 $(e).children("img").attr("src","img/triangle.png")
+		       		 	});
+				   	}
+				   </script>
 	</div>
 	<div id="canvasPanl">
 	</div>
